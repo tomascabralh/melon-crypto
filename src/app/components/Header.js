@@ -1,6 +1,7 @@
-import { Input } from "@chakra-ui/input";
 import { Box, Flex, Text, Link } from "@chakra-ui/layout";
 import React from "react";
+import SearchBar from "./SearchBar";
+import { names } from "../../test_nombres";
 
 function Header() {
   return (
@@ -39,7 +40,7 @@ function Header() {
           </Box>
           <Box w="100%"></Box>
           <Box right me={10} w="500px">
-            <Input size="sm" variant="flushed" placeholder="Search . . ." />
+            <SearchBar data={names} />
           </Box>
         </Flex>
       </Box>
