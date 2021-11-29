@@ -5,7 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import LandingPage from "./app/pages/LandingPage";
 import NotFoundPage from "./app/pages/NotFoundPage";
 import CoinPage from "./app/pages/CoinPage";
-import Header from "./app/components/Header";
+import Header from "./app/components/header/Header";
 
 function App() {
   return (

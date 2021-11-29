@@ -3,31 +3,38 @@ import { Input } from "@chakra-ui/input";
 import React from "react";
 import { useState } from "react";
 
-function SearchBar(props) {
-  const data = props.data;
+const SearchBar = (props) => {
+  const { data } = props;
 
   const [filteredData, setFilteredData] = useState([]);
+  const [input, setInput] = useState("");
 
-  const filtering = (e) => {
+  const onSearch = (e) => {
     var searchWord = e.target.value;
     const newfilter = data.filter((value) => {
       return value.name.toLowerCase().includes(searchWord.toLowerCase());
     });
+    setInput(searchWord);
     setFilteredData(newfilter);
   };
   return (
     <Box>
       <Input
         size="sm"
+        background="white"
+        rounded="md"
+        px={2}
         variant="flushed"
         placeholder="Search . . ."
-        onChange={filtering}
+        onChange={onSearch}
+        onBlur={() => setInput("")}
       />
-      {filteredData != 0 && (
+      {input.length > 1 && (
         <Box
           border="1px"
+          bg="white"
+          mt={2}
           borderColor="gray.200"
-          bgColor="#9AE6B4"
           overflow="auto"
           overflowY="auto"
           maxH="162px"
@@ -44,14 +51,14 @@ function SearchBar(props) {
             },
           }}
         >
-          {filteredData.map((data, key) => {
+          {filteredData.map((data, index) => {
             return (
               <Box
                 p={2}
                 _hover={{
                   background: "#C6F6D5",
                 }}
-                key={key}
+                key={index}
               >
                 {data.name}
               </Box>
@@ -61,6 +68,6 @@ function SearchBar(props) {
       )}
     </Box>
   );
-}
+};
 
 export default SearchBar;
