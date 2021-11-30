@@ -7,7 +7,7 @@ import {
 } from "react-icons/fa";
 import { ButtonGroup, IconButton } from "@chakra-ui/react";
 
-function SocialMedia(props) {
+const SocialMedia = (props) => {
   return (
     <ButtonGroup variant="ghost" color="gray.600" {...props}>
       <IconButton

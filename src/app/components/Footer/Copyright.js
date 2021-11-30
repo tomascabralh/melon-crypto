@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Center, Text } from "@chakra-ui/layout";
 
-function Copyright() {
+const Copyright = () => {
   return (
     <Box bgColor="#48BB78" w="100%" h="80px">
       <Center fontSize="lg">

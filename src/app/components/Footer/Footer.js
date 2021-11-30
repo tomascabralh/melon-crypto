@@ -14,7 +14,7 @@ import About from "./About";
 import Legal from "./Legal";
 import Suscription from "./SuscriptionForm";
 
-function Footer() {
+const Footer = () => {
   return (
     <Box as="footer" role="contentinfo" mx="auto">
       <Grid

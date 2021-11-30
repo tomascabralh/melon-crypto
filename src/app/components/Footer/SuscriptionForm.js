@@ -3,7 +3,7 @@ import { Box, Text, Stack } from "@chakra-ui/layout";
 import { Input } from "@chakra-ui/input";
 import { Button } from "@chakra-ui/button";
 
-function Suscription() {
+const Suscription = () => {
   return (
     <Box pl="120px">
       <Text mb={2} fontWeight="semibold">

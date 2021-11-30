@@ -1,7 +1,7 @@
 import { Box, Text, Stack, Link } from "@chakra-ui/layout";
 import React from "react";
 
-function About() {
+const About = () => {
   return (
     <Box pl={2}>
       <Text mb={4}  fontWeight="semibold">
