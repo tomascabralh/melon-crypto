@@ -3,8 +3,8 @@ import React from "react";
 
 function About() {
   return (
-    <Box>
-      <Text mb={4} fontWeight="semibold">
+    <Box pl={2}>
+      <Text mb={4}  fontWeight="semibold">
         ABOUT
       </Text>
       <Stack>

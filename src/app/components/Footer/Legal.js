@@ -4,7 +4,7 @@ import React from "react";
 function Legal() {
   return (
     <Box>
-      <Text mb={2} fontWeight="semibold">
+      <Text mb={4} fontWeight="semibold">
         LEGAL
       </Text>
       <Stack>
