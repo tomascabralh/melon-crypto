@@ -3,7 +3,7 @@ import React from "react";
 
 const About = () => {
   return (
-    <Box pl={2}>
+    <Box pl={2} >
       <Text mb={4}  fontWeight="semibold">
         ABOUT
       </Text>

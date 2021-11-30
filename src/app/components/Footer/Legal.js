@@ -3,7 +3,7 @@ import React from "react";
 
 const Legal = () => {
   return (
-    <Box>
+    <Box >
       <Text mb={4} fontWeight="semibold">
         LEGAL
       </Text>
