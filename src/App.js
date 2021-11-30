@@ -5,7 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import LandingPage from "./app/pages/LandingPage";
 import NotFoundPage from "./app/pages/NotFoundPage";
 import CoinPage from "./app/pages/CoinPage";
-import Footer from "./app/components/Footer";
+import Footer from "./app/components/Footer/Footer";
 
 function App() {
   return (

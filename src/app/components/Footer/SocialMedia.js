@@ -12,26 +12,34 @@ function SocialMedia(props) {
     <ButtonGroup variant="ghost" color="gray.600" {...props}>
       <IconButton
         as="a"
-        href="#"
+        href="https://www.instagram.com/tch._.tch/?hl=es"
         aria-label="Instagram"
+        isRound="true"
+        target="_blank"
         icon={<FaInstagram fontSize="20px" />}
       />
       <IconButton
         as="a"
-        href="#"
+        href="https://www.facebook.com/tomicabral"
         aria-label="Facebook"
+        isRound="true"
+        target="_blank"
         icon={<FaFacebook fontSize="20px" />}
       />
       <IconButton
         as="a"
-        href="#"
+        href="https://twitter.com/zurba96"
         aria-label="Twitter"
+        isRound="true"
+        target="_blank"
         icon={<FaTwitter fontSize="20px" />}
       />
       <IconButton
         as="a"
-        href="#"
+        href="https://www.linkedin.com/in/facudom/"
         aria-label="Linkedin"
+        isRound="true"
+        target="_blank"
         icon={<FaLinkedinIn fontSize="20px" />}
       />
     </ButtonGroup>
