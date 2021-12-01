@@ -12,6 +12,7 @@ function App() {
       <Routes>
         <Route exact path="/news/:news" element={<NewsPage />} />
         <Route exact path="/coins/:coin" element={<CoinPage />} />
+        <Route exact path="/coins" element={<CoinPage />} />
         <Route path="/terms" element={<TermsPage />} />
         <Route path="/" element={<LandingPage />} />
         <Route path="/*" element={<NotFoundPage />} />
