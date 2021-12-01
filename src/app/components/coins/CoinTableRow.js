@@ -26,18 +26,18 @@ const CoinTableRow = () => {
           >
             <Td>{coin.market_cap_rank}</Td>
             <Td>
-              <Link href={`/coin/${coin.id}`}>
+              <Link href={`/coins/${coin.id}`}>
                 <Flex>
                   <img src={coin.image} width="30" height="5" />
                   <Box ml={5}>{coin.name}</Box>
                 </Flex>
               </Link>
             </Td>
-            <Td>{coin.current_price}</Td>
+            <Td>{`$ ${coin.current_price}`}</Td>
             {coin.price_change_percentage_24h >= 0 ? (
-              <Td color="green">{coin.price_change_percentage_24h}</Td>
+              <Td color="green">{`+${coin.price_change_percentage_24h}%`}</Td>
             ) : (
-              <Td color="red">{coin.price_change_percentage_24h}</Td>
+              <Td color="red">{`${coin.price_change_percentage_24h}%`}</Td>
             )}
             <Td>{coin.market_cap}</Td>
           </Tr>
