@@ -14,7 +14,7 @@ const CoinTableRow = () => {
       setCoins(res.data);
     });
   }, []);
-  console.log(GETrequest)
+  console.log(GETrequest);
   return (
     <>
       {coins.map((coin) => {
