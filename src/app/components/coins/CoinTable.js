@@ -4,12 +4,12 @@ import React from "react";
 import CoinTableRow from "./CoinTableRow";
 
 const CoinTable = () => {
-  const titles = ["Top", "Coin", "Price", "24h %", "7d %", "Market Cap"];
+  const titles = ["Top", "Coin", "Price (USD)", "24h %", "Market Cap"];
 
   return (
     <Box
       mt="40px"
-      mx="300px"
+      mx={{ md: 0, lg: 300 }}
       bgColor="green.200"
       borderRadius="5px"
       overflow="auto"

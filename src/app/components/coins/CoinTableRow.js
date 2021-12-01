@@ -1,36 +1,45 @@
-import { Link } from "@chakra-ui/layout";
+import { Box, Flex, Link } from "@chakra-ui/layout";
 import { Tr, Td } from "@chakra-ui/react";
-import React from "react";
-import { Currencies } from "../../../data/CoinTableRowTEST";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const CoinTableRow = () => {
-  const currencies = Currencies;
+  const GETrequest =
+    "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false";
+
+  const [coins, setCoins] = useState([]);
+
+  useEffect(() => {
+    axios.get(GETrequest).then((res) => {
+      setCoins(res.data);
+    });
+  }, []);
 
   return (
     <>
-      {currencies.map((coins) => {
+      {coins.map((coin) => {
         return (
           <Tr
             _hover={{
               background: "green.100",
             }}
           >
-            <Td>{coins.top}</Td>
+            <Td>{coin.market_cap_rank}</Td>
             <Td>
-              <Link href={`/coin/${coins.id}`}>{coins.coin}</Link>
+              <Link href={`/coin/${coin.id}`}>
+                <Flex>
+                  <img src={coin.image} width="30" height="5" />
+                  <Box ml={5}>{coin.name}</Box>
+                </Flex>
+              </Link>
             </Td>
-            <Td>{coins.price}</Td>
-            {coins.dayvar >= 0 ? (
-              <Td color="green">{coins.dayvar}</Td>
+            <Td>{coin.current_price}</Td>
+            {coin.price_change_percentage_24h >= 0 ? (
+              <Td color="green">{coin.price_change_percentage_24h}</Td>
             ) : (
-              <Td color="red">{coins.dayvar}</Td>
+              <Td color="red">{coin.price_change_percentage_24h}</Td>
             )}
-            {coins.weekvar >= 0 ? (
-              <Td color="green">{coins.weekvar}</Td>
-            ) : (
-              <Td color="red">{coins.weekvar}</Td>
-            )}
-            <Td>{coins.marketcap}</Td>
+            <Td>{coin.market_cap}</Td>
           </Tr>
         );
       })}
