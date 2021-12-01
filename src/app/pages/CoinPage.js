@@ -1,11 +1,9 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import React from "react";
+import CoinPageData from "../components/coins/CoinPageData";
 
 const CoinPage = () => {
-  const { id } = useParams;
-  const [coin, setCoin] = useState();
 
-  return <div>coinpage</div>;
+  return <CoinPageData />;
 };
 
 export default CoinPage;
