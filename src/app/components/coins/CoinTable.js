@@ -1,20 +1,37 @@
 import { Box } from "@chakra-ui/layout";
-import { Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
+import { Table, Thead, Tbody, Tr, Th } from "@chakra-ui/react";
 import React from "react";
 import CoinTableRow from "./CoinTableRow";
 
 const CoinTable = () => {
+  const titles = ["Top", "Coin", "Price", "24h %", "7d %", "Market Cap"];
+
   return (
-    <Box mt="40px" mx="100px" bgColor="#9AE6B4" borderRadius="5px">
+    <Box
+      mt="40px"
+      mx="300px"
+      bgColor="green.200"
+      borderRadius="5px"
+      overflow="auto"
+      sx={{
+        "&::-webkit-scrollbar": {
+          width: "8px",
+          borderRadius: "8px",
+          backgroundColor: `rgba(0, 0, 0, 0.05)`,
+        },
+
+        "&::-webkit-scrollbar-thumb": {
+          backgroundColor: `rgba(0, 0, 0, 0.05)`,
+          borderRadius: "8px",
+        },
+      }}
+    >
       <Table size="lg">
         <Thead>
           <Tr>
-            <Th>Top</Th>
-            <Th>Cryptocurrency</Th>
-            <Th>Price</Th>
-            <Th>24h %</Th>
-            <Th>7d %</Th>
-            <Th>30d %</Th>
+            {titles.map((head) => {
+              return <Th key={head}>{head}</Th>;
+            })}
           </Tr>
         </Thead>
         <Tbody>

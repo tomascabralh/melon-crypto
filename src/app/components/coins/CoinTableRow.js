@@ -1,22 +1,41 @@
-import { Box } from "@chakra-ui/layout";
-import { Tr, Th, Td } from "@chakra-ui/react";
+import { Link } from "@chakra-ui/layout";
+import { Tr, Td } from "@chakra-ui/react";
 import React from "react";
+import { Currencies } from "../../../data/CoinTableRowTEST";
 
 const CoinTableRow = () => {
-  const CryptoData = () => {
-    return (
-      <Tr>
-        <Td>1</Td>
-        <Td>Bitcoin</Td>
-        <Td>6346346</Td>
-        <Td>3</Td>
-        <Td>2</Td>
-        <Td>7</Td>
-      </Tr>
-    );
-  };
+  const currencies = Currencies;
 
-  return <>{CryptoData}</>;
+  return (
+    <>
+      {currencies.map((coins) => {
+        return (
+          <Tr
+            _hover={{
+              background: "green.100",
+            }}
+          >
+            <Td>{coins.top}</Td>
+            <Td>
+              <Link href={`/coin/${coins.id}`}>{coins.coin}</Link>
+            </Td>
+            <Td>{coins.price}</Td>
+            {coins.dayvar >= 0 ? (
+              <Td color="green">{coins.dayvar}</Td>
+            ) : (
+              <Td color="red">{coins.dayvar}</Td>
+            )}
+            {coins.weekvar >= 0 ? (
+              <Td color="green">{coins.weekvar}</Td>
+            ) : (
+              <Td color="red">{coins.weekvar}</Td>
+            )}
+            <Td>{coins.marketcap}</Td>
+          </Tr>
+        );
+      })}
+    </>
+  );
 };
 
 export default CoinTableRow;
