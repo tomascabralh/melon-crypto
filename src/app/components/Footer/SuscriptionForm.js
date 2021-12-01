@@ -5,11 +5,21 @@ import { Button } from "@chakra-ui/button";
 
 const Suscription = () => {
   return (
-    <Box ml="120px" pb='10px' minW='100px' display={{ base: "none", md: "none", lg:'block' }}>
+    <Box
+      ml="120px"
+      pb="10px"
+      minW="100px"
+      display={{ base: "none", md: "none", lg: "block" }}
+    >
       <Text mb={2} fontWeight="semibold">
         SUSCRIBE TO OUR NEWSLETTER
       </Text>
-      <Text mb={2} fontSize="sm" maxWidth={360} display={{ base: "none", md: "none", xl:'block' }}>
+      <Text
+        mb={2}
+        fontSize="sm"
+        maxWidth={360}
+        display={{ base: "none", md: "none", xl: "block" }}
+      >
         Get crypto analysis, news and updates right to your inbox! Sign up here
         so you don't miss a single newsletter.
       </Text>
@@ -30,6 +40,6 @@ const Suscription = () => {
       </Stack>
     </Box>
   );
-}
+};
 
 export default Suscription;

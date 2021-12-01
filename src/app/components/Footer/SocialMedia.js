@@ -44,6 +44,6 @@ const SocialMedia = (props) => {
       />
     </ButtonGroup>
   );
-}
+};
 
 export default SocialMedia;

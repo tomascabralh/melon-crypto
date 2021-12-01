@@ -3,8 +3,8 @@ import React from "react";
 
 const Legal = () => {
   return (
-    <Box >
-      <Text mb={4} fontWeight="semibold">
+    <Box>
+      <Text mb={4} paddingRight="10px" fontWeight="semibold">
         LEGAL
       </Text>
       <Stack>
@@ -13,6 +13,6 @@ const Legal = () => {
       </Stack>
     </Box>
   );
-}
+};
 
 export default Legal;

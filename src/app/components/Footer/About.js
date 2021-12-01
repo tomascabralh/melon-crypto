@@ -3,8 +3,8 @@ import React from "react";
 
 const About = () => {
   return (
-    <Box pl={2} >
-      <Text mb={4}  fontWeight="semibold">
+    <Box pl={2}>
+      <Text mb={4} paddingRight="10px" fontWeight="semibold">
         ABOUT
       </Text>
       <Stack>
@@ -14,6 +14,6 @@ const About = () => {
       </Stack>
     </Box>
   );
-}
+};
 
 export default About;
