@@ -1,7 +1,9 @@
 import React from "react";
+import CoinPageData from "../components/coins/CoinPageData";
 
 const CoinPage = () => {
-  return <div></div>;
+
+  return <CoinPageData />;
 };
 
 export default CoinPage;
