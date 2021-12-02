@@ -1,12 +1,4 @@
-import {
-  Box,
-  Center,
-  Grid,
-  GridItem,
-  Spacer,
-  Stack,
-  Text,
-} from "@chakra-ui/layout";
+import { Box, Center, Grid, GridItem } from "@chakra-ui/react";
 import React from "react";
 import SocialMedia from "./SocialMedia";
 import Copyright from "./Copyright";

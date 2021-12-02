@@ -4,13 +4,15 @@ import { Routes, Route } from "react-router-dom";
 import LandingPage from "./app/pages/LandingPage";
 import NotFoundPage from "./app/pages/NotFoundPage";
 import CoinPage from "./app/pages/CoinPage";
-import Footer from "./app/components/Footer/Footer";
+import Footer from "./app/components/footer/Footer";
 import TermsPage from "./app/pages/Legal/TermsPage";
 import PrivacyPage from "./app/pages/Legal/PrivacyPage";
+import Header from "./app/components/header/Header";
 
 function App() {
   return (
     <Box>
+      <Header />
       <Routes>
         <Route exact path="/news/:news" element={<NewsPage />} />
         <Route exact path="/coins/:id" element={<CoinPage />} />
