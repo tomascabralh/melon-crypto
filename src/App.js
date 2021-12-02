@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import LandingPage from "./app/pages/LandingPage";
 import NotFoundPage from "./app/pages/NotFoundPage";
 import CoinPage from "./app/pages/CoinPage";
+import Footer from "./app/components/Footer/Footer";
 import TermsPage from "./app/pages/Legal/TermsPage";
 import PrivacyPage from "./app/pages/Legal/PrivacyPage";
 
@@ -19,6 +20,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/*" element={<NotFoundPage />} />
       </Routes>
+      <Footer />
     </Box>
   );
 }

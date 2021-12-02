@@ -1,10 +1,10 @@
-import { Center, Text, VStack } from "@chakra-ui/react";
+import { Center, Text, VStack, Box, Spacer } from "@chakra-ui/react";
 import React from "react";
 import CoinTable from "../components/coins/CoinTable";
 
 const LandingPage = () => {
   return (
-    <>
+    <Box>
       <Center padding={4}>
         <VStack>
           <Text fontSize={48}>🍈 Melon Crypto 🍈</Text>
@@ -12,7 +12,7 @@ const LandingPage = () => {
         </VStack>
       </Center>
       <CoinTable />
-    </>
+    </Box>
   );
 };
 
