@@ -28,7 +28,12 @@ const CoinTableRow = () => {
             <Td>
               <Link href={`/coins/${coin.id}`}>
                 <Flex>
-                  <img src={coin.image} width="30" height="5" />
+                  <img
+                    src={coin.image}
+                    width="30"
+                    height="5"
+                    alt="juanchi pete no te olvides de las alts en las imagenes"
+                  />
                   <Box ml={5}>{coin.name}</Box>
                 </Flex>
               </Link>

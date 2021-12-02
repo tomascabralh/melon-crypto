@@ -7,3 +7,4 @@ export default {
 };
 
 export const Primary = () => <Footer />;
+Primary.args = {};
