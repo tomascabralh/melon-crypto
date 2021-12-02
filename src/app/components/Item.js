@@ -1,11 +1,11 @@
 import React from "react";
 
-const Item = (props) => {
+const Item = () => {
   return (
     <div>
-      <p>{props.id}</p>
-      <h1>{props.title}</h1>
-      <p>{props.body}</p>
+      <p></p>
+      <h1></h1>
+      <p></p>
     </div>
   );
 };
