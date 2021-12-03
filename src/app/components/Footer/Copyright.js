@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Center, Text } from "@chakra-ui/layout";
+import { Box, Center } from "@chakra-ui/layout";
 
 const Copyright = () => {
   return (
@@ -12,6 +12,6 @@ const Copyright = () => {
       <Center fontSize="sm">All rights reserved</Center>
     </Box>
   );
-}
+};
 
 export default Copyright;

@@ -2,6 +2,7 @@ import { Box, Flex, Link } from "@chakra-ui/layout";
 import { Tr, Td } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import CoinDayVariation from "./CoinDayVariation";
 
 const CoinTableRow = () => {
   const GETrequest =
@@ -14,7 +15,7 @@ const CoinTableRow = () => {
       setCoins(res.data);
     });
   }, []);
-  console.log(GETrequest);
+
   return (
     <>
       {coins.map((coin) => {
@@ -28,22 +29,17 @@ const CoinTableRow = () => {
             <Td>
               <Link href={`/coins/${coin.id}`}>
                 <Flex>
-                  <img
-                    src={coin.image}
-                    width="30"
-                    height="5"
-                    alt="juanchi pete no te olvides de las alts en las imagenes"
-                  />
+                  <img src={coin.image} width="30" height="5" alt={coin.name} />
                   <Box ml={5}>{coin.name}</Box>
                 </Flex>
               </Link>
             </Td>
             <Td>{`$ ${coin.current_price}`}</Td>
-            {coin.price_change_percentage_24h >= 0 ? (
-              <Td color="green">{`+${coin.price_change_percentage_24h}%`}</Td>
-            ) : (
-              <Td color="red">{`${coin.price_change_percentage_24h}%`}</Td>
-            )}
+            <Td>
+              <CoinDayVariation
+                porcentageVar={coin.price_change_percentage_24h}
+              />
+            </Td>
             <Td>{coin.market_cap}</Td>
           </Tr>
         );
