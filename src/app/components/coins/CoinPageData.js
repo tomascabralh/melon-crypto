@@ -1,8 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
-import { Box, Flex } from "@chakra-ui/layout";
+import { Box, Container, Flex } from "@chakra-ui/layout";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import CoinStats from "./CoinStats";
 
 const CoinPageData = () => {
   const { id } = useParams();
@@ -27,8 +28,8 @@ const Pepu = ({ coin }) => {
           <Box minW="200px" mr="100px">
             <img src={coin.image?.large} alt={coin.name} />
           </Box>
-          <Box maxH="200px" overflow="auto">
-            {coin.description?.en}
+          <Box>
+            <CoinStats coin={coin}/>
           </Box>
         </Flex>
       </Box>
