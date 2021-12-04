@@ -1,18 +1,52 @@
-import { Box } from '@chakra-ui/layout';
-import { Select } from '@chakra-ui/select';
-import React from 'react';
+import { Box } from "@chakra-ui/layout";
+import { Select } from "@chakra-ui/select";
+import React from "react";
 
-const TimeSelector = () => {
+const TimeSelector = ({ fetchDataFromTimeSelector }) => {
+  const daysrange = [
+    {
+      label: "24 Hours",
+      value: 1,
+    },
+    {
+      label: "7 Days",
+      value: 7,
+    },
+    {
+      label: "30 Days",
+      value: 30,
+    },
+    {
+      label: "3 Months",
+      value: 90,
+    },
+    {
+      label: "1 Year",
+      value: 365,
+    },
+  ];
 
-    const daysrange ={'14 days':'14', '1 month':'30', '6 months':'180', '1 year': '365'}
-    const options = daysrange.map((item) => {
-        return(<option value={item.value} key={item.key}>{item.key}</option>)})
+  const options = daysrange.map((day) => {
+    return (
+      <option key={day.value} value={day.value}>
+        {day.label}
+      </option>
+    );
+  });
 
-    return (<Box>
-        <Select placeholder='7 days' w='40' >
-          {options}
-        </Select>
-        </Box>)
-}
+  return (
+    <Box>
+      <Select
+        w="40"
+        ml="160"
+        onChange={(e) => {
+          fetchDataFromTimeSelector(e.target.value);
+        }}
+      >
+        {options}
+      </Select>
+    </Box>
+  );
+};
 
 export default TimeSelector;
