@@ -1,7 +1,9 @@
-import { Box, Grid, Heading, Text } from "@chakra-ui/layout";
+import { Box, Grid, Heading, Spacer, Text } from "@chakra-ui/layout";
 import React from "react";
 import LowHighBar from "./LowHighBar";
 import CoinDayVariation from "./CoinDayVariation";
+import { Select } from "@chakra-ui/select";
+import CurrencySelector from "./CurrencySelector";
 
 const CoinStats = ({ coin }) => {
   return (
@@ -34,7 +36,7 @@ const CoinStats = ({ coin }) => {
                   }
                 />
                 {coin.market_data.current_price.usd}
-                <Box fontSize="sm">Select Currency</Box>
+                <CurrencySelector/>
               </Box>
             </Grid>
             <Grid templateColumns="repeat(2, 1fr)" mt={5}>

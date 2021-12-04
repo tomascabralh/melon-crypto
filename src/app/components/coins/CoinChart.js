@@ -5,11 +5,14 @@ import { Box, Flex, Stack } from "@chakra-ui/layout";
 import { Line } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 import { Chart } from "react-chartjs-2";
+import { Select } from "@chakra-ui/select";
+import TimeSelector from "./TimeSelector";
+import CurrencySelector from "./CurrencySelector";
 
 const CoinChart = () => {
   const { id } = useParams();
   const [chartdata, setChartdata] = useState();
-  const [dayrange, setDayrange] = useState("30");
+  const days='30'
 
   useEffect(() => {
     axios
@@ -20,7 +23,7 @@ const CoinChart = () => {
         setChartdata(res.data);
       });
   }, []);
-  console.log(chartdata);
+
   return (
     <>
       <Flex maxH="400px" maxW="1000px">
@@ -35,13 +38,13 @@ const CoinChart = () => {
                   date.getHours() > 12
                     ? `${date.getHours() - 12}:${date.getMinutes()} PM`
                     : `${date.getHours()}:${date.getMinutes()} AM`;
-                return dayrange === 1 ? time : date.toLocaleDateString();
+                return days === 1 ? time : date.toLocaleDateString();
               }),
 
               datasets: [
                 {
                   data: chartdata.prices.map((coin) => coin[1]),
-                  label: `Price ( Past ${dayrange} Days ) in usd`,
+                  label: `Price ( Past ${days} Days ) in usd`,
                   borderColor: "#EEBC1D",
                 },
               ],
@@ -56,8 +59,8 @@ const CoinChart = () => {
           />
         )}
         <Stack>
-          <Box>Time Range:</Box>
-          <Box>Currency:</Box>
+          <TimeSelector/>
+          <CurrencySelector/>
         </Stack>
       </Flex>
     </>
