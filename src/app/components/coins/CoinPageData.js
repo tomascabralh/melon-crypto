@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import CoinStats from "./CoinStats";
 import CoinChart from "./CoinChart";
+import { SliderMark } from "@chakra-ui/slider";
 
 const CoinPageData = () => {
   const { id } = useParams();
@@ -34,9 +35,9 @@ const Pepu = ({ coin }) => {
           </Flex>
         </Flex>
       </Box>
-      <Box w="100%">
+      <Box w="100%" h='100%'>
         <Flex px="20px" mx="50px">
-          <Box minW="200px" maxW="250px" maxH={550} mr="50px" overflow="auto">
+          <Box minW="200px" maxW="300px" maxH={650} mr="50px" mb='50px' overflow="auto" display={{ lg: "none", xl: "none", '2xl':'block' }}>
             {coin.description?.en}
           </Box>
           <Box>

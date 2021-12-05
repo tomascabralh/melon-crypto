@@ -25,7 +25,7 @@ function Header() {
             menuItems={[
               {
                 name: "Cryptos",
-                link: "/cryptos",
+                link: "/",
               },
               { name: "NFT", link: "/nfts" },
               { name: "News", link: "/news" },

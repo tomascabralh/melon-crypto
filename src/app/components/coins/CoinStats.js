@@ -30,35 +30,37 @@ const CoinStats = ({ coin }) => {
             py={2}
           >
             <Grid templateColumns="repeat(2, 1fr)">
-              <Box mb="5">
-                <Heading mt="30">{coin.name}</Heading>
+              <Box mb="5" whiteSpace='nowrap' position='relative'>
+                <Heading mt="30" w='300' >{coin.name}</Heading>
                 <Text>#{coin.market_cap_rank}</Text>
               </Box>
-              <Box fontSize="4xl" textAlign="right">
+              <Box fontSize="4xl" textAlign="right" position='absolute' ml='250'>
                 <CoinDayVariation
                   porcentageVar={
                     coin.market_data.price_change_percentage_24h_in_currency.usd
                   }
                 />
                 {coin.market_data.current_price.usd}
+                <Box w={100} ml='300px'>
                 <CurrencySelector
                   fetchDataFromCurrencySelector={fetchDataFromCurrencySelector}
                 />
+                </Box>
               </Box>
             </Grid>
             <Grid templateColumns="repeat(2, 1fr)" mt={5}>
               <Box fontSize="lg" textAlign="left">
-                Lowest
+                Lowest 24h
                 <Text fontSize="sm">{coin.market_data.low_24h?.usd}</Text>
               </Box>
               <Box fontSize="lg" textAlign="right">
-                Highest
+                Highest 24h
                 <Text fontSize="sm">{coin.market_data.high_24h?.usd}</Text>
               </Box>
             </Grid>
             <LowHighBar coin={coin} />
           </Box>
-          <Box w="100%" maxW="725" h="250" px={10} py={2}>
+          <Box w="100%" h="250" px={10} py={2} >
             <Grid templateColumns="repeat(2, 1fr)">
               <Box h="100" my={3} borderBottom="2px" borderColor="gray.100">
                 <Heading size="md">Market Cap</Heading>

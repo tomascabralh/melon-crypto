@@ -45,8 +45,6 @@ const CurrencySelector = ({ fetchDataFromCurrencySelector }) => {
   return (
     <Box>
       <Select
-        w="40"
-        ml="160"
         onChange={(e) => {
           fetchDataFromCurrencySelector(e.target.value);
         }}

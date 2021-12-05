@@ -1,6 +1,7 @@
 import { Center, Text, VStack, Box } from "@chakra-ui/react";
 import React from "react";
 import CoinTable from "../components/coins/CoinTable";
+import CoinCarousel from "../components/Carousel";
 
 const LandingPage = () => {
   return (
@@ -11,6 +12,7 @@ const LandingPage = () => {
           <Text fontSize={40}>🍈 The best crypto news around 🍈</Text>
         </VStack>
       </Center>
+      <CoinCarousel/>
       <CoinTable />
     </Box>
   );

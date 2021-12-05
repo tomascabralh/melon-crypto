@@ -37,8 +37,6 @@ const TimeSelector = ({ fetchDataFromTimeSelector }) => {
   return (
     <Box>
       <Select
-        w="40"
-        ml="160"
         onChange={(e) => {
           fetchDataFromTimeSelector(e.target.value);
         }}
