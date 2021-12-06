@@ -1,23 +1,14 @@
-import { Box } from "@chakra-ui/layout";
-import React, { useEffect, useState } from "react";
-import Item from "../components/Item";
+import { Box, Heading } from "@chakra-ui/layout";
+import React from "react";
+import NewsCarousel from "../components/carousel/NewsCarousel";
 
 const NewsPage = () => {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/posts")
-      .then((response) => response.json())
-      .then((data) => setData(data));
-  }, []);
-
   return (
     <Box>
-      {data.map((item) => (
-        <Box py={4}>
-          <Item {...item} />
-        </Box>
-      ))}
+      <Heading mx={{ md: 0, lg: 300 }} my={10}>
+        Trending News
+      </Heading>
+      <NewsCarousel />
     </Box>
   );
 };

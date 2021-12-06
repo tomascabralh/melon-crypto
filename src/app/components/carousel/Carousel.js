@@ -1,4 +1,4 @@
-import { Center, Box } from "@chakra-ui/layout";
+import { Center } from "@chakra-ui/layout";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Carousel } from "react-responsive-carousel";

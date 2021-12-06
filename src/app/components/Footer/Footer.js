@@ -8,7 +8,13 @@ import Suscription from "./SuscriptionForm";
 
 const Footer = () => {
   return (
-    <Box as="footer" role="contentinfo" mx="auto" width="100%" position='absolute'>
+    <Box
+      as="footer"
+      role="contentinfo"
+      mx="auto"
+      width="100%"
+      position="absolute"
+    >
       <Grid
         templateColumns={{
           base: "repeat(2, 1fr)",
