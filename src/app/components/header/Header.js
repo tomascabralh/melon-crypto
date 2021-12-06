@@ -17,7 +17,7 @@ function Header() {
       >
         <Flex marginRight={4} marginY={2}>
           <Box width="200px" marginRight={8}>
-            <Link href="/">
+            <Link href="/" style={{ textDecoration: "none" }}>
               <Text>🍈 Melon Crypto</Text>
             </Link>
           </Box>

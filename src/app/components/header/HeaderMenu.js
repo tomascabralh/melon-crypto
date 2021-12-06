@@ -8,7 +8,7 @@ const HeaderMenu = (props) => {
       display={{ base: "none", md: "block" }}
       key={item.name}
     >
-      <Link href={item.link}>
+      <Link href={item.link} style={{ textDecoration: "none" }}>
         <Text textAlign="center">{item.name}</Text>
       </Link>
     </Box>

@@ -8,9 +8,15 @@ const About = () => {
         ABOUT
       </Text>
       <Stack>
-        <Link href="#">About Us</Link>
-        <Link href="#">Team</Link>
-        <Link href="#">FAQ</Link>
+        <Link href="#" style={{ textDecoration: "none" }}>
+          About Us
+        </Link>
+        <Link href="#" style={{ textDecoration: "none" }}>
+          Team
+        </Link>
+        <Link href="#" style={{ textDecoration: "none" }}>
+          FAQ
+        </Link>
       </Stack>
     </Box>
   );

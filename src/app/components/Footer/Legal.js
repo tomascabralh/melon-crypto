@@ -8,8 +8,12 @@ const Legal = () => {
         LEGAL
       </Text>
       <Stack>
-        <Link href="/privacy">Privacy</Link>
-        <Link href="/terms">Terms</Link>
+        <Link href="/privacy" style={{ textDecoration: "none" }}>
+          Privacy
+        </Link>
+        <Link href="/terms" style={{ textDecoration: "none" }}>
+          Terms
+        </Link>
       </Stack>
     </Box>
   );
