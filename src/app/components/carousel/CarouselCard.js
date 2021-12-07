@@ -14,7 +14,7 @@ import CoinDayVariation from "../coins/CoinDayVariation";
 
 const CarouselCard = ({ coin }) => {
   return (
-    <Center py={12}>
+    <Center py={12} key={coin.id}>
       <Box
         role={"group"}
         p={6}
@@ -25,6 +25,9 @@ const CarouselCard = ({ coin }) => {
         rounded={"lg"}
         pos={"relative"}
         zIndex={1}
+        _hover={{
+          color: "teal.800",
+        }}
       >
         <Link href={`/coins/${coin.id}`} style={{ textDecoration: "none" }}>
           <Box

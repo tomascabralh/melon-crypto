@@ -1,25 +1,27 @@
-import { Center, Box } from "@chakra-ui/layout";
+import { Box, Center } from "@chakra-ui/layout";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import CarouselCard from "./CarouselCard";
+import NewsCarouselCard from "./NewsCarouselCard";
 
-const CoinCarousel = () => {
-  const GETrequest =
-    "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false&price_change_percentage=24h";
+const NewsCarousel = () => {
+  const [articles, setArticles] = useState([]);
 
-  const [coins, setCoins] = useState([]);
+  const APIkey = "ad888119f1d4427dab37e01c74a66761";
+  const GETrequest = `https://newsapi.org/v2/everything?q=crypto&apiKey=${APIkey}`;
 
   useEffect(() => {
     axios.get(GETrequest).then((res) => {
-      setCoins(res.data);
+      setArticles(res.data.articles);
     });
   }, []);
 
-  const CarouselEntries = coins.map((coin) => {
-    return <CarouselCard coin={coin} />;
+  const CarouselEntries = articles.map((article, index) => {
+    return <NewsCarouselCard article={article} index={index} />;
   });
+
+  useEffect(() => {}, []);
 
   return (
     <Box w="100%" overflow="hidden">
@@ -31,12 +33,13 @@ const CoinCarousel = () => {
           emulateTouch={true}
           stopOnHover={true}
           showThumbs={false}
-          showArrows={true}
+          showArrows={false}
           showIndicators={false}
           showStatus={false}
           centerMode={true}
-          centerSlidePercentage={40}
+          centerSlidePercentage={12}
           transitionTime={1000}
+          interval={5000}
         >
           {CarouselEntries}
         </Carousel>
@@ -45,4 +48,4 @@ const CoinCarousel = () => {
   );
 };
 
-export default CoinCarousel;
+export default NewsCarousel;

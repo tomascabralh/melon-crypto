@@ -27,7 +27,6 @@ function Header() {
                 name: "Cryptos",
                 link: "/",
               },
-              { name: "NFT", link: "/nfts" },
               { name: "News", link: "/news" },
             ]}
           />

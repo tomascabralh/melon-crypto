@@ -27,7 +27,10 @@ const CoinTableRow = () => {
           >
             <Td>{coin.market_cap_rank}</Td>
             <Td>
-              <Link href={`/coins/${coin.id}`}>
+              <Link
+                href={`/coins/${coin.id}`}
+                style={{ textDecoration: "none" }}
+              >
                 <Flex>
                   <img src={coin.image} width="30" height="5" alt={coin.name} />
                   <Box ml={5}>{coin.name}</Box>

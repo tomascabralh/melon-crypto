@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Box, Flex, Stack } from "@chakra-ui/layout";
 import { Line } from "react-chartjs-2";
-import { Spinner } from '@chakra-ui/react'
 import axios from "axios";
 import { Chart as ChartJS } from "chart.js/auto";
 import { Chart } from "react-chartjs-2";
@@ -38,7 +37,7 @@ const CoinChart = () => {
     <>
       <Flex minH="600px" w="1300px">
         {!chartdata ? (
-          <SpinnerUI/>
+          <SpinnerUI />
         ) : (
           <Line
             data={{
@@ -69,13 +68,15 @@ const CoinChart = () => {
           />
         )}
         <Stack>
-          <Box w={150} mt='180' mb='20'>
-          <TimeSelector fetchDataFromTimeSelector={fetchDataFromTimeSelector} />
+          <Box w={150} mt="180" mb="20">
+            <TimeSelector
+              fetchDataFromTimeSelector={fetchDataFromTimeSelector}
+            />
           </Box>
           <Box w={150}>
-          <CurrencySelector
-            fetchDataFromCurrencySelector={fetchDataFromCurrencySelector}
-          />
+            <CurrencySelector
+              fetchDataFromCurrencySelector={fetchDataFromCurrencySelector}
+            />
           </Box>
         </Stack>
       </Flex>
