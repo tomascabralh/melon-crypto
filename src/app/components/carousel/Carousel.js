@@ -1,4 +1,4 @@
-import { Center } from "@chakra-ui/layout";
+import { Center, Box } from "@chakra-ui/layout";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Carousel } from "react-responsive-carousel";
@@ -22,24 +22,26 @@ const CoinCarousel = () => {
   });
 
   return (
-    <Center>
-      <Carousel
-        autoPlay={true}
-        infiniteLoop={true}
-        swipeable={true}
-        emulateTouch={true}
-        stopOnHover={true}
-        showThumbs={false}
-        showArrows={true}
-        showIndicators={false}
-        showStatus={false}
-        centerMode={true}
-        centerSlidePercentage={40}
-        transitionTime={1000}
-      >
-        {CarouselEntries}
-      </Carousel>
-    </Center>
+    <Box w="100%" overflow="hidden">
+      <Center>
+        <Carousel
+          autoPlay={true}
+          infiniteLoop={true}
+          swipeable={true}
+          emulateTouch={true}
+          stopOnHover={true}
+          showThumbs={false}
+          showArrows={true}
+          showIndicators={false}
+          showStatus={false}
+          centerMode={true}
+          centerSlidePercentage={40}
+          transitionTime={1000}
+        >
+          {CarouselEntries}
+        </Carousel>
+      </Center>
+    </Box>
   );
 };
 

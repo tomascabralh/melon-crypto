@@ -9,7 +9,7 @@ const CoinTable = () => {
   return (
     <Box
       my={10}
-      mx={{ md: 0, lg: 300 }}
+      mx={{ md: 0, lg: 100, xl: 300 }}
       bgColor="#9AE6B4"
       borderRadius="5px"
       overflow="auto"

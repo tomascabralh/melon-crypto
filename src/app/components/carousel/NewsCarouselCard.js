@@ -10,22 +10,30 @@ import {
 } from "@chakra-ui/react";
 import Author from "../news/Author";
 
-const NewsCarouselCard = ({ article }) => {
+const NewsCarouselCard = ({ article }, { index }) => {
+  const formatHrefTitle = (Title) => {
+    var title = Title.replaceAll(" ", "-");
+    return title;
+  };
+
   return (
-    <Center py={6} pb={20} key={article.source.id}>
+    <Center py={6} pb={20} key={index}>
       <Box
         maxW={"445px"}
-        w={"full"}
+        w="100%"
         boxShadow={"lg"}
         rounded={"lg"}
         p={6}
         overflow={"hidden"}
         maxHeight="500px"
         minHeight="500px"
+        _hover={{
+          background: "gray.50",
+          color: "teal.800",
+        }}
       >
         <Link
-          href={article.url}
-          target="_blank"
+          href={`/news/${formatHrefTitle(article.title)}`}
           style={{ textDecoration: "none" }}
         >
           <Box
@@ -39,10 +47,7 @@ const NewsCarouselCard = ({ article }) => {
             <Image src={article.urlToImage} layout={"fill"} maxHeight="210px" />
           </Box>
           <Stack>
-            <Heading
-              fontSize={"2xl"}
-              fontFamily={"body"}
-            >
+            <Heading fontSize={"2xl"} fontFamily={"body"}>
               {article.title}
             </Heading>
             <Box maxHeight="100px">
@@ -51,7 +56,7 @@ const NewsCarouselCard = ({ article }) => {
               </Text>
             </Box>
           </Stack>
-            <Author article={article}/>
+          <Author article={article} />
         </Link>
       </Box>
     </Center>

@@ -17,8 +17,8 @@ const NewsCarousel = () => {
     });
   }, []);
 
-  const CarouselEntries = articles.map((article) => {
-    return <NewsCarouselCard article={article} />;
+  const CarouselEntries = articles.map((article, index) => {
+    return <NewsCarouselCard article={article} index={index} />;
   });
 
   useEffect(() => {}, []);
@@ -33,7 +33,7 @@ const NewsCarousel = () => {
           emulateTouch={true}
           stopOnHover={true}
           showThumbs={false}
-          showArrows={true}
+          showArrows={false}
           showIndicators={false}
           showStatus={false}
           centerMode={true}
