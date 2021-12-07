@@ -1,4 +1,4 @@
-import { Center, Text, VStack, Box, Heading } from "@chakra-ui/react";
+import { Center, VStack, Box, Heading } from "@chakra-ui/react";
 import React from "react";
 import CoinTable from "../components/coins/CoinTable";
 import CoinCarousel from "../components/carousel/Carousel";
@@ -13,17 +13,23 @@ const LandingPage = () => {
           <Heading>🍈 The best crypto news around 🍈</Heading>
         </VStack>
       </Center>
-      <Heading mx={{ md: 0, lg: 300 }} my={10}>
+      <Box mx={{ md: 0, lg: 300 }} my={5} py={5} borderBottom='1px' borderColor='gray.100'>
+      <Heading >
         Trending News{" "}
       </Heading>
+      </Box>
       <NewsCarousel />
-      <Heading mx={{ md: 0, lg: 300 }} my={10}>
+      <Box mx={{ md: 0, lg: 300 }} my={5} py={5} borderBottom='1px' borderColor='gray.100'>
+      <Heading>
         Top 10 Cryptos{" "}
       </Heading>
+      </Box>
       <CoinCarousel />
-      <Heading mx={{ md: 0, lg: 300 }} my={10}>
+      <Box mx={{ md: 0, lg: 300 }} my={5} py={5} borderBottom='1px' borderColor='gray.100'>
+      <Heading >
         Today's Cryptocurrency Prices by Melon Crypto
       </Heading>
+      </Box>
       <CoinTable />
     </Box>
   );

@@ -5,18 +5,17 @@ import {
   Heading,
   Text,
   Stack,
-  useColorModeValue,
   Image,
   Link,
 } from "@chakra-ui/react";
+import Author from "../news/Author";
 
 const NewsCarouselCard = ({ article }) => {
   return (
-    <Center py={6} pb={20}>
+    <Center py={6} pb={20} key={article.source.id}>
       <Box
         maxW={"445px"}
         w={"full"}
-        bg={useColorModeValue("white", "gray.900")}
         boxShadow={"lg"}
         rounded={"lg"}
         p={6}
@@ -41,7 +40,6 @@ const NewsCarouselCard = ({ article }) => {
           </Box>
           <Stack>
             <Heading
-              color={useColorModeValue("gray.700", "white")}
               fontSize={"2xl"}
               fontFamily={"body"}
             >
@@ -53,18 +51,7 @@ const NewsCarouselCard = ({ article }) => {
               </Text>
             </Box>
           </Stack>
-          <Box mt={6} direction={"row"} spacing={4} align={"center"}>
-            <Stack direction={"column"} spacing={0} fontSize={"sm"}>
-              <Text fontWeight={600} textAlign="left">
-                By: {article.source.name}
-              </Text>
-              {article.author !== null ? (
-                <Text color={"gray.500"} textAlign="left">
-                  Author: {article.author}
-                </Text>
-              ) : null}
-            </Stack>
-          </Box>
+            <Author article={article}/>
         </Link>
       </Box>
     </Center>

@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import CoinStats from "./CoinStats";
 import CoinChart from "./CoinChart";
-import { SliderMark } from "@chakra-ui/slider";
+
 
 const CoinPageData = () => {
   const { id } = useParams();
