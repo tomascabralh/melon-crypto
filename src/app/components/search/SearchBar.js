@@ -3,6 +3,7 @@ import { Box } from "@chakra-ui/layout";
 import { Input } from "@chakra-ui/input";
 import React from "react";
 import { useState } from "react";
+import { useColorModeValue } from "@chakra-ui/color-mode";
 
 const SearchBar = (props) => {
   const { data } = props;
@@ -18,13 +19,18 @@ const SearchBar = (props) => {
     setInput(searchWord);
     setFilteredData(newfilter);
   };
+
+  const bg = useColorModeValue("white", "gray.900");
+  const color = useColorModeValue("black", "gray.50");
+
   return (
     <Box>
       <Input
         size="sm"
-        background="white"
+        background={bg}
         rounded="md"
         px={2}
+        color={color}
         variant="flushed"
         placeholder="Search . . ."
         onChange={onSearch}

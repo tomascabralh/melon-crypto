@@ -2,15 +2,18 @@ import { Box } from "@chakra-ui/layout";
 import { Table, Thead, Tbody, Tr, Th } from "@chakra-ui/react";
 import React from "react";
 import CoinTableRow from "./CoinTableRow";
+import { useColorModeValue } from "@chakra-ui/color-mode";
 
 const CoinTable = () => {
+  const bg = useColorModeValue("#9AE6B4", "green.800");
+
   const titles = ["Top", "Coin", "Price (USD)", "24h %", "Market Cap"];
 
   return (
     <Box
       my={10}
       mx={{ md: 0, lg: 100, xl: 300 }}
-      bgColor="#9AE6B4"
+      bgColor={bg}
       borderRadius="5px"
       overflow="auto"
       sx={{

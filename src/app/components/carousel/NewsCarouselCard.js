@@ -28,7 +28,7 @@ const NewsCarouselCard = ({ article }, { index }) => {
         maxHeight="500px"
         minHeight="500px"
         _hover={{
-          background: "gray.50",
+          background: "gray.200",
           color: "teal.800",
         }}
       >

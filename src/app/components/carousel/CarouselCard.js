@@ -13,6 +13,8 @@ import { Link } from "@chakra-ui/react";
 import CoinDayVariation from "../coins/CoinDayVariation";
 
 const CarouselCard = ({ coin }) => {
+  const bg = useColorModeValue("white", "gray.700");
+
   return (
     <Center py={12} key={coin.id}>
       <Box
@@ -20,12 +22,13 @@ const CarouselCard = ({ coin }) => {
         p={6}
         maxW={"330px"}
         w={"full"}
-        bg={useColorModeValue("white", "gray.800")}
+        bg={bg}
         boxShadow={"xl"}
         rounded={"lg"}
         pos={"relative"}
         zIndex={1}
         _hover={{
+          background: "gray.200",
           color: "teal.800",
         }}
       >

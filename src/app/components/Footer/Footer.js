@@ -5,8 +5,12 @@ import Copyright from "./Copyright";
 import About from "./About";
 import Legal from "./Legal";
 import Suscription from "./SuscriptionForm";
+import { useColorModeValue } from "@chakra-ui/color-mode";
 
 const Footer = () => {
+  const bg = useColorModeValue("#9AE6B4", "green.700");
+  const color = useColorModeValue("black", "gray.50");
+
   return (
     <Box
       as="footer"
@@ -23,7 +27,8 @@ const Footer = () => {
           lg: "repeat(6, 1fr)",
         }}
         h="200px"
-        bgColor="#9AE6B4"
+        bgColor={bg}
+        color={color}
         pl={8}
         pt={4}
         width="100%"

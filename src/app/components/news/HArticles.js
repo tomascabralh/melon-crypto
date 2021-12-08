@@ -28,7 +28,7 @@ const Articles = ({ sortBy }) => {
         alignContent="right"
         key={index.toString()}
         _hover={{
-          background: "gray.50",
+          background: "gray.200",
           color: "teal.800",
         }}
         borderRadius="lg"

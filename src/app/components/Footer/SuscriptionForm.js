@@ -2,8 +2,12 @@ import React from "react";
 import { Box, Text, Stack } from "@chakra-ui/layout";
 import { Input } from "@chakra-ui/input";
 import { Button } from "@chakra-ui/button";
+import { useColorModeValue } from "@chakra-ui/color-mode";
 
 const Suscription = () => {
+  const bg = useColorModeValue("white", "gray.900");
+  const color = useColorModeValue("black", "gray.50");
+
   return (
     <Box
       ml="120px"
@@ -26,7 +30,8 @@ const Suscription = () => {
       <Stack>
         <Input
           size="sm"
-          background="white"
+          background={bg}
+          color={color}
           rounded="md"
           px={2}
           variant="flushed"
