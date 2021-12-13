@@ -5,6 +5,8 @@ import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
 import { BrowserRouter } from "react-router-dom";
 import theme from "./theme";
 
+require("dotenv").config();
+
 ReactDOM.render(
   <BrowserRouter>
     <ChakraProvider>

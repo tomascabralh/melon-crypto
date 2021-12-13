@@ -44,7 +44,12 @@ const NewsCarouselCard = ({ article }, { index }) => {
             mb={6}
             pos={"relative"}
           >
-            <Image src={article.urlToImage} layout={"fill"} maxHeight="210px" />
+            <Image
+              src={article.urlToImage}
+              layout={"fill"}
+              maxHeight="210px"
+              alt={article.title}
+            />
           </Box>
           <Stack>
             <Heading fontSize={"2xl"} fontFamily={"body"}>

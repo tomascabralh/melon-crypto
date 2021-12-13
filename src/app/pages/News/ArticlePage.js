@@ -10,10 +10,9 @@ const ArticlePage = () => {
   const { news } = useParams();
   const [articleData, setArticleData] = useState([]);
 
-  const APIkey = "ad888119f1d4427dab37e01c74a66761";
   const GETrequest = (Title) => {
     var title = Title.replaceAll("-", " ");
-    return `https://newsapi.org/v2/everything?qInTitle="${title}"&apiKey=${APIkey}`;
+    return `https://newsapi.org/v2/everything?qInTitle="${title}"&apiKey=${process.env.REACT_APP_articles_APIkey}`;
   };
 
   useEffect(() => {

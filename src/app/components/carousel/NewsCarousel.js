@@ -8,9 +8,7 @@ import NewsCarouselCard from "./NewsCarouselCard";
 const NewsCarousel = () => {
   const [articles, setArticles] = useState([]);
 
-  const APIkey = "ad888119f1d4427dab37e01c74a66761";
-  const GETrequest = `https://newsapi.org/v2/everything?q=crypto&apiKey=${APIkey}`;
-
+  const GETrequest = `https://newsapi.org/v2/everything?q=crypto&apiKey=${process.env.REACT_APP_articles_APIkey}`;
   useEffect(() => {
     axios.get(GETrequest).then((res) => {
       setArticles(res.data.articles);

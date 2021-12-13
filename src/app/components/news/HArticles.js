@@ -9,8 +9,7 @@ const Articles = ({ sortBy }) => {
   const [articles, setArticles] = useState([]);
   const [sortedBy, setSortedBy] = useState("publishedAt");
 
-  const APIkey = "ad888119f1d4427dab37e01c74a66761";
-  const GETrequest = `https://newsapi.org/v2/everything?q=crypto&sortBy=${sortedBy}&apiKey=${APIkey}`;
+  const GETrequest = `https://newsapi.org/v2/everything?q=crypto&sortBy=${sortedBy}&apiKey=${process.env.REACT_APP_articles_APIkey}`;
 
   const formatHrefTitle = (Title) => {
     var title = Title.replaceAll(" ", "-");
@@ -91,7 +90,7 @@ const Articles = ({ sortBy }) => {
     setSortedBy(sortBy);
   }, [sortBy]);
 
-  return <Box>{buildArticle}</Box>;
+  return <>{buildArticle}</>;
 };
 
 export default Articles;
