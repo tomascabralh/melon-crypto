@@ -10,14 +10,14 @@ import {
 } from "@chakra-ui/react";
 import Author from "../news/Author";
 
-const NewsCarouselCard = ({ article }, { index }) => {
+const NewsCarouselCard = ({ article }, { key }) => {
   const formatHrefTitle = (Title) => {
     var title = Title.replaceAll(" ", "-");
     return title;
   };
 
   return (
-    <Center py={6} pb={20} key={index}>
+    <Center py={6} pb={20} key={key}>
       <Box
         maxW={"445px"}
         w="100%"
@@ -61,8 +61,8 @@ const NewsCarouselCard = ({ article }, { index }) => {
               </Text>
             </Box>
           </Stack>
-          <Author article={article} />
         </Link>
+        <Author article={article} />
       </Box>
     </Center>
   );

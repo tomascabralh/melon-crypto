@@ -38,6 +38,7 @@ const Suscription = () => {
           placeholder="Enter your email"
           type="email"
           maxWidth={360}
+          isReadOnly
         />
         <Button colorScheme="blue" variant="solid" maxWidth={120}>
           SEND

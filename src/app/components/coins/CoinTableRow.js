@@ -21,6 +21,7 @@ const CoinTableRow = () => {
       {coins.map((coin) => {
         return (
           <Tr
+            key={coin.market_cap_rank}
             _hover={{
               background: "green.100",
             }}

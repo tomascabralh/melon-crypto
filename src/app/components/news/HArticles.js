@@ -1,19 +1,24 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Box, Heading, Link, AspectRatio, Text } from "@chakra-ui/layout";
+import { Box, Heading, Link, AspectRatio, Text, Grid } from "@chakra-ui/layout";
 import { Image } from "@chakra-ui/image";
 import Author from "./Author";
 import FormatDay from "./DayFormater";
+import SortBySelector from "./SortBySelector";
 
-const Articles = ({ sortBy }) => {
+const Articles = (params) => {
   const [articles, setArticles] = useState([]);
-  const [sortedBy, setSortedBy] = useState("publishedAt");
-
-  const GETrequest = `https://newsapi.org/v2/everything?q=crypto&sortBy=${sortedBy}&apiKey=${process.env.REACT_APP_articles_APIkey}`;
+  const [sortby, setSortBy] = useState("relevancy");
+  const [searchParams, setSearchParams] = useState();
+  const [search, setSearch] = useState();
 
   const formatHrefTitle = (Title) => {
     var title = Title.replaceAll(" ", "-");
     return title;
+  };
+
+  const fetchDataFromSortBySelector = (sortby) => {
+    setSortBy(sortby);
   };
 
   const buildArticle = articles.map((article, index) => {
@@ -81,16 +86,51 @@ const Articles = ({ sortBy }) => {
   });
 
   useEffect(() => {
-    axios.get(GETrequest).then((res) => {
-      setArticles(res.data.articles);
-    });
-  }, [sortedBy]);
+    params.q !== undefined
+      ? setSearchParams(params.q)
+      : setSearchParams("crypto");
+    params.searchT !== undefined ? setSearch(params.searchT) : setSearch("q");
+  });
 
   useEffect(() => {
-    setSortedBy(sortBy);
-  }, [sortBy]);
+    searchParams !== undefined && search !== undefined
+      ? axios
+          .get(
+            `https://newsapi.org/v2/everything?${search}=${searchParams}&sortBy=${sortby}&apiKey=${process.env.REACT_APP_articles_APIkey}`
+          )
+          .then((res) => {
+            setArticles(res.data.articles);
+          })
+      : console.log(
+          `https://newsapi.org/v2/everything?${search}=${searchParams}&sortBy=${sortby}&apiKey=${process.env.REACT_APP_articles_APIkey}`
+        );
+  }, [sortby, searchParams, search]);
 
-  return <>{buildArticle}</>;
+  return (
+    <>
+      <Box
+        mx={{ md: 0, lg: 200 }}
+        my={5}
+        py={5}
+        borderBottom="1px"
+        borderColor="gray.200"
+        alignContent="right"
+      >
+        <Grid templateColumns={{ sm: "repeat(1, 1fr)", md: "repeat(2, 1fr)" }}>
+          <Box>
+            <Heading>{searchParams} News</Heading>
+          </Box>
+          <Box alignContent="right" pl={{ sm: 0, md: 100, lg: 200, xl: 500 }}>
+            <Text textAlign={{ sm: "left", md: "right" }}>Sort By: </Text>
+            <SortBySelector
+              fetchDataFromSortBySelector={fetchDataFromSortBySelector}
+            />
+          </Box>
+        </Grid>
+      </Box>
+      <Box>{buildArticle}</Box>
+    </>
+  );
 };
 
 export default Articles;

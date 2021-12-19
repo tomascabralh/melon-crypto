@@ -8,15 +8,15 @@ import NewsCarouselCard from "./NewsCarouselCard";
 const NewsCarousel = () => {
   const [articles, setArticles] = useState([]);
 
-  const GETrequest = `https://newsapi.org/v2/everything?q=crypto&apiKey=${process.env.REACT_APP_articles_APIkey}`;
   useEffect(() => {
+    const GETrequest = `https://newsapi.org/v2/everything?q=crypto&apiKey=${process.env.REACT_APP_articles_APIkey}`;
     axios.get(GETrequest).then((res) => {
       setArticles(res.data.articles);
     });
   }, []);
 
   const CarouselEntries = articles.map((article, index) => {
-    return <NewsCarouselCard article={article} index={index} />;
+    return <NewsCarouselCard article={article} key={index} />;
   });
 
   useEffect(() => {}, []);

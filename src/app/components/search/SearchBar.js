@@ -38,10 +38,8 @@ const SearchBar = (props) => {
       />
       {input.length > 1 && (
         <Box
-          border="1px"
-          bg="white"
-          mt={2}
-          borderColor="gray.200"
+          mt={3}
+          borderRadius="3px"
           overflow="auto"
           overflowY="auto"
           maxH="162px"
@@ -49,11 +47,10 @@ const SearchBar = (props) => {
             "&::-webkit-scrollbar": {
               width: "8px",
               borderRadius: "8px",
-              backgroundColor: rgba(0, 0, 0, 0.05),
             },
 
             "&::-webkit-scrollbar-thumb": {
-              backgroundColor: rgba(0, 0, 0, 0.05),
+              backgroundColor: "gray.400",
               borderRadius: "8px",
             },
           }}

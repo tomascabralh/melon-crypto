@@ -5,17 +5,17 @@ import axios from "axios";
 import { Image } from "@chakra-ui/image";
 import Author from "../../components/news/Author";
 import FormatDay from "../../components/news/DayFormater";
+import SpinnerUI from "../../components/Spinner";
 
 const ArticlePage = () => {
   const { news } = useParams();
   const [articleData, setArticleData] = useState([]);
 
-  const GETrequest = (Title) => {
-    var title = Title.replaceAll("-", " ");
-    return `https://newsapi.org/v2/everything?qInTitle="${title}"&apiKey=${process.env.REACT_APP_articles_APIkey}`;
-  };
-
   useEffect(() => {
+    const GETrequest = (Title) => {
+      var title = Title.replaceAll("-", " ");
+      return `https://newsapi.org/v2/everything?qInTitle="${title}"&apiKey=${process.env.REACT_APP_articles_APIkey}`;
+    };
     axios.get(GETrequest(news)).then((res) => {
       setArticleData(res.data.articles[0]);
     });
@@ -49,7 +49,9 @@ const ArticlePage = () => {
             {articleData.content}
           </Text>
         </Box>
-      ) : null}
+      ) : (
+        <SpinnerUI />
+      )}
     </>
   );
 };

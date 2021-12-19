@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import CoinStats from "./CoinStats";
 import CoinChart from "./CoinChart";
-
+import Articles from "../news/HArticles";
 
 const CoinPageData = () => {
   const { id } = useParams();
@@ -35,9 +35,28 @@ const Pepu = ({ coin }) => {
           </Flex>
         </Flex>
       </Box>
-      <Box w="100%" h='100%'>
+      <Box w="100%" h="100%">
         <Flex px="20px" mx="50px">
-          <Box minW="200px" maxW="300px" maxH={650} mr="50px" mb='50px' overflow="auto" display={{ lg: "none", xl: "none", '2xl':'block' }}>
+          <Box
+            minW="200px"
+            maxW="300px"
+            maxH={650}
+            mr="50px"
+            mb="50px"
+            overflow="auto"
+            display={{ lg: "none", xl: "none", "2xl": "block" }}
+            sx={{
+              "&::-webkit-scrollbar": {
+                width: "8px",
+                borderRadius: "8px",
+              },
+
+              "&::-webkit-scrollbar-thumb": {
+                backgroundColor: "gray.400",
+                borderRadius: "8px",
+              },
+            }}
+          >
             {coin.description?.en}
           </Box>
           <Box>
@@ -45,6 +64,7 @@ const Pepu = ({ coin }) => {
           </Box>
         </Flex>
       </Box>
+      <Articles q={coin.name} searchT={"qInTitle"} />
     </Box>
   );
 };

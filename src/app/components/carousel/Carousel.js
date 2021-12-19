@@ -17,8 +17,8 @@ const CoinCarousel = () => {
     });
   }, []);
 
-  const CarouselEntries = coins.map((coin) => {
-    return <CarouselCard coin={coin} />;
+  const CarouselEntries = coins.map((coin, index) => {
+    return <CarouselCard coin={coin} key={index} />;
   });
 
   return (
