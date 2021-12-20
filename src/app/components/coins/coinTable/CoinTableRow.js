@@ -2,7 +2,7 @@ import { Box, Flex, Link } from "@chakra-ui/layout";
 import { Tr, Td } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import CoinDayVariation from "./CoinDayVariation";
+import CoinDayVariation from "../coinPage/CoinDayVariation";
 
 const CoinTableRow = () => {
   const GETrequest =

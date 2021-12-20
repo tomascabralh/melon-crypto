@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Box, Heading, Link, AspectRatio, Text, Grid } from "@chakra-ui/layout";
+import {
+  Box,
+  Heading,
+  Link,
+  AspectRatio,
+  Text,
+  Grid,
+  HStack,
+} from "@chakra-ui/layout";
 import { Image } from "@chakra-ui/image";
 import Author from "./Author";
 import FormatDay from "./DayFormater";
@@ -101,9 +109,7 @@ const Articles = (params) => {
           .then((res) => {
             setArticles(res.data.articles);
           })
-      : console.log(
-          `https://newsapi.org/v2/everything?${search}=${searchParams}&sortBy=${sortby}&apiKey=${process.env.REACT_APP_articles_APIkey}`
-        );
+      : console.log("cabra gei xd");
   }, [sortby, searchParams, search]);
 
   return (
@@ -120,12 +126,15 @@ const Articles = (params) => {
           <Box>
             <Heading>{searchParams} News</Heading>
           </Box>
-          <Box alignContent="right" pl={{ sm: 0, md: 100, lg: 200, xl: 500 }}>
+          <HStack
+            alignContent="right"
+            pl={{ sm: 0, md: 100, lg: 200, xl: 500 }}
+          >
             <Text textAlign={{ sm: "left", md: "right" }}>Sort By: </Text>
             <SortBySelector
               fetchDataFromSortBySelector={fetchDataFromSortBySelector}
             />
-          </Box>
+          </HStack>
         </Grid>
       </Box>
       <Box>{buildArticle}</Box>

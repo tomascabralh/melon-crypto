@@ -1,7 +1,7 @@
 import { Center, VStack, Box, Heading } from "@chakra-ui/react";
 import React from "react";
-import CoinTable from "../components/coins/CoinTable";
-import CoinCarousel from "../components/carousel/Carousel";
+import CoinTable from "../components/coins/coinTable/CoinTable";
+import CoinCarousel from "../components/carousel/CoinsCarousel";
 import NewsCarousel from "../components/carousel/NewsCarousel";
 
 const LandingPage = () => {

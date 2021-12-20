@@ -10,7 +10,7 @@ import {
   AspectRatio,
 } from "@chakra-ui/react";
 import { Link } from "@chakra-ui/react";
-import CoinDayVariation from "../coins/CoinDayVariation";
+import CoinDayVariation from "../coins/coinPage/CoinDayVariation";
 
 const CarouselCard = ({ coin }) => {
   const bg = useColorModeValue("white", "gray.700");

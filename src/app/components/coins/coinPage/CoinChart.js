@@ -7,7 +7,7 @@ import { Chart as ChartJS } from "chart.js/auto";
 import { Chart } from "react-chartjs-2";
 import TimeSelector from "./TimeSelector";
 import CurrencySelector from "./CurrencySelector";
-import SpinnerUI from "../Spinner";
+import SpinnerUI from "../../Spinner";
 
 const CoinChart = () => {
   const { id } = useParams();
@@ -35,7 +35,7 @@ const CoinChart = () => {
 
   return (
     <>
-      <Flex minH="600px" w="1300px">
+      <Flex minH="600px" maxW="1300px" mx={{ md: 0, lg: 200 }} my={5} py={5}>
         {!chartdata ? (
           <SpinnerUI />
         ) : (
