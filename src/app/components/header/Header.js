@@ -6,6 +6,8 @@ import { IconButton } from "@chakra-ui/react";
 import { FaMoon, FaSun } from "react-icons/fa";
 import HeaderMenu from "./HeaderMenu";
 import { useColorMode, useColorModeValue } from "@chakra-ui/color-mode";
+import SignUp from "./auth/SignUp";
+import Login from "./auth/Login";
 
 function Header() {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -40,6 +42,8 @@ function Header() {
             ]}
           />
           <Spacer />
+          <Login />
+          <SignUp />
           <Box right marginRight={10} w="500px">
             <SearchBar data={names} />
           </Box>
