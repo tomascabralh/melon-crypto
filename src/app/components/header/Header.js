@@ -8,6 +8,7 @@ import HeaderMenu from "./HeaderMenu";
 import { useColorMode, useColorModeValue } from "@chakra-ui/color-mode";
 import SignUp from "./auth/SignUp";
 import Login from "./auth/Login";
+import UserMenu from "./user/UserMenu";
 
 function Header() {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -42,8 +43,6 @@ function Header() {
             ]}
           />
           <Spacer />
-          <Login />
-          <SignUp />
           <Box right marginRight={10} w="500px">
             <SearchBar data={names} />
           </Box>
@@ -56,8 +55,12 @@ function Header() {
               )
             }
             size="sm"
+            marginRight={5}
             onClick={toggleColorMode}
           />
+          <Login />
+          <SignUp />
+          <UserMenu />
         </Flex>
       </Box>
     </Box>

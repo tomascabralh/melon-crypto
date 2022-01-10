@@ -9,7 +9,7 @@ const Copyright = () => {
     <Box bgColor={bgCopyright} w="100%" h="80px">
       <Center fontSize="lg">
         <Box mt="15px" fontWeight="semibold">
-          © 2021 Melon Crypto.
+          © 2022 Melon Crypto.
         </Box>
       </Center>
       <Center fontSize="sm">All rights reserved</Center>

@@ -3,8 +3,10 @@ import React from "react";
 import CoinTable from "../components/coins/coinTable/CoinTable";
 import CoinCarousel from "../components/carousel/CoinsCarousel";
 import NewsCarousel from "../components/carousel/NewsCarousel";
+import { useAuth } from "../components/contexts/AuthContext";
 
 const LandingPage = () => {
+  const { currentUser } = useAuth();
   return (
     <Box pt={6}>
       <Center padding={4}>
@@ -20,7 +22,7 @@ const LandingPage = () => {
         borderBottom="1px"
         borderColor="gray.200"
       >
-        <Heading>Trending News </Heading>
+        <Heading>Trending News , current user is {currentUser}</Heading>
       </Box>
       <NewsCarousel />
       <Box
