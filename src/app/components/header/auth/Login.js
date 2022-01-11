@@ -1,6 +1,4 @@
 import {
-  Box,
-  Link,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -9,8 +7,6 @@ import {
   ModalCloseButton,
   FormControl,
   FormLabel,
-  FormErrorMessage,
-  FormHelperText,
   Button,
   Input,
   useDisclosure,
@@ -23,38 +19,48 @@ import { auth } from "../../../../firebase";
 import React, { useRef, useState } from "react";
 import SignUp from "./SignUp";
 import { useToast } from "@chakra-ui/react";
+import PasswordReset from "./PasswordReset";
 
 const Login = () => {
-  const [logInEmail, setLogInEmail] = useState("");
-  const [logInPassword, setLogInPassword] = useState("");
+  const [logInEmail, setLogInEmail] = useState(null);
+  const [logInPassword, setLogInPassword] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const toast = useToast();
 
-  const initialRef = React.useRef();
+  const initialRef = useRef();
 
   const login = async () => {
-    if ("asd" === "asd") {
-      const user = await signInWithEmailAndPassword(
-        auth,
-        logInEmail,
-        logInPassword
-      );
-      onClose();
+    if (logInEmail === null || logInPassword === null) {
       toast({
-        title: "Logged in successfully!",
-        status: "success",
-        duration: 2000,
-        isClosable: true,
-      });
-      console.log(auth.currentUser);
-    } else {
-      toast({
-        title: "Username or password incorrect",
+        title: "Credentials not valid",
         status: "error",
         duration: 2000,
         isClosable: true,
       });
+    } else {
+      try {
+        const user = await signInWithEmailAndPassword(
+          auth,
+          logInEmail,
+          logInPassword
+        );
+        onClose();
+        toast({
+          title: "Logged in successfully!",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+        });
+      } catch (error) {
+        toast({
+          title: "Username or password incorrect",
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+        });
+        console.log(auth.currentUser);
+      }
     }
   };
 
@@ -98,9 +104,7 @@ const Login = () => {
                 }}
               />
             </FormControl>
-            <Link href="#" textColor={"gray.500"}>
-              Forgot password?
-            </Link>
+            <PasswordReset />
             <Button colorScheme="teal" w="100%" mt={5} mr={3} onClick={login}>
               Log In
             </Button>

@@ -17,10 +17,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useRef, useState } from "react";
 import Login from "./Login";
-import {
-  createUserWithEmailAndPassword,
-  fetchSignInMethodsForEmail,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../../firebase";
 import { useToast } from "@chakra-ui/react";
 
@@ -32,7 +29,6 @@ const SignUp = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const passwordConfirmRef = useRef(null);
-  //  const { SignUp } = useAuth();
 
   const toast = useToast();
 

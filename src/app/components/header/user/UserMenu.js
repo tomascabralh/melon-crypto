@@ -7,8 +7,11 @@ import {
   MenuItem,
 } from "@chakra-ui/react";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { useAuth } from "../../contexts/AuthContext";
 
 const UserMenu = () => {
+  const { logout } = useAuth();
+
   return (
     <>
       <Menu>
@@ -23,7 +26,7 @@ const UserMenu = () => {
           <MenuItem>Watchlist</MenuItem>
           <MenuItem>Portfolio</MenuItem>
           <MenuItem>Update Profile</MenuItem>
-          <MenuItem>Logout</MenuItem>
+          <MenuItem onClick={logout}>Logout</MenuItem>
         </MenuList>
       </Menu>
     </>
