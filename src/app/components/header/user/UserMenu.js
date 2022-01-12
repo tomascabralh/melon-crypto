@@ -9,13 +9,9 @@ import {
 } from "@chakra-ui/react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useAuth } from "../../contexts/AuthContext";
-import { useColorMode, useColorModeValue } from "@chakra-ui/color-mode";
 
 const UserMenu = () => {
-  const { currentUser, logout } = useAuth();
-  const { colorMode, toggleColorMode } = useColorMode();
-
-  const bg = useColorModeValue("#9AE6B4", "green.700");
+  const { logout } = useAuth();
 
   return (
     <>

@@ -1,12 +1,6 @@
-import { useFocusEffect } from "@chakra-ui/react";
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { auth } from "../../../firebase";
-import {
-  sendPasswordResetEmail,
-  onAuthStateChanged,
-  signOut,
-  confirmPasswordReset,
-} from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 
 const AuthContext = createContext("");
 

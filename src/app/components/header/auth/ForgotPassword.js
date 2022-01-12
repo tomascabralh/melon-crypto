@@ -18,7 +18,7 @@ import { auth } from "../../../../firebase";
 import React, { useRef, useState } from "react";
 import { useToast } from "@chakra-ui/react";
 
-const PasswordReset = () => {
+const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -69,4 +69,4 @@ const PasswordReset = () => {
     </>
   );
 };
-export default PasswordReset;
+export default ForgotPassword;

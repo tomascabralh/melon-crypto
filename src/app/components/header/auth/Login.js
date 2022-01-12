@@ -19,7 +19,7 @@ import { auth } from "../../../../firebase";
 import React, { useRef, useState } from "react";
 import SignUp from "./SignUp";
 import { useToast } from "@chakra-ui/react";
-import PasswordReset from "./PasswordReset";
+import ForgotPassword from "./ForgotPassword";
 
 const Login = () => {
   const [logInEmail, setLogInEmail] = useState(null);
@@ -105,7 +105,7 @@ const Login = () => {
                 }}
               />
             </FormControl>
-            <PasswordReset />
+            <ForgotPassword />
             <Button colorScheme="teal" w="100%" mt={5} mr={3} onClick={login}>
               Log In
             </Button>

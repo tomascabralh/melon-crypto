@@ -1,3 +1,4 @@
+import React, { useRef, useState } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -15,7 +16,6 @@ import {
   HStack,
   Spacer,
 } from "@chakra-ui/react";
-import React, { useRef, useState } from "react";
 import Login from "./Login";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../../firebase";
@@ -54,6 +54,7 @@ const SignUp = () => {
           duration: 2000,
           isClosable: true,
         });
+        console.log(user);
       } catch (error) {
         toast({
           title: "Email is invalid or already in use",

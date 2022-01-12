@@ -1,15 +1,29 @@
-import { Box, Heading } from "@chakra-ui/react";
-import React from "react";
-import { useAuth } from "../../components/contexts/AuthContext";
-import { useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { Box, Grid, GridItem } from "@chakra-ui/react";
+import UserData from "../../components/user/UserData";
+import UserDataUpdate from "../../components/user/UserDataUpdate";
 
 const ProfilePage = () => {
-  const { user } = useParams();
-  const { currentUser } = useAuth();
+  const [updateForm, setUpdateForm] = useState(false);
+
+  const displayProfile = () => {
+    if (updateForm === false) {
+      return <UserData setUpdateForm={setUpdateForm} />;
+    } else {
+      return <UserDataUpdate />;
+    }
+  };
 
   return (
     <Box>
-      <Heading>This is {currentUser?.email} profile.</Heading>
+      <Box mt={5}>
+        <Grid templateColumns="repeat(3, 1fr)" gap={6}>
+          <GridItem colSpan={1} borderRight="1px" borderColor="gray.200">
+            {updateForm === false ? <UserData /> : <UserDataUpdate />}
+          </GridItem>
+          <GridItem colSpan={2}>Watchlist</GridItem>
+        </Grid>
+      </Box>
     </Box>
   );
 };

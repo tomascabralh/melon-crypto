@@ -16,7 +16,6 @@ import PortfolioPage from "./app/pages/user/PortfolioPage";
 import { useAuth } from "./app/components/contexts/AuthContext";
 
 function App() {
-  const { currentUser } = useAuth();
   return (
     <Box>
       <AuthContextProvider>
