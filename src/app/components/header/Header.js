@@ -9,12 +9,15 @@ import { useColorMode, useColorModeValue } from "@chakra-ui/color-mode";
 import SignUp from "./auth/SignUp";
 import Login from "./auth/Login";
 import UserMenu from "./user/UserMenu";
+import { useAuth } from "../contexts/AuthContext";
 
 function Header() {
   const { colorMode, toggleColorMode } = useColorMode();
 
   const bg = useColorModeValue("#9AE6B4", "green.700");
   const color = useColorModeValue("black", "gray.50");
+
+  const { currentUser } = useAuth();
 
   return (
     <Box h="54" w="100%">
@@ -58,9 +61,8 @@ function Header() {
             marginRight={5}
             onClick={toggleColorMode}
           />
-          <Login />
-          <SignUp />
-          <UserMenu />
+          {!currentUser ? <Login /> : null}
+          {!currentUser ? <SignUp /> : <UserMenu />}
         </Flex>
       </Box>
     </Box>

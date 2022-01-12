@@ -45,6 +45,7 @@ const Login = () => {
           logInEmail,
           logInPassword
         );
+        console.log(user);
         onClose();
         toast({
           title: "Logged in successfully!",
