@@ -9,6 +9,7 @@ import {
   FormControl,
   Input,
   Link,
+  Checkbox,
 } from "@chakra-ui/react";
 import { useToast } from "@chakra-ui/react";
 import { updateProfile } from "firebase/auth";
@@ -16,10 +17,12 @@ import { auth } from "../../../firebase";
 import Avatar from "../../../images/user/DefaultAvatar.png";
 import { useAuth } from "../contexts/AuthContext";
 
-const UserDataUpdate = () => {
+const UserDataUpdate = (props) => {
   const { currentUser } = useAuth();
   const [username, setUsername] = useState(currentUser?.displayName);
   const [photo, setPhoto] = useState(currentUser?.photoURL);
+  const [checkbox, setCheckbox] = useState(true);
+  console.log(currentUser);
 
   const toast = useToast();
 
@@ -34,6 +37,7 @@ const UserDataUpdate = () => {
       duration: 2000,
       isClosable: true,
     });
+    props.changeToUpdate(false);
   };
 
   useEffect(() => {
@@ -58,7 +62,6 @@ const UserDataUpdate = () => {
         <Heading size={"md"} my={3}>
           Photo URL:
         </Heading>
-        {console.log(photo, username)}
         <Input
           id="photo"
           mb={10}
@@ -90,6 +93,19 @@ const UserDataUpdate = () => {
           mb={10}
           value={currentUser?.email}
         />
+        <Checkbox
+          mb={10}
+          isChecked={checkbox}
+          onChange={() => {
+            if (checkbox === true) {
+              setCheckbox(false);
+            } else {
+              setCheckbox(true);
+            }
+          }}
+        >
+          <Heading size={"md"}>Suscribed To Newsletter </Heading>
+        </Checkbox>
         <Button
           colorScheme="blue"
           variant="solid"

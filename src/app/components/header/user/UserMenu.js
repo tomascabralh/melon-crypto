@@ -40,7 +40,7 @@ const UserMenu = () => {
           </MenuItem>
           <MenuItem
             as={Link}
-            href={`/profile/update`}
+            href={`/profile`}
             style={{ textDecoration: "none" }}
           >
             Account Settings

@@ -11,7 +11,6 @@ import Header from "./app/components/header/Header";
 import Footer from "./app/components/footer/Footer";
 import AuthContextProvider from "./app/components/contexts/AuthContext";
 import ProfilePage from "./app/pages/user/ProfilePage";
-import UpdateProfilePage from "./app/pages/user/UpdateProfilePage";
 import PortfolioPage from "./app/pages/user/PortfolioPage";
 import { useAuth } from "./app/components/contexts/AuthContext";
 
@@ -22,7 +21,6 @@ function App() {
         <Header />
         <Routes>
           <Route exact path="/user/portfolio" element={<PortfolioPage />} />
-          <Route exact path="/profile/update" element={<UpdateProfilePage />} />
           <Route exact path="/profile" element={<ProfilePage />} />
           <Route exact path="/news/:news" element={<ArticlePage />} />
           <Route exact path="/news" element={<NewsPage />} />

@@ -7,7 +7,6 @@ import { useAuth } from "../components/contexts/AuthContext";
 
 const LandingPage = () => {
   const { currentUser } = useAuth();
-  console.log(currentUser);
   return (
     <Box pt={6}>
       <Center padding={4}>
@@ -23,7 +22,7 @@ const LandingPage = () => {
         borderBottom="1px"
         borderColor="gray.200"
       >
-        <Heading>Trending News , current user is {currentUser?.email}</Heading>
+        <Heading>Trending News</Heading>
       </Box>
       <NewsCarousel />
       <Box

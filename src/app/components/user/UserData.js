@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Box,
   Heading,
@@ -7,13 +7,17 @@ import {
   Button,
   Center,
   AspectRatio,
+  Checkbox,
 } from "@chakra-ui/react";
 import Avatar from "../../../images/user/DefaultAvatar.png";
 import { useAuth } from "../contexts/AuthContext";
 
-const UserData = () => {
+const UserData = (props) => {
   const { currentUser } = useAuth();
-  console.log(currentUser);
+
+  const clickEvent = () => {
+    props.changeToUpdate(true);
+  };
 
   return (
     <Box mx={20}>
@@ -40,12 +44,15 @@ const UserData = () => {
         Email:
       </Heading>
       <Text mb={10}>{currentUser?.email}</Text>
+      <Checkbox mb={10} isDisabled defaultIsChecked>
+        <Heading size={"md"}>Suscribed To Newsletter </Heading>
+      </Checkbox>
       <Button
         colorScheme="blue"
         variant="solid"
         w={"100%"}
         mb={10}
-        onClick={"ogete"}
+        onClick={clickEvent}
       >
         Update Settings
       </Button>
