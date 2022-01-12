@@ -19,7 +19,7 @@ const ProfilePage = () => {
       <Box mt={5}>
         <Grid templateColumns="repeat(3, 1fr)" gap={6}>
           <GridItem colSpan={1} borderRight="1px" borderColor="gray.200">
-            {updateForm === false ? <UserData /> : <UserDataUpdate />}
+            <UserDataUpdate />
           </GridItem>
           <GridItem colSpan={2}>Watchlist</GridItem>
         </Grid>

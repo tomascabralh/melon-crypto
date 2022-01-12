@@ -18,15 +18,12 @@ import { useAuth } from "../contexts/AuthContext";
 
 const UserDataUpdate = () => {
   const { currentUser } = useAuth();
-  const [email, setEmail] = useState();
   const [username, setUsername] = useState(currentUser?.displayName);
-  const [photo, setPhoto] = useState();
+  const [photo, setPhoto] = useState(currentUser?.photoURL);
 
   const toast = useToast();
 
   const update = async () => {
-    console.log(username);
-
     await updateProfile(auth.currentUser, {
       displayName: username,
       photoURL: photo,
@@ -40,10 +37,9 @@ const UserDataUpdate = () => {
   };
 
   useEffect(() => {
-    setEmail(currentUser?.email);
     setPhoto(currentUser?.photoURL);
     setUsername(currentUser?.displayName);
-  }, []);
+  }, [currentUser]);
 
   return (
     <Box mx={20}>
@@ -62,6 +58,7 @@ const UserDataUpdate = () => {
         <Heading size={"md"} my={3}>
           Photo URL:
         </Heading>
+        {console.log(photo, username)}
         <Input
           id="photo"
           mb={10}
@@ -86,14 +83,12 @@ const UserDataUpdate = () => {
           Email:
         </Heading>
         <Input
+          isDisabled
+          isRequired
           id="email"
           type="email"
-          isRequired
           mb={10}
           value={currentUser?.email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
         />
         <Button
           colorScheme="blue"
