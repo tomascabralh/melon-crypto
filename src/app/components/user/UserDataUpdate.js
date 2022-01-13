@@ -14,8 +14,8 @@ import {
 import { useToast } from "@chakra-ui/react";
 import { updateProfile } from "firebase/auth";
 import { auth } from "../../../firebase";
-import Avatar from "../../../images/user/DefaultAvatar.png";
 import { useAuth } from "../contexts/AuthContext";
+import Avatar from "../../../images/user/DefaultAvatar.png";
 
 const UserDataUpdate = (props) => {
   const { currentUser } = useAuth();

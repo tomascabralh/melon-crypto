@@ -19,6 +19,8 @@ import {
 import Login from "./Login";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../../firebase";
+import { getDatabase, ref, set } from "firebase/database";
+
 import { useToast } from "@chakra-ui/react";
 
 const SignUp = () => {
@@ -42,11 +44,23 @@ const SignUp = () => {
       });
     } else if (signUpPassword === signUpPasswordConfirm) {
       try {
-        const user = await createUserWithEmailAndPassword(
+        await createUserWithEmailAndPassword(
           auth,
           signUpEmail,
           signUpPassword
-        );
+        ).then((res) => {
+          set(ref(getDatabase(), "users/" + res.user.uid), {
+            email: res.user.email,
+            username: "-------",
+            photoURL: "",
+            subscribedtonewsletter: false,
+          });
+          set(ref(getDatabase(), `users/${res.user.uid}/` + "watchlist"), {
+            1: false,
+            2: false,
+            3: false,
+          });
+        });
         onClose();
         toast({
           title: "User created successfuly!",
@@ -54,7 +68,6 @@ const SignUp = () => {
           duration: 2000,
           isClosable: true,
         });
-        console.log(user);
       } catch (error) {
         toast({
           title: "Email is invalid or already in use",

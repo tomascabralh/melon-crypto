@@ -57,7 +57,7 @@ const NewsCarouselCard = ({ article }, { key }) => {
             <Heading fontSize={"2xl"} fontFamily={"body"}>
               {article.title}
             </Heading>
-            <Box maxHeight="100px">
+            <Box maxHeight="100px" overflow={"hidden"}>
               <Text color={"gray.500"} whiteSpace="pre-wrap">
                 {article.description}
               </Text>

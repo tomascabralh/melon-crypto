@@ -7,7 +7,7 @@ import { useColorModeValue } from "@chakra-ui/color-mode";
 const CoinTable = () => {
   const bg = useColorModeValue("#9AE6B4", "green.800");
 
-  const titles = ["Top", "Coin", "Price (USD)", "24h %", "Market Cap"];
+  const titles = ["", "Top", "Coin", "Price (USD)", "24h %", "Market Cap"];
 
   return (
     <Box

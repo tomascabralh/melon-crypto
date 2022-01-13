@@ -14,6 +14,7 @@ import { useAuth } from "../contexts/AuthContext";
 
 const UserData = (props) => {
   const { currentUser } = useAuth();
+  console.log(currentUser);
 
   const clickEvent = () => {
     props.changeToUpdate(true);
