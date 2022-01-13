@@ -9,6 +9,7 @@ import {
   Link,
 } from "@chakra-ui/react";
 import Author from "../news/Author";
+import ImageNotFound from "../../../images/image-not-found.png";
 
 const NewsCarouselCard = ({ article }, { key }) => {
   const formatHrefTitle = (Title) => {
@@ -49,6 +50,7 @@ const NewsCarouselCard = ({ article }, { key }) => {
               layout={"fill"}
               maxHeight="210px"
               alt={article.title}
+              fallbackSrc={ImageNotFound}
             />
           </Box>
           <Stack>
