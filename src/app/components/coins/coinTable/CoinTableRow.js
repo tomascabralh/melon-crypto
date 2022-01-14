@@ -1,96 +1,106 @@
 import React, { useState, useEffect } from "react";
 import { Box, Flex, Link } from "@chakra-ui/layout";
 import { Tr, Td, Checkbox, useToast } from "@chakra-ui/react";
-import axios from "axios";
 import CoinDayVariation from "../coinPage/CoinDayVariation";
 import { RiStarLine } from "react-icons/ri";
 import { useAuth } from "../../contexts/AuthContext";
-import { auth } from "../../../../firebase";
-import { updateProfile } from "firebase/auth";
+import { update, ref, getDatabase } from "firebase/database";
 
-const CoinTableRow = () => {
-  const GETrequest =
-    "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false";
-
-  const [coins, setCoins] = useState([]);
+const CoinTableRow = ({ coins }, { watchlist }) => {
+  const [cryptos, setCryptos] = useState([]);
   const [checkStatus, setCheckStats] = useState(false);
-
-  const { currentUser } = useAuth();
+  const { currentUser, users } = useAuth();
 
   const toast = useToast();
 
   const ShowToast = () => {
     if (checkStatus === true) {
       return "Added to watchlist";
-    } else {
+    } else if (checkStatus === false) {
       return "Removed from watchlist";
     }
   };
 
-  const addWatchlist = async () => {
-    await updateProfile(auth.currentUser, {
-      phoneNumber: "asd",
+  const addWatchlist = (id) => {
+    if (checkStatus === true) {
+      setCheckStats(false);
+    } else {
+      setCheckStats(true);
+    }
+    let object = {};
+    object[`n${id}`] = checkStatus;
+    update(
+      ref(getDatabase(), "users/" + currentUser.uid + "/watchlist"),
+      object
+    );
+    toast({
+      title: ShowToast(),
+      status: "success",
+      duration: 2000,
+      isClosable: true,
     });
-    console.log(auth.currentUser);
   };
 
   useEffect(() => {
-    axios.get(GETrequest).then((res) => {
-      setCoins(res.data);
-    });
-  }, []);
+    setCryptos([coins]);
+  }, [coins]);
 
   return (
     <>
-      {coins.map((coin) => {
-        return (
-          <Tr
-            key={coin.market_cap_rank}
-            _hover={{
-              background: "green.100",
-            }}
-          >
-            <Td>
-              <Checkbox
-                icon={<RiStarLine />}
-                colorScheme="teal"
-                size="lg"
-                onChange={() => {
-                  if (checkStatus === true) {
-                    setCheckStats(false);
-                  } else {
-                    setCheckStats(true);
+      {console.log(cryptos)}
+      {console.log(users)}
+      {cryptos[0]?.map((coin) => {
+        if (users !== null) {
+          return (
+            <Tr
+              key={coin.market_cap_rank}
+              _hover={{
+                background: "green.100",
+              }}
+            >
+              <Td>
+                <Checkbox
+                  icon={<RiStarLine />}
+                  colorScheme="teal"
+                  size="lg"
+                  isChecked={
+                    users === undefined
+                      ? users?.watchlist[`n${coin?.market_cap_rank}`]
+                      : false
                   }
-                  toast({
-                    title: ShowToast(),
-                    status: "success",
-                    duration: 2000,
-                    isClosable: true,
-                  });
-                }}
-              ></Checkbox>
-            </Td>
-            <Td>{coin.market_cap_rank}</Td>
-            <Td>
-              <Link
-                href={`/coins/${coin.id}`}
-                style={{ textDecoration: "none" }}
-              >
-                <Flex>
-                  <img src={coin.image} width="30" height="5" alt={coin.name} />
-                  <Box ml={5}>{coin.name}</Box>
-                </Flex>
-              </Link>
-            </Td>
-            <Td>{`$ ${coin.current_price}`}</Td>
-            <Td>
-              <CoinDayVariation
-                porcentageVar={coin.price_change_percentage_24h}
-              />
-            </Td>
-            <Td>{coin.market_cap}</Td>
-          </Tr>
-        );
+                  onChange={() => {
+                    setCheckStats(users?.watchlist[`n${coin.market_cap_rank}`]);
+                    addWatchlist(coin.market_cap_rank);
+                  }}
+                ></Checkbox>
+              </Td>
+              <Td>{coin.market_cap_rank}</Td>
+              <Td>
+                <Link
+                  href={`/coins/${coin.id}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  <Flex>
+                    <img
+                      src={coin.image}
+                      width="30"
+                      height="5"
+                      alt={coin.name}
+                    />
+                    <Box ml={5}>{coin.name}</Box>
+                  </Flex>
+                </Link>
+              </Td>
+              <Td>{`$ ${coin.current_price}`}</Td>
+              <Td>
+                <CoinDayVariation
+                  porcentageVar={coin.price_change_percentage_24h}
+                />
+              </Td>
+              <Td>{coin.market_cap}</Td>
+            </Tr>
+          );
+        }
       })}
     </>
   );

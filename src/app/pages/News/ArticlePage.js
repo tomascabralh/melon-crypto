@@ -5,7 +5,7 @@ import axios from "axios";
 import { Image } from "@chakra-ui/image";
 import Author from "../../components/news/Author";
 import FormatDay from "../../components/news/DayFormater";
-import SpinnerUI from "../../components/Spinner";
+import SpinnerUI from "../../components/UI/Spinner";
 
 const ArticlePage = () => {
   const { news } = useParams();

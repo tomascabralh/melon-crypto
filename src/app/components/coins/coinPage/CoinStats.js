@@ -47,7 +47,7 @@ const CoinStats = ({ coin }) => {
                     coin.market_data.price_change_percentage_24h_in_currency.usd
                   }
                 />
-                {coin.market_data.current_price.usd}
+                {coin.market_data.current_price[currency]}
                 <Box w={100} ml="300px">
                   <CurrencySelector
                     fetchDataFromCurrencySelector={
@@ -60,11 +60,11 @@ const CoinStats = ({ coin }) => {
             <Grid templateColumns="repeat(2, 1fr)" mt={5}>
               <Box fontSize="lg" textAlign="left">
                 Lowest 24h
-                <Text fontSize="sm">{coin.market_data.low_24h?.usd}</Text>
+                <Text fontSize="sm">{coin.market_data.low_24h[currency]}</Text>
               </Box>
               <Box fontSize="lg" textAlign="right">
                 Highest 24h
-                <Text fontSize="sm">{coin.market_data.high_24h?.usd}</Text>
+                <Text fontSize="sm">{coin.market_data.high_24h[currency]}</Text>
               </Box>
             </Grid>
             <LowHighBar coin={coin} />
@@ -73,7 +73,7 @@ const CoinStats = ({ coin }) => {
             <Grid templateColumns="repeat(2, 1fr)">
               <Box h="100" my={3} borderBottom="2px" borderColor="gray.100">
                 <Heading size="md">Market Cap</Heading>
-                <Text>${coin.market_data.market_cap.usd}</Text>
+                <Text>${coin.market_data.market_cap[currency]}</Text>
                 <CoinDayVariation
                   porcentageVar={
                     coin.market_data.market_cap_change_percentage_24h
@@ -88,11 +88,13 @@ const CoinStats = ({ coin }) => {
                 borderColor="gray.100"
               >
                 <Heading size="md">Volume 24h</Heading>
-                <Text>${coin.market_data.total_volume.usd}</Text>
+                <Text>${coin.market_data.total_volume[currency]}</Text>
               </Box>
               <Box h="100" my={3}>
                 <Heading size="md">Fully Diluted Market Cap</Heading>
-                <Text>${coin.market_data.fully_diluted_valuation.usd}</Text>
+                <Text>
+                  ${coin.market_data.fully_diluted_valuation[currency]}
+                </Text>
                 <CoinDayVariation
                   porcentageVar={
                     coin.market_data.market_cap_change_percentage_24h

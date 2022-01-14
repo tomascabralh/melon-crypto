@@ -7,7 +7,7 @@ import { Chart as ChartJS } from "chart.js/auto";
 import { Chart } from "react-chartjs-2";
 import TimeSelector from "./TimeSelector";
 import CurrencySelector from "./CurrencySelector";
-import SpinnerUI from "../../Spinner";
+import SpinnerUI from "../../UI/Spinner";
 
 const CoinChart = () => {
   const { id } = useParams();

@@ -13,8 +13,7 @@ import Avatar from "../../../images/user/DefaultAvatar.png";
 import { useAuth } from "../contexts/AuthContext";
 
 const UserData = (props) => {
-  const { currentUser } = useAuth();
-  console.log(currentUser);
+  const { users } = useAuth();
 
   const clickEvent = () => {
     props.changeToUpdate(true);
@@ -25,8 +24,8 @@ const UserData = (props) => {
       <Center my={10}>
         <AspectRatio w={300} ratio={19 / 21}>
           <Image
-            src={currentUser?.photoURL}
-            alt={currentUser?.uid}
+            src={users?.photoURL}
+            alt={users?.uid}
             fallbackSrc={Avatar}
             borderRadius="full"
             boxSize="150px"
@@ -37,15 +36,13 @@ const UserData = (props) => {
         Username:
       </Heading>
       <Text mb={10}>
-        {currentUser?.displayName
-          ? currentUser.displayName
-          : "----------------"}
+        {users?.username ? users.username : "----------------"}
       </Text>
       <Heading size={"md"} my={3}>
         Email:
       </Heading>
-      <Text mb={10}>{currentUser?.email}</Text>
-      <Checkbox mb={10} isDisabled defaultIsChecked>
+      <Text mb={10}>{users?.email}</Text>
+      <Checkbox mb={10} isDisabled isChecked={users?.subscribedtonewsletter}>
         <Heading size={"md"}>Suscribed To Newsletter </Heading>
       </Checkbox>
       <Button

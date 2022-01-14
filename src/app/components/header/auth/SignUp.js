@@ -15,13 +15,13 @@ import {
   Text,
   HStack,
   Spacer,
+  useToast,
 } from "@chakra-ui/react";
-import Login from "./Login";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../../firebase";
 import { getDatabase, ref, set } from "firebase/database";
-
-import { useToast } from "@chakra-ui/react";
+import Login from "./Login";
+//import register from "./logic/register";
 
 const SignUp = () => {
   const [signUpEmail, setSignUpEmail] = useState(null);
@@ -33,6 +33,14 @@ const SignUp = () => {
   const passwordConfirmRef = useRef(null);
 
   const toast = useToast();
+
+  function watchlistObject() {
+    let object = {};
+    for (var i = 1; i <= 50; i++) {
+      object[`n${i}`] = false;
+    }
+    return object;
+  }
 
   const register = async () => {
     if (signUpEmail === null || signUpPassword === null) {
@@ -51,15 +59,14 @@ const SignUp = () => {
         ).then((res) => {
           set(ref(getDatabase(), "users/" + res.user.uid), {
             email: res.user.email,
-            username: "-------",
+            username: "",
             photoURL: "",
-            subscribedtonewsletter: false,
+            subscribedtonewsletter: true,
           });
-          set(ref(getDatabase(), `users/${res.user.uid}/` + "watchlist"), {
-            1: false,
-            2: false,
-            3: false,
-          });
+          set(
+            ref(getDatabase(), `users/${res.user.uid}/` + "watchlist"),
+            watchlistObject()
+          );
         });
         onClose();
         toast({

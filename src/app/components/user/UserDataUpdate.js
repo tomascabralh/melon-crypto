@@ -12,25 +12,25 @@ import {
   Checkbox,
 } from "@chakra-ui/react";
 import { useToast } from "@chakra-ui/react";
-import { updateProfile } from "firebase/auth";
-import { auth } from "../../../firebase";
 import { useAuth } from "../contexts/AuthContext";
+import { update, ref, getDatabase } from "firebase/database";
 import Avatar from "../../../images/user/DefaultAvatar.png";
 
 const UserDataUpdate = (props) => {
-  const { currentUser } = useAuth();
-  const [username, setUsername] = useState(currentUser?.displayName);
-  const [photo, setPhoto] = useState(currentUser?.photoURL);
-  const [checkbox, setCheckbox] = useState(true);
-  console.log(currentUser);
+  const { currentUser, users } = useAuth();
+  const [Username, setUsername] = useState(users?.username);
+  const [photo, setPhoto] = useState(users?.photoURL);
+  const [checkbox, setCheckbox] = useState(users?.subscribedtonewsletter);
 
   const toast = useToast();
 
-  const update = async () => {
-    await updateProfile(auth.currentUser, {
-      displayName: username,
+  const Update = async () => {
+    await update(ref(getDatabase(), "users/" + currentUser.uid), {
+      username: Username,
       photoURL: photo,
+      subscribedtonewsletter: checkbox,
     });
+
     toast({
       title: "Profile updated!",
       status: "success",
@@ -41,9 +41,10 @@ const UserDataUpdate = (props) => {
   };
 
   useEffect(() => {
-    setPhoto(currentUser?.photoURL);
-    setUsername(currentUser?.displayName);
-  }, [currentUser]);
+    setPhoto(users?.photoURL);
+    setUsername(users?.username);
+    setCheckbox(users?.subscribedtonewsletter);
+  }, [users]);
 
   return (
     <Box mx={20}>
@@ -51,8 +52,8 @@ const UserDataUpdate = (props) => {
         <Center my={10}>
           <AspectRatio w={300} ratio={19 / 21}>
             <Image
-              src={currentUser?.photoURL}
-              alt={currentUser?.uid}
+              src={users?.photoURL}
+              alt={users?.uid}
               fallbackSrc={Avatar}
               borderRadius="full"
               boxSize="150px"
@@ -77,7 +78,7 @@ const UserDataUpdate = (props) => {
           id="username"
           isRequired
           mb={10}
-          value={username}
+          value={Username}
           onChange={(e) => {
             setUsername(e.target.value);
           }}
@@ -91,7 +92,7 @@ const UserDataUpdate = (props) => {
           id="email"
           type="email"
           mb={10}
-          value={currentUser?.email}
+          value={users?.email}
         />
         <Checkbox
           mb={10}
@@ -112,7 +113,7 @@ const UserDataUpdate = (props) => {
           type="submit"
           w={"100%"}
           mb={5}
-          onClick={update}
+          onClick={Update}
         >
           Confirm Update
         </Button>
