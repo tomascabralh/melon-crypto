@@ -1,4 +1,4 @@
-import { Box, Heading, Text } from "@chakra-ui/layout";
+import { Box, Heading, Text, Divider } from "@chakra-ui/layout";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -6,6 +6,8 @@ import { Image } from "@chakra-ui/image";
 import Author from "../../components/news/Author";
 import FormatDay from "../../components/news/DayFormater";
 import SpinnerUI from "../../components/UI/Spinner";
+import CreateComment from "../../components/news/comments/CreateComment";
+import Comments from "../../components/news/comments/Comments";
 
 const ArticlePage = () => {
   const { news } = useParams();
@@ -13,7 +15,7 @@ const ArticlePage = () => {
 
   useEffect(() => {
     const GETrequest = (Title) => {
-      var title = Title.replaceAll("-", " ");
+      const title = Title.replaceAll("-", " ");
       return `https://newsapi.org/v2/everything?qInTitle="${title}"&apiKey=${process.env.REACT_APP_articles_APIkey}`;
     };
     axios.get(GETrequest(news)).then((res) => {
@@ -26,7 +28,7 @@ const ArticlePage = () => {
       {articleData.title !== undefined ? (
         <Box my={20} px={300}>
           <Heading justifyContent="left" my={5} mb={5}>
-            {articleData.title}
+            {articleData?.title}
           </Heading>
           <Author article={articleData} />
           <Text
@@ -37,12 +39,12 @@ const ArticlePage = () => {
             borderBottom="1px"
             borderColor="gray.200"
           >
-            Date: <FormatDay date={articleData.publishedAt} />
+            Date: <FormatDay date={articleData?.publishedAt} />
           </Text>
           <Image
             borderRadius="lg"
-            src={articleData.urlToImage}
-            alt={articleData.title}
+            src={articleData?.urlToImage}
+            alt={articleData?.title}
             objectFit="contain"
           />
           <Text as="p" marginTop="2" fontSize="lg" justifyContent="center">
@@ -52,6 +54,12 @@ const ArticlePage = () => {
       ) : (
         <SpinnerUI />
       )}
+      <Box mx={{ md: 0, lg: 300 }} my={20} py={5}>
+        <Heading>Comment Section</Heading>
+        <Divider my={10} />
+        <CreateComment title={news} />
+        <Comments title={news} />
+      </Box>
     </>
   );
 };

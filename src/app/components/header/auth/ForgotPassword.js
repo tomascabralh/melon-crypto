@@ -13,7 +13,7 @@ import {
   Input,
   useDisclosure,
 } from "@chakra-ui/react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../../../../firebase";
 import React, { useRef, useState } from "react";
 import { useToast } from "@chakra-ui/react";
@@ -25,6 +25,31 @@ const ForgotPassword = () => {
   const toast = useToast();
 
   const initialRef = useRef();
+
+  const sendEmail = async () => {
+    await sendPasswordResetEmail(auth, email, {
+      url: "http://localhost:3000/login",
+    })
+      .then((res) => {
+        toast({
+          title: "Email sent successfully!",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+        });
+      })
+      .catch((error) => {
+        console.log(error.message);
+        toast({
+          title: "Email does not exists",
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+        });
+      });
+
+    onClose();
+  };
 
   return (
     <>
@@ -43,7 +68,7 @@ const ForgotPassword = () => {
           <ModalHeader>Forgot password?</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Text>
+            <Text mb={5}>
               Enter your email below, you will receive an email with
               instructions on how to reset your password in a few minutes.
             </Text>
@@ -60,7 +85,13 @@ const ForgotPassword = () => {
                 }}
               />
             </FormControl>
-            <Button colorScheme="teal" w="100%" mt={5} mr={3} onClick={onClose}>
+            <Button
+              colorScheme="teal"
+              w="100%"
+              my={5}
+              mr={3}
+              onClick={sendEmail}
+            >
               Send Email
             </Button>
           </ModalBody>

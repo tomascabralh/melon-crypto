@@ -17,11 +17,10 @@ const CoinTable = ({ watchlist }) => {
   useEffect(() => {
     axios.get(GETrequest).then((res) => {
       setCoins(res.data);
-      console.log(watchlist);
     });
   }, []);
 
-  const asd = (watchlist) => {
+  const watchlistCoins = (watchlist) => {
     if (watchlist.watchlist !== undefined) {
       console.log(watchlist?.watchlist);
       var keys = Object.keys(watchlist?.watchlist);
@@ -29,27 +28,15 @@ const CoinTable = ({ watchlist }) => {
         return watchlist?.watchlist[key];
       });
       var filterToApply = filterToApply.map((s) => s.slice(1));
-      var filterToApply = filterToApply.map((s) => parseInt(s));
-
-      /* var res = coins.filter(function (itm) {
-        return filterToApply.indexOf(itm.filterToApply) > -1;
-      });*/
-
-      var data = [
-        { coin: "bitcoin", price: "300" },
-        { coin: "eth", price: "1" },
-      ];
-      var empIds = [1];
-      var filteredArray = data.filter(function (itm) {
-        return empIds.indexOf(itm.empid) > -1;
+      var filterToApply = filterToApply.map((s) => parseInt(s) - 1);
+      console.log(filterToApply);
+      var filteredCoins = coins.filter(function (eachElem, index) {
+        return filterToApply.indexOf(index) !== -1;
       });
-
-      console.log(filteredArray);
+      console.log(filteredCoins);
+      return filteredCoins;
     }
-
-    //console.log(filterToApply);
   };
-  //mx={{ md: 0, lg: 100, xl: 300 }}
 
   return (
     <Box
@@ -79,7 +66,7 @@ const CoinTable = ({ watchlist }) => {
           </Tr>
         </Thead>
         <Tbody>
-          <CoinTableRow coins={watchlist ? asd(watchlist) : coins} />
+          <CoinTableRow coins={watchlist ? watchlistCoins(watchlist) : coins} />
         </Tbody>
       </Table>
     </Box>

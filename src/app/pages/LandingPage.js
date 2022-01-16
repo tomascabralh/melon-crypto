@@ -44,7 +44,9 @@ const LandingPage = () => {
       >
         <Heading>Today's Cryptocurrency Prices by Melon Crypto</Heading>
       </Box>
-      <CoinTable />
+      <Box mx={{ md: 0, lg: 100, xl: 300 }}>
+        <CoinTable />
+      </Box>
     </Box>
   );
 };

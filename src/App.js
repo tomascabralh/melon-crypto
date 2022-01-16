@@ -12,6 +12,7 @@ import Footer from "./app/components/footer/Footer";
 import AuthContextProvider from "./app/components/contexts/AuthContext";
 import ProfilePage from "./app/pages/user/ProfilePage";
 import PortfolioPage from "./app/pages/user/PortfolioPage";
+import PasswordResetPage from "./app/pages/user/PasswordResetPage";
 import { useAuth } from "./app/components/contexts/AuthContext";
 
 function App() {
@@ -21,6 +22,11 @@ function App() {
         <Header />
         <Routes>
           <Route exact path="/user/portfolio" element={<PortfolioPage />} />
+          <Route
+            exact
+            path="/profile/password-reset"
+            element={<PasswordResetPage />}
+          />
           <Route exact path="/profile" element={<ProfilePage />} />
           <Route exact path="/news/:news" element={<ArticlePage />} />
           <Route exact path="/news" element={<NewsPage />} />

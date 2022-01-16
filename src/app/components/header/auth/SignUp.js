@@ -43,7 +43,10 @@ const SignUp = () => {
   }
 
   const register = async () => {
-    if (signUpEmail === null || signUpPassword === null) {
+    if (
+      (signUpEmail === null || signUpPassword === null) &&
+      (signUpPasswordConfirm === "" || signUpPassword === "")
+    ) {
       toast({
         title: "Credentials not valid",
         status: "error",

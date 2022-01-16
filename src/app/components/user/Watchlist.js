@@ -17,7 +17,7 @@ const Watchlist = () => {
         borderBottom="1px"
         borderColor="gray.200"
       >
-        <Heading>Watchlist {users?.email}</Heading>
+        <Heading>Watchlist</Heading>
       </Box>
       <Box mr={{ md: 0, lg: 20 }}>
         {users ? <CoinTable watchlist={users} /> : null}

@@ -60,7 +60,6 @@ const Login = () => {
           duration: 2000,
           isClosable: true,
         });
-        console.log(auth.currentUser);
       }
     }
   };

@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import Avatar from "../../../images/user/DefaultAvatar.png";
 import { useAuth } from "../contexts/AuthContext";
+import SpinnerUI from "../UI/Spinner";
 
 const UserData = (props) => {
   const { users } = useAuth();
@@ -20,41 +21,51 @@ const UserData = (props) => {
   };
 
   return (
-    <Box mx={20}>
-      <Center my={10}>
-        <AspectRatio w={300} ratio={19 / 21}>
-          <Image
-            src={users?.photoURL}
-            alt={users?.uid}
-            fallbackSrc={Avatar}
-            borderRadius="full"
-            boxSize="150px"
-          />
-        </AspectRatio>
-      </Center>
-      <Heading size={"md"} my={3}>
-        Username:
-      </Heading>
-      <Text mb={10}>
-        {users?.username ? users.username : "----------------"}
-      </Text>
-      <Heading size={"md"} my={3}>
-        Email:
-      </Heading>
-      <Text mb={10}>{users?.email}</Text>
-      <Checkbox mb={10} isDisabled isChecked={users?.subscribedtonewsletter}>
-        <Heading size={"md"}>Suscribed To Newsletter </Heading>
-      </Checkbox>
-      <Button
-        colorScheme="blue"
-        variant="solid"
-        w={"100%"}
-        mb={10}
-        onClick={clickEvent}
-      >
-        Update Settings
-      </Button>
-    </Box>
+    <>
+      {!users ? (
+        <SpinnerUI />
+      ) : (
+        <Box mx={20}>
+          <Center my={10}>
+            <AspectRatio w={300} ratio={19 / 21}>
+              <Image
+                src={users?.photoURL}
+                alt={users?.uid}
+                fallbackSrc={Avatar}
+                borderRadius="full"
+                boxSize="150px"
+              />
+            </AspectRatio>
+          </Center>
+          <Heading size={"md"} my={3}>
+            Username:
+          </Heading>
+          <Text mb={10}>
+            {users?.username ? users.username : "----------------"}
+          </Text>
+          <Heading size={"md"} my={3}>
+            Email:
+          </Heading>
+          <Text mb={10}>{users?.email}</Text>
+          <Checkbox
+            mb={10}
+            isDisabled
+            isChecked={users?.subscribedtonewsletter}
+          >
+            <Heading size={"md"}>Suscribed To Newsletter </Heading>
+          </Checkbox>
+          <Button
+            colorScheme="blue"
+            variant="solid"
+            w={"100%"}
+            mb={10}
+            onClick={clickEvent}
+          >
+            Update Settings
+          </Button>
+        </Box>
+      )}
+    </>
   );
 };
 

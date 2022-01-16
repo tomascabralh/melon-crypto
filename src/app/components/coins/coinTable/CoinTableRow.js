@@ -5,8 +5,9 @@ import CoinDayVariation from "../coinPage/CoinDayVariation";
 import { RiStarLine } from "react-icons/ri";
 import { useAuth } from "../../contexts/AuthContext";
 import { update, ref, getDatabase } from "firebase/database";
+import SpinnerUI from "../../UI/Spinner";
 
-const CoinTableRow = ({ coins }, { watchlist }) => {
+const CoinTableRow = ({ coins }) => {
   const [cryptos, setCryptos] = useState([]);
   const [checkStatus, setCheckStats] = useState(false);
   const { currentUser, users } = useAuth();
@@ -47,9 +48,9 @@ const CoinTableRow = ({ coins }, { watchlist }) => {
 
   return (
     <>
-      {console.log(cryptos)}
-      {console.log(users)}
       {cryptos[0]?.map((coin) => {
+        console.log(users);
+        console.log(users);
         if (users !== null) {
           return (
             <Tr
@@ -63,11 +64,7 @@ const CoinTableRow = ({ coins }, { watchlist }) => {
                   icon={<RiStarLine />}
                   colorScheme="teal"
                   size="lg"
-                  isChecked={
-                    users === undefined
-                      ? users?.watchlist[`n${coin?.market_cap_rank}`]
-                      : false
-                  }
+                  isChecked={users?.watchlist[`n${coin?.market_cap_rank}`]}
                   onChange={() => {
                     setCheckStats(users?.watchlist[`n${coin.market_cap_rank}`]);
                     addWatchlist(coin.market_cap_rank);
@@ -100,6 +97,8 @@ const CoinTableRow = ({ coins }, { watchlist }) => {
               <Td>{coin.market_cap}</Td>
             </Tr>
           );
+        } else {
+          <SpinnerUI />;
         }
       })}
     </>

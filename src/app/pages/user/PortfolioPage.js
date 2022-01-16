@@ -5,9 +5,17 @@ import { useAuth } from "../../components/contexts/AuthContext";
 const PortfolioPage = () => {
   const { currentUser } = useAuth();
   return (
-    <Box>
-      <Heading>This is {currentUser?.email} Portfolio.</Heading>
-    </Box>
+    <>
+      <Box
+        mx={{ md: 0, lg: 20 }}
+        my={5}
+        py={5}
+        borderBottom="1px"
+        borderColor="gray.200"
+      >
+        <Heading>Portfolio</Heading>
+      </Box>
+    </>
   );
 };
 
