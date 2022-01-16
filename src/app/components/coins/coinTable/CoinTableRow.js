@@ -43,14 +43,13 @@ const CoinTableRow = ({ coins }) => {
   };
 
   useEffect(() => {
+    console.log(users);
     setCryptos([coins]);
-  }, [coins]);
+  }, [users, coins]);
 
   return (
     <>
       {cryptos[0]?.map((coin) => {
-        console.log(users);
-        console.log(users);
         if (users !== null) {
           return (
             <Tr
