@@ -30,10 +30,14 @@ function Header() {
         whiteSpace="nowrap"
         color={color}
       >
-        <Flex marginRight={4} marginY={2}>
-          <Box width="200px" marginRight={8}>
+        <Flex marginRight={{ sm: 0, md: 2, lg: 4 }} marginY={2}>
+          <Box
+            width="200px"
+            marginRight={8}
+            display={{ base: "none", md: "block" }}
+          >
             <Link href="/" style={{ textDecoration: "none" }}>
-              <Text>🍈 Melon Crypto</Text>
+              <Text fontWeight="500">🍈 Melon Crypto</Text>
             </Link>
           </Box>
           <HeaderMenu
@@ -46,7 +50,12 @@ function Header() {
             ]}
           />
           <Spacer />
-          <Box right marginRight={10} w="500px">
+          <Box
+            right
+            mx={{ sm: 5, md: 5, lg: 10 }}
+            w="500px"
+            display={{ base: "none", sm: "block", md: "block" }}
+          >
             <SearchBar data={names} />
           </Box>
           <IconButton
@@ -58,7 +67,7 @@ function Header() {
               )
             }
             size="sm"
-            marginRight={5}
+            mr={{ base: 2, sm: 2, md: 2, lg: 5 }}
             onClick={toggleColorMode}
           />
           {!currentUser ? <Login /> : null}

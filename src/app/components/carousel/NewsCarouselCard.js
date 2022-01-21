@@ -20,7 +20,7 @@ const NewsCarouselCard = ({ article }, { key }) => {
   return (
     <Center py={6} pb={20} key={key}>
       <Box
-        maxW={"445px"}
+        maxW={{ base: "330px", sm: "445px" }}
         w="100%"
         boxShadow={"lg"}
         rounded={"lg"}
@@ -57,8 +57,12 @@ const NewsCarouselCard = ({ article }, { key }) => {
             <Heading fontSize={"2xl"} fontFamily={"body"}>
               {article.title}
             </Heading>
-            <Box maxHeight="100px" overflow={"hidden"}>
-              <Text color={"gray.500"} whiteSpace="pre-wrap">
+            <Box h={100} overflow={"hidden"}>
+              <Text
+                color={"gray.500"}
+                whiteSpace="pre-wrap"
+                overflow={"hidden"}
+              >
                 {article.description}
               </Text>
             </Box>

@@ -67,7 +67,7 @@ const SignUp = () => {
             subscribedtonewsletter: true,
           });
           set(
-            ref(getDatabase(), `users/${res.user.uid}/` + "watchlist"),
+            ref(getDatabase(), `users/${res.user.uid}/watchlist`),
             watchlistObject()
           );
         });
@@ -98,7 +98,11 @@ const SignUp = () => {
   const isError = signUpPasswordConfirm === signUpPassword;
   return (
     <>
-      <Button onClick={onOpen} size={"sm"} mx={5}>
+      <Button
+        onClick={onOpen}
+        size={"sm"}
+        mx={{ base: 2, sm: 2, md: 2, lg: 5 }}
+      >
         Sign Up
       </Button>
       <Modal

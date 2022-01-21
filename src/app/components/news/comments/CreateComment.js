@@ -1,65 +1,164 @@
 import {
-  Divider,
   FormControl,
   FormLabel,
-  Input,
   Button,
-  Box,
-  Spacer,
   Grid,
   GridItem,
   Image,
   Textarea,
   Text,
-  useToast,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
-import { getDatabase, ref, set, onValue } from "firebase/database";
+import { getDatabase, ref, set, onValue, update } from "firebase/database";
 import Avatar from "../../../../images/user/DefaultAvatar.png";
+import { useParams } from "react-router-dom";
 
-const CreateComment = ({ title }) => {
+const CreateComment = ({ commentID }) => {
   const { currentUser, users } = useAuth();
-  const toast = useToast();
+
+  const { news } = useParams();
 
   const [msg, setMsg] = useState();
-  const [countComments, setCountComments] = useState();
+  const [counter, setCounter] = useState();
 
-  const submitComment = async () => {
-    if (msg !== null || msg !== "") {
-      await set(ref(getDatabase(), `comments/${title}/com/` + countComments), {
-        userID: currentUser?.uid,
-        photoURL: users?.photoURL,
-        user: users?.username,
-        message: msg,
-        date: "ogete",
-        //new Date().toISOString().slice(0, 19).replace("T", " "),
-      });
+  const submitComment = () => {
+    var d = new Date();
+
+    if (msg === undefined || msg === "") {
+    } else {
+      if (commentID === undefined) {
+        if (counter === 0) {
+          set(ref(getDatabase(), `comments/${news}`), {
+            idCounter: counter,
+          });
+
+          set(ref(getDatabase(), `comments/${news}/com/` + counter), {
+            userID: currentUser?.uid,
+            photoURL: users?.photoURL,
+            user: users?.username,
+            message: msg,
+            date: d.toLocaleString(),
+            commentID: counter,
+          });
+          setMsg("");
+        } else {
+          update(ref(getDatabase(), `comments/${news}`), {
+            idCounter: counter,
+          });
+
+          set(ref(getDatabase(), `comments/${news}/com/` + counter), {
+            userID: currentUser?.uid,
+            photoURL: users?.photoURL,
+            user: users?.username,
+            message: msg,
+            date: d.toLocaleString(),
+            commentID: counter,
+          });
+          setMsg("");
+        }
+      } else {
+        if (counter === 0) {
+          set(
+            ref(getDatabase(), `comments/${news}/com/${commentID}/zreplies/`),
+            {
+              idCounter: counter,
+            }
+          );
+
+          set(
+            ref(
+              getDatabase(),
+              `comments/${news}/com/${commentID}/zreplies/com/` +
+                `${commentID}-${counter}`
+            ),
+            {
+              userID: currentUser?.uid,
+              photoURL: users?.photoURL,
+              user: users?.username,
+              message: msg,
+              date: d.toLocaleString(),
+              commentID: `${commentID}-${counter}`,
+            }
+          );
+          setMsg("");
+        } else {
+          update(
+            ref(getDatabase(), `comments/${news}/com/${commentID}/zreplies/`),
+            {
+              idCounter: counter,
+            }
+          );
+
+          set(
+            ref(
+              getDatabase(),
+              `comments/${news}/com/${commentID}/zreplies/com/` +
+                `${commentID}-${counter}`
+            ),
+            {
+              userID: currentUser?.uid,
+              photoURL: users?.photoURL,
+              user: users?.username,
+              message: msg,
+              date: d.toLocaleString(),
+              commentID: `${commentID}-${counter}`,
+            }
+          );
+          setMsg("");
+        }
+      }
     }
   };
 
   useEffect(() => {
-    const starCountRef = ref(getDatabase(), `comments/${title}/com`);
-    onValue(starCountRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data === null) {
-        setCountComments(0);
-      } else {
-        setCountComments(Object.keys(data).length);
-      }
-    });
-  }, []);
+    if (commentID === undefined) {
+      const starCountRef = ref(getDatabase(), `comments/${news}/com`);
+      onValue(starCountRef, (snapshot) => {
+        const data = snapshot.val();
+        if (data === null) {
+          setCounter(0);
+        } else {
+          const dbref = ref(getDatabase(), `comments/${news}`);
+          onValue(dbref, (snapshot) => {
+            const idData = snapshot.val();
+            setCounter(idData.idCounter + 1);
+          });
+        }
+      });
+    } else {
+      const starCountRef = ref(
+        getDatabase(),
+        `comments/${news}/com/${commentID}/zreplies/com/`
+      );
+      onValue(starCountRef, (snapshot) => {
+        const data = snapshot.val();
+        if (data === null) {
+          setCounter(0);
+        } else {
+          const dbref = ref(
+            getDatabase(),
+            `comments/${news}/com/${commentID}/zreplies/`
+          );
+          onValue(dbref, (snapshot) => {
+            const idData = snapshot.val();
+            setCounter(idData.idCounter + 1);
+          });
+        }
+      });
+    }
+  }, [commentID, news]);
 
   return (
     <>
       <Grid templateColumns="repeat(10 ,1fr)">
-        <GridItem colSpan={2}>
+        <GridItem colSpan={2} mx={30}>
           <Image
             src={users?.photoURL}
             alt={users?.uid}
             fallbackSrc={Avatar}
             borderRadius="full"
-            boxSize="150px"
+            boxSize={150}
           />
         </GridItem>
         <GridItem colSpan={7}>
@@ -69,6 +168,7 @@ const CreateComment = ({ title }) => {
             <Textarea
               id="comment"
               placeholder="Comment here"
+              value={msg}
               size={"lg"}
               onChange={(e) => {
                 setMsg(e.target.value);

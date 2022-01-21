@@ -1,18 +1,18 @@
-import { Center, VStack, Box, Heading } from "@chakra-ui/react";
 import React from "react";
+import { Center, VStack, Box, Heading } from "@chakra-ui/react";
 import CoinTable from "../components/coins/coinTable/CoinTable";
 import CoinCarousel from "../components/carousel/CoinsCarousel";
 import NewsCarousel from "../components/carousel/NewsCarousel";
-import { useAuth } from "../components/contexts/AuthContext";
 
 const LandingPage = () => {
-  const { currentUser } = useAuth();
   return (
     <Box pt={6}>
       <Center padding={4}>
         <VStack>
           <Heading my={10}>🍈 Melon Crypto 🍈</Heading>
-          <Heading>🍈 The best crypto news around 🍈</Heading>
+          <Heading display={{ base: "none", sm: "block" }}>
+            🍈 The best crypto news around 🍈
+          </Heading>
         </VStack>
       </Center>
       <Box
@@ -44,7 +44,7 @@ const LandingPage = () => {
       >
         <Heading>Today's Cryptocurrency Prices by Melon Crypto</Heading>
       </Box>
-      <Box mx={{ md: 0, lg: 100, xl: 300 }}>
+      <Box mx={{ base: 5, sm: 5, md: 5, lg: 100, xl: 200 }}>
         <CoinTable />
       </Box>
     </Box>

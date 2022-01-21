@@ -1,14 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
-import { Box, Flex, Text } from "@chakra-ui/layout";
+import {
+  Box,
+  Flex,
+  Text,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  Image,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import CoinStats from "./CoinStats";
 import CoinChart from "./CoinChart";
 import Articles from "../../news/HArticles";
 import About from "./CoinAbout";
-import { useColorModeValue } from "@chakra-ui/color-mode";
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
 
 const CoinPageData = () => {
   const { id } = useParams();
@@ -36,26 +43,27 @@ const Pepu = ({ coin }) => {
               Home
             </BreadcrumbLink>
           </BreadcrumbItem>
-
           <BreadcrumbItem>
             <BreadcrumbLink href="/" textColor={color}>
               Coins
             </BreadcrumbLink>
           </BreadcrumbItem>
-
           <BreadcrumbItem isCurrentPage>
             <Text as="i">{coin.name}</Text>
           </BreadcrumbItem>
         </Breadcrumb>
       </Box>
       <Box w="100%">
-        <Flex px="20px" m="50px">
-          <Box minW="200px" w="250px" h="250px" mr="50px">
-            <img src={coin.image?.large} alt={coin.name} />
+        <Flex m={{ lg: 10, xl: 50 }}>
+          <Box
+            w={{ lg: 150, xl: 250 }}
+            minW={{ lg: 150, xl: 250 }}
+            mr={{ lg: 10, xl: 50 }}
+            display={{ base: "none", sm: "none", md: "none", lg: "block" }}
+          >
+            <Image src={coin.image?.large} alt={coin.name} />
           </Box>
-          <Flex>
-            <CoinStats coin={coin} />
-          </Flex>
+          <CoinStats coin={coin} />
         </Flex>
       </Box>
       <Box w="100%" h="100%">

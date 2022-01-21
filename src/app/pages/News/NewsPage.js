@@ -6,8 +6,14 @@ import Articles from "../../components/news/HArticles";
 const NewsPage = () => {
   return (
     <>
-      <Box mx={{ md: 0, lg: 200 }} my={5} py={5}>
-        <Heading borderBottom="1px" borderColor="gray.200" my={5} py={5}>
+      <Box my={5} py={5}>
+        <Heading
+          borderBottom="1px"
+          borderColor="gray.200"
+          mx={{ md: 0, lg: 200 }}
+          my={5}
+          py={5}
+        >
           Trending News
         </Heading>
         <NewsCarousel />

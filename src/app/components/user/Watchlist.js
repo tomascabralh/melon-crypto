@@ -4,9 +4,7 @@ import CoinTable from "../coins/coinTable/CoinTable";
 import { useAuth } from "../contexts/AuthContext";
 
 const Watchlist = () => {
-  const { currentUser, users } = useAuth();
-
-  //const list = users?.watchlist;
+  const { users } = useAuth();
 
   return (
     <>

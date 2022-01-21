@@ -1,6 +1,5 @@
-import { Flex } from "@chakra-ui/layout";
-import { Select } from "@chakra-ui/select";
 import React from "react";
+import { Box, Select } from "@chakra-ui/react";
 
 const SortBySelector = ({ fetchDataFromSortBySelector }) => {
   const sortOptions = [
@@ -17,15 +16,16 @@ const SortBySelector = ({ fetchDataFromSortBySelector }) => {
     );
   });
   return (
-    <Flex>
+    <Box>
       <Select
+        w={120}
         onChange={(e) => {
           fetchDataFromSortBySelector(e.target.value);
         }}
       >
         {options}
       </Select>
-    </Flex>
+    </Box>
   );
 };
 

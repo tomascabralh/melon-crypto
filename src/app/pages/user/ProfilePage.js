@@ -18,7 +18,15 @@ const ProfilePage = () => {
     <Box>
       <Box mt={5}>
         <Text>{users?.uid}</Text>
-        <Grid templateColumns="repeat(20, 1fr)">
+        <Grid
+          templateColumns={{
+            base: "repeat(1, 3fr)",
+            sm: "repeat(1, 3fr)",
+            md: "repeat(1, 3fr)",
+            lg: "repeat(20, 1fr)",
+            xl: "repeat(20, 1fr)",
+          }}
+        >
           {users ? (
             <GridItem colSpan={1}>
               {updateForm === false ? (

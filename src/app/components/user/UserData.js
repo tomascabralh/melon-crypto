@@ -25,15 +25,15 @@ const UserData = (props) => {
       {!users ? (
         <SpinnerUI />
       ) : (
-        <Box mx={20}>
+        <Box mx={{ base: 5, sm: 20 }}>
           <Center my={10}>
-            <AspectRatio w={300} ratio={19 / 21}>
+            <AspectRatio w={{ base: 250, sm: 300 }} ratio={19 / 21}>
               <Image
                 src={users?.photoURL}
                 alt={users?.uid}
                 fallbackSrc={Avatar}
                 borderRadius="full"
-                boxSize="150px"
+                boxSize={"150px"}
               />
             </AspectRatio>
           </Center>

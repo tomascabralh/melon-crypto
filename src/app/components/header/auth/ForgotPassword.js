@@ -39,7 +39,6 @@ const ForgotPassword = () => {
         });
       })
       .catch((error) => {
-        console.log(error.message);
         toast({
           title: "Email does not exists",
           status: "error",

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import LowHighBar from "./LowHighBar";
 import CoinDayVariation from "./CoinDayVariation";
 import CurrencySelector from "./CurrencySelector";
+import { HStack, Spacer } from "@chakra-ui/react";
 
 const CoinStats = ({ coin }) => {
   const [currency, setCurrency] = useState("usd");
@@ -13,42 +14,37 @@ const CoinStats = ({ coin }) => {
 
   return (
     <>
-      <Box w="1450px" h="250px" position="absolute">
+      <Box w="1450px" h="250px">
         <Grid
-          templateColumns="repeat(2, 1fr)"
+          templateColumns={{ md: "repeat(1, 1fr)", lg: "repeat(2, 1fr)" }}
           gap={6}
           boxShadow="base"
           rounded="md"
         >
           <Box
             w="100%"
-            maxW="725"
             h="250"
             borderRight="2px"
             borderColor="gray.100"
             px={10}
             py={2}
           >
-            <Grid templateColumns="repeat(2, 1fr)">
-              <Box mb="5" whiteSpace="nowrap" position="relative">
+            <HStack>
+              <Box mb="5">
                 <Heading mt="30" w="300">
                   {coin.name}
                 </Heading>
                 <Text>#{coin.market_cap_rank}</Text>
               </Box>
-              <Box
-                fontSize="4xl"
-                textAlign="right"
-                position="absolute"
-                ml="250"
-              >
+              <Spacer />
+              <Box fontSize="4xl" textAlign="right">
                 <CoinDayVariation
                   porcentageVar={
                     coin.market_data.price_change_percentage_24h_in_currency.usd
                   }
                 />
                 {coin.market_data.current_price[currency]}
-                <Box w={100} ml="300px">
+                <Box w={100}>
                   <CurrencySelector
                     fetchDataFromCurrencySelector={
                       fetchDataFromCurrencySelector
@@ -56,7 +52,7 @@ const CoinStats = ({ coin }) => {
                   />
                 </Box>
               </Box>
-            </Grid>
+            </HStack>
             <Grid templateColumns="repeat(2, 1fr)" mt={5}>
               <Box fontSize="lg" textAlign="left">
                 Lowest 24h

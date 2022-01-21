@@ -20,7 +20,6 @@ const UserMenu = () => {
           as={IconButton}
           aria-label="Options"
           icon={<GiHamburgerMenu />}
-          variant="outline"
           size="sm"
         />
         <MenuList>

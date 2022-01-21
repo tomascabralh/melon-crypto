@@ -22,18 +22,15 @@ const CoinTable = ({ watchlist }) => {
 
   const watchlistCoins = (watchlist) => {
     if (watchlist.watchlist !== undefined) {
-      console.log(watchlist?.watchlist);
       var keys = Object.keys(watchlist?.watchlist);
       var filterToApply = keys.filter(function (key) {
         return watchlist?.watchlist[key];
       });
-      var filterToApply = filterToApply.map((s) => s.slice(1));
-      var filterToApply = filterToApply.map((s) => parseInt(s) - 1);
-      console.log(filterToApply);
+      var filterToApplya = filterToApply.map((s) => s.slice(1));
+      var FilterToApply = filterToApplya.map((s) => parseInt(s) - 1);
       var filteredCoins = coins.filter(function (eachElem, index) {
-        return filterToApply.indexOf(index) !== -1;
+        return FilterToApply.indexOf(index) !== -1;
       });
-      console.log(filteredCoins);
       return filteredCoins;
     }
   };

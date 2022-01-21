@@ -1,5 +1,5 @@
-import { Box, Heading, Text, Divider } from "@chakra-ui/layout";
 import React, { useState, useEffect } from "react";
+import { Box, Heading, Text, Divider } from "@chakra-ui/layout";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Image } from "@chakra-ui/image";
@@ -8,10 +8,12 @@ import FormatDay from "../../components/news/DayFormater";
 import SpinnerUI from "../../components/UI/Spinner";
 import CreateComment from "../../components/news/comments/CreateComment";
 import Comments from "../../components/news/comments/Comments";
+import { useAuth } from "../../components/contexts/AuthContext";
 
 const ArticlePage = () => {
   const { news } = useParams();
   const [articleData, setArticleData] = useState([]);
+  const { users } = useAuth();
 
   useEffect(() => {
     const GETrequest = (Title) => {
@@ -21,12 +23,12 @@ const ArticlePage = () => {
     axios.get(GETrequest(news)).then((res) => {
       setArticleData(res.data.articles[0]);
     });
-  }, []);
+  }, [news]);
 
   return (
     <>
       {articleData.title !== undefined ? (
-        <Box my={20} px={300}>
+        <Box my={20} mx={{ base: 5, sm: 5, md: 5, lg: 100, xl: 300 }}>
           <Heading justifyContent="left" my={5} mb={5}>
             {articleData?.title}
           </Heading>
@@ -54,10 +56,10 @@ const ArticlePage = () => {
       ) : (
         <SpinnerUI />
       )}
-      <Box mx={{ md: 0, lg: 300 }} my={20} py={5}>
+      <Box mx={{ base: 5, sm: 5, md: 5, lg: 100, xl: 200 }} my={20} py={5}>
         <Heading>Comment Section</Heading>
         <Divider my={10} />
-        <CreateComment title={news} />
+        {users ? <CreateComment title={news} /> : null}
         <Comments title={news} />
       </Box>
     </>

@@ -8,8 +8,10 @@ import {
   Text,
   Grid,
   HStack,
-} from "@chakra-ui/layout";
-import { Image } from "@chakra-ui/image";
+  Center,
+  Image,
+  Spacer,
+} from "@chakra-ui/react";
 import Author from "./Author";
 import FormatDay from "./DayFormater";
 import SortBySelector from "./SortBySelector";
@@ -31,8 +33,8 @@ const Articles = (params) => {
 
   const buildArticle = articles.map((article, index) => {
     return (
-      <Box
-        mx={{ md: 0, lg: 100, xl: 300 }}
+      <Center
+        mx={{ md: 0, lg: 50, xl: 200 }}
         py={5}
         my={10}
         borderBottom="1px"
@@ -54,19 +56,27 @@ const Articles = (params) => {
             flexDirection={{ base: "column", sm: "row" }}
             justifyContent="space-between"
           >
-            <Box display="flex" flex="1" marginRight="3" position="relative">
+            <Box
+              display="flex"
+              flex="1"
+              marginRight={{ sm: 0, md: 3 }}
+              position="relative"
+            >
               <Box
                 width={{ base: "0", sm: "30%" }}
                 zIndex="2"
-                marginLeft={{ base: "0", sm: "5%" }}
+                marginLeft={{ sm: "0", md: "5%" }}
                 mx={10}
               >
-                <AspectRatio maxW="400" maxH="400" ratio={1}>
+                <AspectRatio w="400" h="300" ratio={1}>
                   <Image
                     borderRadius="lg"
                     src={article.urlToImage}
                     alt={article.title}
                     objectFit="contain"
+                    maxW={"100%"}
+                    h="auto"
+                    display={{ base: "none", sm: "block" }}
                   />
                 </AspectRatio>
               </Box>
@@ -78,7 +88,12 @@ const Articles = (params) => {
                 marginTop={{ base: "3", sm: "0" }}
               >
                 <Heading marginTop="1">{article.title}</Heading>
-                <Text as="p" marginTop="2" fontSize="lg">
+                <Text
+                  as="p"
+                  marginTop="2"
+                  fontSize="lg"
+                  display={{ base: "none", sm: "none", md: "flex" }}
+                >
                   {article.description}
                 </Text>
                 <Author article={article} />
@@ -89,7 +104,7 @@ const Articles = (params) => {
             </Box>
           </Box>
         </Link>
-      </Box>
+      </Center>
     );
   });
 
@@ -98,7 +113,7 @@ const Articles = (params) => {
       ? setSearchParams(params.q)
       : setSearchParams("crypto");
     params.searchT !== undefined ? setSearch(params.searchT) : setSearch("q");
-  });
+  }, [params]);
 
   useEffect(() => {
     searchParams !== undefined && search !== undefined
@@ -109,7 +124,7 @@ const Articles = (params) => {
           .then((res) => {
             setArticles(res.data.articles);
           })
-      : console.log("cabra gei xd");
+      : console.log("loading");
   }, [sortby, searchParams, search]);
 
   return (
@@ -122,20 +137,16 @@ const Articles = (params) => {
         borderColor="gray.200"
         alignContent="right"
       >
-        <Grid templateColumns={{ sm: "repeat(1, 1fr)", md: "repeat(2, 1fr)" }}>
+        <HStack alignContent="center">
           <Box>
             <Heading>{searchParams} News</Heading>
           </Box>
-          <HStack
-            alignContent="right"
-            pl={{ sm: 0, md: 100, lg: 200, xl: 500 }}
-          >
-            <Text textAlign={{ sm: "left", md: "right" }}>Sort By: </Text>
-            <SortBySelector
-              fetchDataFromSortBySelector={fetchDataFromSortBySelector}
-            />
-          </HStack>
-        </Grid>
+          <Spacer />
+          <Text textAlign={{ sm: "left", md: "right" }}>Sort By: </Text>
+          <SortBySelector
+            fetchDataFromSortBySelector={fetchDataFromSortBySelector}
+          />
+        </HStack>
       </Box>
       <Box>{buildArticle}</Box>
     </>

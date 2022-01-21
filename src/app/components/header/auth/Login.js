@@ -13,18 +13,21 @@ import {
   Text,
   HStack,
   Spacer,
+  useToast,
 } from "@chakra-ui/react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../../firebase";
 import React, { useRef, useState } from "react";
 import SignUp from "./SignUp";
-import { useToast } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 import ForgotPassword from "./ForgotPassword";
 
 const Login = () => {
   const [logInEmail, setLogInEmail] = useState(null);
   const [logInPassword, setLogInPassword] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const navigate = useNavigate();
 
   const toast = useToast();
 
@@ -40,12 +43,7 @@ const Login = () => {
       });
     } else {
       try {
-        const user = await signInWithEmailAndPassword(
-          auth,
-          logInEmail,
-          logInPassword
-        );
-        console.log(user);
+        await signInWithEmailAndPassword(auth, logInEmail, logInPassword);
         onClose();
         toast({
           title: "Logged in successfully!",
@@ -53,6 +51,7 @@ const Login = () => {
           duration: 2000,
           isClosable: true,
         });
+        navigate("/");
       } catch (error) {
         toast({
           title: "Username or password incorrect",

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import {
   FormControl,
   FormLabel,
@@ -76,7 +76,6 @@ const PasswordResetPage = () => {
               mb={3}
               onChange={(e) => {
                 setNewPassword(e.target.value);
-                console.log(newPassword);
               }}
             />
             <FormHelperText my={1} mb={5}>
