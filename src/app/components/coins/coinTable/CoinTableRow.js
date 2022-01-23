@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Box, Flex, Link } from "@chakra-ui/layout";
-import { Tr, Td, Checkbox, useToast } from "@chakra-ui/react";
+import {
+  Tr,
+  Td,
+  Checkbox,
+  useToast,
+  useColorModeValue,
+  Box,
+  Flex,
+  Link,
+} from "@chakra-ui/react";
 import CoinDayVariation from "../coinPage/CoinDayVariation";
 import { RiStarLine } from "react-icons/ri";
 import { useAuth } from "../../contexts/AuthContext";
@@ -12,6 +20,8 @@ const CoinTableRow = ({ coins }) => {
   const { currentUser, users } = useAuth();
 
   const toast = useToast();
+
+  const bg = useColorModeValue("green.100", "green.400");
 
   const ShowToast = (id) => {
     if (users?.watchlist[`n${id}`] === true) {
@@ -47,7 +57,7 @@ const CoinTableRow = ({ coins }) => {
           <Tr
             key={coin.market_cap_rank}
             _hover={{
-              background: "green.100",
+              background: bg,
             }}
           >
             <Td>

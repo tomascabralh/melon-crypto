@@ -1,5 +1,6 @@
 import { Box, Heading } from "@chakra-ui/react";
 import React from "react";
+import SpinnerUI from "../../components/UI/Spinner";
 
 const PortfolioPage = () => {
   return (
@@ -11,7 +12,10 @@ const PortfolioPage = () => {
         borderBottom="1px"
         borderColor="gray.200"
       >
-        <Heading>Portfolio</Heading>
+        <Heading>Portfolio (Work in progress)</Heading>
+      </Box>
+      <Box w="100%" h={550}>
+        <SpinnerUI />
       </Box>
     </>
   );

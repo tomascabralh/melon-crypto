@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Box } from "@chakra-ui/layout";
-import { Table, Thead, Tbody, Tr, Th } from "@chakra-ui/react";
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  useColorModeValue,
+  Box,
+} from "@chakra-ui/react";
 import axios from "axios";
 import CoinTableRow from "./CoinTableRow";
-import { useColorModeValue } from "@chakra-ui/color-mode";
 
 const CoinTable = ({ watchlist }) => {
   const bg = useColorModeValue("#9AE6B4", "green.800");

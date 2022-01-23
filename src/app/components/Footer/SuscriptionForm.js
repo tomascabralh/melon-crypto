@@ -19,19 +19,28 @@ const Suscription = () => {
   const toast = useToast();
 
   function Popup() {
-    var keyName = email.replace("@", "---").replace(".", "-");
+    if (email.includes("@") === true && email.includes(".") === true) {
+      var keyName = email.replace("@", "---").replace(".", "-");
 
-    set(ref(getDatabase(), "suscriptions/" + keyName), {
-      email: email,
-    });
+      set(ref(getDatabase(), "suscriptions/" + keyName), {
+        email: email,
+      });
 
-    toast({
-      title: "Thanks for joining our newsletter!",
-      status: "success",
-      duration: 9000,
-      isClosable: true,
-    });
-    setEmail("");
+      toast({
+        title: "Thanks for joining our newsletter!",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
+      setEmail("");
+    } else {
+      toast({
+        title: "You must enter an email address",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
   }
 
   return (

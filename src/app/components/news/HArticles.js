@@ -11,6 +11,7 @@ import {
   Center,
   Image,
   Spacer,
+  VStack,
 } from "@chakra-ui/react";
 import Author from "./Author";
 import FormatDay from "./DayFormater";
@@ -148,7 +149,19 @@ const Articles = (params) => {
           />
         </HStack>
       </Box>
-      <Box>{buildArticle}</Box>
+      {articles[0] !== undefined ? (
+        buildArticle
+      ) : (
+        <Center mx={{ md: 0, lg: 200 }} my={5} py={5} h="60vh">
+          <VStack>
+            <Heading mt={30} mb={30}>
+              There are no matches for "{params.q}"{" "}
+            </Heading>
+
+            <Box>Try searching something else!</Box>
+          </VStack>
+        </Center>
+      )}
     </>
   );
 };

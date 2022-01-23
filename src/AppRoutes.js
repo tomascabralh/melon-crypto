@@ -10,8 +10,7 @@ import ArticlePage from "./app/pages/News/ArticlePage";
 import ProfilePage from "./app/pages/user/ProfilePage";
 import PortfolioPage from "./app/pages/user/PortfolioPage";
 import PasswordResetPage from "./app/pages/user/PasswordResetPage";
-import { useAuth } from "./app/components/contexts/AuthContext";
-import { getDatabase, ref, onValue } from "firebase/database";
+import SearchNewsPage from "./app/pages/News/SearchNewsPage";
 
 function AppRoutes() {
   return (
@@ -25,6 +24,11 @@ function AppRoutes() {
         />
         <Route exact path="/profile" element={<ProfilePage />} />
         <Route exact path="/news/:news" element={<ArticlePage />} />
+        <Route
+          exact
+          path="/news/search/search_query=:query"
+          element={<SearchNewsPage />}
+        />
         <Route exact path="/news" element={<NewsPage />} />
         <Route exact path="/coins/:id" element={<CoinPage />} />
         <Route exact path="/coins" element={<LandingPage />} />
@@ -39,12 +43,12 @@ function AppRoutes() {
 
 export default AppRoutes;
 
-const ProtectedRoute = async () => {
+/*const ProtectedRoute = async () => {
   const { currentUser } = useAuth;
 
   return currentUser ? <Outlet /> : <Navigate to="/" />;
 
-  /*onValue(ref(getDatabase(), "users/" + currentUser?.uid), (snapshot) => {
+  onValue(ref(getDatabase(), "users/" + currentUser?.uid), (snapshot) => {
     const data = snapshot.val();
     console.log(currentUser);
     if (data !== null) {
@@ -52,7 +56,7 @@ const ProtectedRoute = async () => {
     } else {
       return <Navigate to="/" />;
     }
-  }*/
-};
+  
+};}*/
 
 //isAuthenticated ? <Outlet /> : <Navigate to="/" />;

@@ -26,7 +26,7 @@ const Footer = () => {
           md: "repeat(3, 1fr)",
           lg: "repeat(3, 1fr)",
         }}
-        h="200px"
+        h="24vh"
         bgColor={bg}
         color={color}
         pt={4}

@@ -25,7 +25,7 @@ function Header() {
         py={2}
         px={4}
         bgColor={bg}
-        maxH={58}
+        maxH="6vh"
         justify="center"
         whiteSpace="nowrap"
         color={color}
