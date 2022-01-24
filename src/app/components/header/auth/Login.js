@@ -14,6 +14,9 @@ import {
   HStack,
   Spacer,
   useToast,
+  InputGroup,
+  IconButton,
+  InputRightElement,
 } from "@chakra-ui/react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../../firebase";
@@ -21,11 +24,13 @@ import React, { useRef, useState } from "react";
 import SignUp from "./SignUp";
 import { useNavigate } from "react-router-dom";
 import ForgotPassword from "./ForgotPassword";
+import { AiOutlineEye } from "react-icons/ai";
 
 const Login = () => {
   const [logInEmail, setLogInEmail] = useState(null);
   const [logInPassword, setLogInPassword] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [show, setShow] = useState(false);
 
   const navigate = useNavigate();
 
@@ -93,15 +98,28 @@ const Login = () => {
                 }}
               />
               <FormLabel htmlFor="Password">Password</FormLabel>
-              <Input
-                id="Password"
-                type="Password"
-                isRequired
-                mb={3}
-                onChange={(e) => {
-                  setLogInPassword(e.target.value);
-                }}
-              />
+              <InputGroup>
+                <Input
+                  id="Password"
+                  type={show ? "text" : "password"}
+                  isRequired
+                  mb={3}
+                  onChange={(e) => {
+                    setLogInPassword(e.target.value);
+                  }}
+                />
+                <InputRightElement width="1.5rem">
+                  <IconButton
+                    size="sm"
+                    icon={<AiOutlineEye />}
+                    fontSize={20}
+                    mr={4}
+                    onClick={() => {
+                      setShow(!show);
+                    }}
+                  />
+                </InputRightElement>
+              </InputGroup>
             </FormControl>
             <ForgotPassword />
             <Button colorScheme="teal" w="100%" mt={5} mr={3} onClick={login}>

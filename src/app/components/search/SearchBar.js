@@ -7,14 +7,21 @@ import {
   Link,
   Kbd,
   Text,
+  Center,
+  InputRightElement,
+  InputGroup,
+  IconButton,
+  Button,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { ImCancelCircle } from "react-icons/im";
 
 const SearchBar = () => {
   const bg = useColorModeValue("white", "gray.900");
   const color = useColorModeValue("black", "gray.50");
   const resultsBg = useColorModeValue("gray.50", "gray.700");
+  const resultsKBD = useColorModeValue("gray.100", "gray.700");
   const hover = useColorModeValue("green.100", "green.700");
 
   const navigate = useNavigate();
@@ -52,63 +59,102 @@ const SearchBar = () => {
 
   return (
     <Box>
-      <Input
-        size="sm"
-        background={bg}
-        rounded="md"
-        px={2}
-        value={input}
-        color={color}
-        variant="flushed"
-        placeholder="Search . . ."
-        onChange={onSearch}
-        onKeyPress={handleKeyPress}
-      />
+      <InputGroup>
+        <Input
+          size="sm"
+          background={bg}
+          rounded="md"
+          px={2}
+          value={input}
+          color={color}
+          variant="flushed"
+          placeholder="Search . . ."
+          onChange={onSearch}
+          onKeyPress={handleKeyPress}
+        />
+        {input !== "" ? (
+          <InputRightElement>
+            <Button
+              size="sm"
+              h="1.50rem"
+              mb={2}
+              fontWeight={1000}
+              variant="ghost"
+              onClick={() => {
+                setInput("");
+              }}
+            >
+              X
+            </Button>
+          </InputRightElement>
+        ) : null}
+      </InputGroup>
       {input.length > 1 && (
-        <Box
-          mt={3}
-          borderRadius="3px"
-          overflow="auto"
-          overflowY="auto"
-          maxH="162px"
-          bg={resultsBg}
-          sx={{
-            "&::-webkit-scrollbar": {
-              width: "8px",
-              borderRadius: "8px",
-            },
+        <>
+          <Box
+            mt={3}
+            borderRadius="3px"
+            overflow="auto"
+            overflowY="auto"
+            maxH="162px"
+            bg={resultsBg}
+            sx={{
+              "&::-webkit-scrollbar": {
+                width: "8px",
+                borderRadius: "8px",
+              },
 
-            "&::-webkit-scrollbar-thumb": {
-              backgroundColor: "gray.400",
-              borderRadius: "8px",
-            },
-          }}
-        >
-          <Box p={2} borderBottom={3} borderBottomColor="teal">
-            <Text size="xs" as="samp">
-              <Kbd>enter</Kbd> to search for "{input}" news
-            </Text>
-          </Box>
-          {filteredData.map((coin, index) => {
-            return (
-              <Box key={index} ml={2}>
-                <Link
-                  href={`/coins/${coin.id}`}
-                  style={{ textDecoration: "none" }}
-                >
-                  <Box
-                    p={2}
-                    _hover={{
-                      background: hover,
-                    }}
-                  >
-                    {coin.name}
-                  </Box>
-                </Link>
+              "&::-webkit-scrollbar-thumb": {
+                backgroundColor: "gray.400",
+                borderRadius: "8px",
+              },
+            }}
+          >
+            <Center
+              borderRadius="5px"
+              maxH={6}
+              bg={resultsBg}
+              borderBottom={1}
+              borderBottomColor="black"
+            >
+              <Box p={2} textAlign={"center"} fontSize="sm">
+                <Text as="samp">Cryptocurrencies</Text>
               </Box>
-            );
-          })}
-        </Box>
+            </Center>
+            {filteredData.map((coin, index) => {
+              return (
+                <Box key={index}>
+                  <Link
+                    href={`/coins/${coin.id}`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <Box
+                      p={2}
+                      px={3}
+                      _hover={{
+                        background: hover,
+                      }}
+                    >
+                      {coin.name}
+                    </Box>
+                  </Link>
+                </Box>
+              );
+            })}
+          </Box>
+          <Center
+            borderRadius="5px"
+            maxH={7}
+            bg={resultsKBD}
+            position="relative"
+          >
+            <Box p={2} textAlign={"center"} fontSize="sm">
+              <Text as="samp">
+                <Kbd>enter</Kbd> to search for "{input}" news
+              </Text>
+            </Box>
+          </Center>
+        </>
       )}
     </Box>
   );

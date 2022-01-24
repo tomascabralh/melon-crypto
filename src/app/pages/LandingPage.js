@@ -10,9 +10,6 @@ const LandingPage = () => {
       <Center padding={4}>
         <VStack>
           <Heading my={10}>🍈 Melon Crypto 🍈</Heading>
-          <Heading display={{ base: "none", sm: "block" }}>
-            🍈 The best crypto news around 🍈
-          </Heading>
         </VStack>
       </Center>
       <Box

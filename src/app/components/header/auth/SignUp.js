@@ -16,18 +16,23 @@ import {
   HStack,
   Spacer,
   useToast,
+  InputGroup,
+  IconButton,
+  InputRightElement,
 } from "@chakra-ui/react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../../firebase";
 import { getDatabase, ref, set } from "firebase/database";
 import Login from "./Login";
-//import register from "./logic/register";
+import { AiOutlineEye } from "react-icons/ai";
 
 const SignUp = () => {
   const [signUpEmail, setSignUpEmail] = useState(null);
   const [signUpPassword, setSignUpPassword] = useState(null);
   const [signUpPasswordConfirm, setSignUpPasswordConfirm] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [showPass1, setShowPass1] = useState(false);
+  const [showPass2, setShowPass2] = useState(false);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const passwordConfirmRef = useRef(null);
@@ -130,30 +135,56 @@ const SignUp = () => {
                 }}
               />
               <FormLabel htmlFor="Password">Password</FormLabel>
-              <Input
-                ref={passwordRef}
-                id="Password"
-                type="Password"
-                isRequired
-                mb={3}
-                onChange={(e) => {
-                  setSignUpPassword(e.target.value);
-                }}
-              />
+              <InputGroup>
+                <Input
+                  ref={passwordRef}
+                  id="Password"
+                  type={showPass1 ? "text" : "password"}
+                  isRequired
+                  mb={3}
+                  onChange={(e) => {
+                    setSignUpPassword(e.target.value);
+                  }}
+                />
+                <InputRightElement width="1.5rem">
+                  <IconButton
+                    size="sm"
+                    icon={<AiOutlineEye />}
+                    fontSize={20}
+                    mr={4}
+                    onClick={() => {
+                      setShowPass1(!showPass1);
+                    }}
+                  />
+                </InputRightElement>
+              </InputGroup>
               <FormHelperText my={1} mb={2}>
                 Passwords must be at least 6 characters.
               </FormHelperText>
               <FormLabel htmlFor="ConfirmPassword">Confirm Password</FormLabel>
-              <Input
-                ref={passwordConfirmRef}
-                id="ConfirmPassword"
-                type="Password"
-                isRequired
-                mb={3}
-                onChange={(e) => {
-                  setSignUpPasswordConfirm(e.target.value);
-                }}
-              />
+              <InputGroup>
+                <Input
+                  ref={passwordConfirmRef}
+                  id="ConfirmPassword"
+                  type={showPass2 ? "text" : "password"}
+                  isRequired
+                  mb={3}
+                  onChange={(e) => {
+                    setSignUpPasswordConfirm(e.target.value);
+                  }}
+                />
+                <InputRightElement width="1.5rem">
+                  <IconButton
+                    size="sm"
+                    icon={<AiOutlineEye />}
+                    fontSize={20}
+                    mr={4}
+                    onClick={() => {
+                      setShowPass2(!showPass2);
+                    }}
+                  />
+                </InputRightElement>
+              </InputGroup>
               {!isError ? (
                 <FormHelperText>Passwords do not match!</FormHelperText>
               ) : null}
