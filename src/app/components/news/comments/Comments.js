@@ -20,10 +20,9 @@ const Comments = () => {
   const color = useColorModeValue("black", "gray.200");
 
   useEffect(() => {
-    const starCountRef = ref(getDatabase(), `comments/${news}/com`);
+    const starCountRef = ref(getDatabase(), `news/${news}/comments`);
     onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
-      console.log(data);
       setBackendComments(data);
     });
   }, [news]);
@@ -80,7 +79,7 @@ const Comments = () => {
                   <CreateComment commentID={comment.commentID} />
                 ) : null}
 
-                {_.toArray(comment.zreplies?.com).map((reply) => {
+                {_.toArray(comment.zreplies?.comments).map((reply) => {
                   return (
                     <>
                       <Flex my={10} key={reply.commentID}>

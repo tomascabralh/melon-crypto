@@ -29,11 +29,11 @@ const CreateComment = ({ commentID }) => {
     } else {
       if (commentID === undefined) {
         if (counter === 0) {
-          set(ref(getDatabase(), `comments/${news}`), {
+          set(ref(getDatabase(), `news/${news}`), {
             idCounter: counter,
           });
 
-          set(ref(getDatabase(), `comments/${news}/com/` + counter), {
+          set(ref(getDatabase(), `news/${news}/comments/` + counter), {
             userID: currentUser?.uid,
             photoURL: users?.photoURL,
             user: users?.username,
@@ -43,11 +43,11 @@ const CreateComment = ({ commentID }) => {
           });
           setMsg("");
         } else {
-          update(ref(getDatabase(), `comments/${news}`), {
+          update(ref(getDatabase(), `news/${news}`), {
             idCounter: counter,
           });
 
-          set(ref(getDatabase(), `comments/${news}/com/` + counter), {
+          set(ref(getDatabase(), `news/${news}/comments/` + counter), {
             userID: currentUser?.uid,
             photoURL: users?.photoURL,
             user: users?.username,
@@ -60,7 +60,7 @@ const CreateComment = ({ commentID }) => {
       } else {
         if (counter === 0) {
           set(
-            ref(getDatabase(), `comments/${news}/com/${commentID}/zreplies/`),
+            ref(getDatabase(), `news/${news}/comments/${commentID}/zreplies/`),
             {
               idCounter: counter,
             }
@@ -69,7 +69,7 @@ const CreateComment = ({ commentID }) => {
           set(
             ref(
               getDatabase(),
-              `comments/${news}/com/${commentID}/zreplies/com/` +
+              `news/${news}/comments/${commentID}/zreplies/comments/` +
                 `${commentID}-${counter}`
             ),
             {
@@ -84,7 +84,7 @@ const CreateComment = ({ commentID }) => {
           setMsg("");
         } else {
           update(
-            ref(getDatabase(), `comments/${news}/com/${commentID}/zreplies/`),
+            ref(getDatabase(), `news/${news}/comments/${commentID}/zreplies/`),
             {
               idCounter: counter,
             }
@@ -93,7 +93,7 @@ const CreateComment = ({ commentID }) => {
           set(
             ref(
               getDatabase(),
-              `comments/${news}/com/${commentID}/zreplies/com/` +
+              `news/${news}/comments/${commentID}/zreplies/comments/` +
                 `${commentID}-${counter}`
             ),
             {
@@ -113,13 +113,13 @@ const CreateComment = ({ commentID }) => {
 
   useEffect(() => {
     if (commentID === undefined) {
-      const starCountRef = ref(getDatabase(), `comments/${news}/com`);
+      const starCountRef = ref(getDatabase(), `news/${news}/comments`);
       onValue(starCountRef, (snapshot) => {
         const data = snapshot.val();
         if (data === null) {
           setCounter(0);
         } else {
-          const dbref = ref(getDatabase(), `comments/${news}`);
+          const dbref = ref(getDatabase(), `news/${news}`);
           onValue(dbref, (snapshot) => {
             const idData = snapshot.val();
             setCounter(idData.idCounter + 1);
@@ -129,7 +129,7 @@ const CreateComment = ({ commentID }) => {
     } else {
       const starCountRef = ref(
         getDatabase(),
-        `comments/${news}/com/${commentID}/zreplies/com/`
+        `news/${news}/comments/${commentID}/zreplies/comments/`
       );
       onValue(starCountRef, (snapshot) => {
         const data = snapshot.val();
@@ -138,7 +138,7 @@ const CreateComment = ({ commentID }) => {
         } else {
           const dbref = ref(
             getDatabase(),
-            `comments/${news}/com/${commentID}/zreplies/`
+            `news/${news}/comments/${commentID}/zreplies/`
           );
           onValue(dbref, (snapshot) => {
             const idData = snapshot.val();

@@ -6,7 +6,6 @@ import {
   Link,
   AspectRatio,
   Text,
-  Grid,
   HStack,
   Center,
   Image,
@@ -16,6 +15,7 @@ import {
 import Author from "./Author";
 import FormatDay from "./DayFormater";
 import SortBySelector from "./SortBySelector";
+import { getDatabase, ref, set, onValue, update } from "firebase/database";
 
 const Articles = (params) => {
   const [articles, setArticles] = useState([]);
@@ -25,7 +25,10 @@ const Articles = (params) => {
 
   const formatHrefTitle = (Title) => {
     var title = Title.replaceAll(" ", "-");
-    return title;
+    var formattedTitle = title.replaceAll(".", "-");
+    var formattedtitle = formattedTitle.replaceAll("$", "usd");
+    var formattitle = formattedtitle.replaceAll("#", "usd");
+    return formattitle;
   };
 
   const fetchDataFromSortBySelector = (sortby) => {

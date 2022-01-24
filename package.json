@@ -17,6 +17,7 @@
     "dotenv": "^10.0.0",
     "emotion-theming": "^11.0.0",
     "firebase": "^9.6.1",
+    "firebase-tools": "^10.1.2",
     "framer-motion": "4",
     "lodash": "^4.17.21",
     "react": "^17.0.2",

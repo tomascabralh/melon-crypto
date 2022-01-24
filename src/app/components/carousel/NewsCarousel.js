@@ -1,17 +1,36 @@
-import { Box, Center } from "@chakra-ui/layout";
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { Box, Center } from "@chakra-ui/layout";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import NewsCarouselCard from "./NewsCarouselCard";
+import { getDatabase, ref, onValue } from "firebase/database";
+import _ from "lodash";
 
 const NewsCarousel = () => {
   const [articles, setArticles] = useState([]);
 
+  const formatHrefTitle = (Title) => {
+    var title = Title.replaceAll(" ", "-");
+    var formattedTitle = title.replaceAll(".", "-");
+    var formattedtitle = formattedTitle.replaceAll("$", "usd");
+    return formattedtitle;
+  };
+
+  const filterArray = (Articles) => {
+    console.log(Articles);
+    var results = Articles.filter(
+      (article) => article.title.includes("crypto") === true
+    );
+    return results;
+  };
+
   useEffect(() => {
-    const GETrequest = `https://newsapi.org/v2/everything?q=crypto&apiKey=${process.env.REACT_APP_articles_APIkey}`;
-    axios.get(GETrequest).then((res) => {
-      setArticles(res.data.articles);
+    const Articles = ref(getDatabase(), `news/`);
+    onValue(Articles, (snapshot) => {
+      const data = snapshot.val();
+
+      console.log(filterArray(_.toArray(data)));
+      setArticles(data);
     });
   }, []);
 

@@ -21,14 +21,15 @@ const DeleteComment = ({ commentID }) => {
   const [Comment, setComment] = useState();
 
   function deleteCom() {
-    if (Comment.commentID.includes("-") === false) {
-      remove(ref(getDatabase(), `comments/${news}/com/` + Comment?.commentID));
+    console.log(Comment);
+    if (Comment?.commentID.toString().includes("-") === false) {
+      remove(ref(getDatabase(), `news/${news}/comments/` + Comment?.commentID));
     } else {
       var parentID = Comment.commentID.split("-");
       remove(
         ref(
           getDatabase(),
-          `comments/${news}/com/${parentID[0]}/zreplies/com/` +
+          `news/${news}/comments/${parentID[0]}/zreplies/comments/` +
             `${Comment?.commentID}`
         )
       );
