@@ -4,38 +4,18 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import NewsCarouselCard from "./NewsCarouselCard";
 import { getDatabase, ref, onValue } from "firebase/database";
+import { filterArray } from "../Functions";
 import _ from "lodash";
 
 const NewsCarousel = () => {
   const [articles, setArticles] = useState([]);
 
-  const formatHrefTitle = (Title) => {
-    var title = Title.replaceAll(" ", "-");
-    var formattedTitle = title.replaceAll(".", "-");
-    var formattedtitle = formattedTitle.replaceAll("$", "usd");
-    return formattedtitle;
-  };
-
-  const filterArray = (Articles) => {
-    const result = Articles.reduce((temp, value) => {
-      if (temp.title.includes("crypto") === true && temp.length < 10)
-        temp.push(value);
-      return temp;
-    }, []);
-    return result;
-  };
-
   useEffect(() => {
     const Articles = ref(getDatabase(), `news/`);
     onValue(Articles, (snapshot) => {
       const data = snapshot.val();
-      const filter = filterArray(
-        _.toArray(data),
-        (i) => i.titles.includes("crypto"),
-        10
-      );
-      console.log(filter);
-      setArticles(filter);
+      const filter = filterArray(_.toArray(data), "crypto");
+      setArticles(filter.slice(0, 10));
     });
   }, []);
 
@@ -59,7 +39,7 @@ const NewsCarousel = () => {
           showIndicators={false}
           showStatus={false}
           centerMode={true}
-          centerSlidePercentage={12}
+          centerSlidePercentage={25}
           transitionTime={1000}
           interval={5000}
         >

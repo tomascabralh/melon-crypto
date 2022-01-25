@@ -21,12 +21,12 @@ const Footer = () => {
     >
       <Grid
         templateColumns={{
-          base: "repeat(3, 1fr)",
-          sm: "repeat(3, 1fr)",
+          base: "repeat(2, 1fr)",
+          sm: "repeat(2, 1fr)",
           md: "repeat(3, 1fr)",
           lg: "repeat(3, 1fr)",
         }}
-        h="21vh"
+        h={{ base: "150px", sm: "150px", md: "210px", lg: "210px" }}
         bgColor={bg}
         color={color}
         pt={4}
@@ -35,7 +35,7 @@ const Footer = () => {
         <GridItem>
           <Legal />
         </GridItem>
-        <GridItem>
+        <GridItem display={{ base: "none", md: "block", lg: "block" }}>
           <Suscription />
         </GridItem>
         <GridItem>
@@ -48,7 +48,7 @@ const Footer = () => {
                 htmlWidth={240}
               />
             </Box>
-            <Center>
+            <Center mr={{ base: 10, sm: 10, md: 0 }}>
               <SocialMedia />
             </Center>
           </VStack>

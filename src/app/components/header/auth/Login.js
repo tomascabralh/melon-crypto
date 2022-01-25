@@ -1,3 +1,4 @@
+import React, { useRef, useState } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -20,7 +21,6 @@ import {
 } from "@chakra-ui/react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../../firebase";
-import React, { useRef, useState } from "react";
 import SignUp from "./SignUp";
 import { useNavigate } from "react-router-dom";
 import ForgotPassword from "./ForgotPassword";
@@ -56,7 +56,7 @@ const Login = () => {
           duration: 2000,
           isClosable: true,
         });
-        navigate("/");
+        navigate("/profile");
       } catch (error) {
         toast({
           title: "Username or password incorrect",

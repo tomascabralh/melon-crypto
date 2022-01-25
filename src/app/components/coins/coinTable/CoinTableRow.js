@@ -8,6 +8,7 @@ import {
   Box,
   Flex,
   Link,
+  Image,
 } from "@chakra-ui/react";
 import CoinDayVariation from "../coinPage/CoinDayVariation";
 import { RiStarLine } from "react-icons/ri";
@@ -92,7 +93,16 @@ const CoinTableRow = ({ coins }) => {
                 style={{ textDecoration: "none" }}
               >
                 <Flex>
-                  <img src={coin.image} width="30" height="5" alt={coin.name} />
+                  <Image
+                    src={coin.image}
+                    boxSize={{
+                      base: "30px",
+                      sm: "30px",
+                      md: "30px",
+                      lg: "30px",
+                    }}
+                    alt={coin.name}
+                  />
                   <Box ml={5}>{coin.name}</Box>
                 </Flex>
               </Link>

@@ -9,7 +9,8 @@ const Watchlist = () => {
   return (
     <>
       <Box
-        mr={{ md: 0, lg: 20 }}
+        mx={{ base: 5, sm: 5, md: 5, lg: 0 }}
+        mr={{ md: 5, lg: 20 }}
         my={5}
         py={5}
         borderBottom="1px"
@@ -17,7 +18,7 @@ const Watchlist = () => {
       >
         <Heading>Watchlist</Heading>
       </Box>
-      <Box mr={{ md: 0, lg: 20 }}>
+      <Box mx={{ base: 5, sm: 5, md: 5, lg: 0 }} mr={{ md: 5, lg: 20 }}>
         {users ? <CoinTable watchlist={users} /> : null}
       </Box>
     </>

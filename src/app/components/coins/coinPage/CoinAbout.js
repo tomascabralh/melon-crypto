@@ -1,10 +1,11 @@
 import React from "react";
 import { Box, Text, Heading } from "@chakra-ui/layout";
+import { removeTags } from "../../Functions";
 
 const About = ({ coin }) => {
   return (
     <>
-      <Box mx={{ md: 0, lg: 100, xl: 200 }} my={5} py={5}>
+      <Box mx={{ base: 5, sm: 5, md: 5, lg: 5, xl: 200 }} my={5} py={5}>
         <Heading
           borderBottom="1px"
           borderColor="gray.200"
@@ -15,7 +16,7 @@ const About = ({ coin }) => {
           About {coin.name}
         </Heading>
         <Text mx={{ md: 10 }} textAlign="justify">
-          {coin.description?.en}
+          {removeTags(coin.description?.en)}
         </Text>
       </Box>
     </>

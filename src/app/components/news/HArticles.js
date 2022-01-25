@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import {
   Box,
   Heading,
@@ -15,21 +14,19 @@ import {
 import Author from "./Author";
 import FormatDay from "./DayFormater";
 import SortBySelector from "./SortBySelector";
-import { getDatabase, ref, set, onValue, update } from "firebase/database";
+import { getDatabase, ref, onValue } from "firebase/database";
+import _ from "lodash";
+import {
+  formatHrefTitle,
+  deformatHrefTitle,
+  filterArray,
+  removeTags,
+} from "../Functions";
 
 const Articles = (params) => {
   const [articles, setArticles] = useState([]);
-  const [sortby, setSortBy] = useState("relevancy");
-  const [searchParams, setSearchParams] = useState();
-  const [search, setSearch] = useState();
-
-  const formatHrefTitle = (Title) => {
-    var title = Title.replaceAll(" ", "-");
-    var formattedTitle = title.replaceAll(".", "-");
-    var formattedtitle = formattedTitle.replaceAll("$", "usd");
-    var formattitle = formattedtitle.replaceAll("#", "usd");
-    return formattitle;
-  };
+  const [sortby, setSortBy] = useState("Crypto");
+  const [searchCoin, setSearchCoin] = useState(null);
 
   const fetchDataFromSortBySelector = (sortby) => {
     setSortBy(sortby);
@@ -91,14 +88,16 @@ const Articles = (params) => {
                 justifyContent="center"
                 marginTop={{ base: "3", sm: "0" }}
               >
-                <Heading marginTop="1">{article.title}</Heading>
+                <Heading marginTop="1">
+                  {deformatHrefTitle(article.title)}
+                </Heading>
                 <Text
                   as="p"
                   marginTop="2"
                   fontSize="lg"
                   display={{ base: "none", sm: "none", md: "flex" }}
                 >
-                  {article.description}
+                  {removeTags(article.description)}
                 </Text>
                 <Author article={article} />
                 <Text color={"gray.500"} textAlign="left">
@@ -113,28 +112,34 @@ const Articles = (params) => {
   });
 
   useEffect(() => {
-    params.q !== undefined
-      ? setSearchParams(params.q)
-      : setSearchParams("crypto");
-    params.searchT !== undefined ? setSearch(params.searchT) : setSearch("q");
-  }, [params]);
+    const Articles = ref(getDatabase(), `news/`);
+    onValue(Articles, (snapshot) => {
+      const data = snapshot.val();
+      if (sortby === "Crypto") {
+        const filter = filterArray(_.toArray(data), searchCoin);
+        setArticles(filter);
+      } else {
+        const filter = filterArray(_.toArray(data), searchCoin).sort(function (
+          a,
+          b
+        ) {
+          return new Date(b.publishedAt) - new Date(a.publishedAt);
+        });
+        setArticles(filter.slice(0, 30));
+      }
+    });
+  }, [sortby, params.q, searchCoin]);
 
   useEffect(() => {
-    searchParams !== undefined && search !== undefined
-      ? axios
-          .get(
-            `https://newsapi.org/v2/everything?${search}=${searchParams}&sortBy=${sortby}&apiKey=${process.env.REACT_APP_articles_APIkey}`
-          )
-          .then((res) => {
-            setArticles(res.data.articles);
-          })
-      : console.log("loading");
-  }, [sortby, searchParams, search]);
+    if (params.q !== undefined) {
+      setSearchCoin(params.q);
+    }
+  }, [sortby, params.q]);
 
   return (
     <>
       <Box
-        mx={{ md: 0, lg: 200 }}
+        mx={{ base: 5, sm: 5, md: 5, lg: 5, xl: 200 }}
         my={5}
         py={5}
         borderBottom="1px"
@@ -143,7 +148,9 @@ const Articles = (params) => {
       >
         <HStack alignContent="center">
           <Box>
-            <Heading>{searchParams} News</Heading>
+            <Heading>
+              {searchCoin !== null ? searchCoin : "Crypto"} News
+            </Heading>
           </Box>
           <Spacer />
           <Text textAlign={{ sm: "left", md: "right" }}>Sort By: </Text>
@@ -160,8 +167,6 @@ const Articles = (params) => {
             <Heading mt={30} mb={30}>
               There are no matches for "{params.q}"{" "}
             </Heading>
-
-            <Box>Try searching something else!</Box>
           </VStack>
         </Center>
       )}

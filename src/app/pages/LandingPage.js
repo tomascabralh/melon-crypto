@@ -13,7 +13,7 @@ const LandingPage = () => {
         </VStack>
       </Center>
       <Box
-        mx={{ md: 0, lg: 200 }}
+        mx={{ base: 5, sm: 5, md: 5, lg: 200 }}
         my={5}
         py={5}
         borderBottom="1px"
@@ -23,7 +23,7 @@ const LandingPage = () => {
       </Box>
       <NewsCarousel />
       <Box
-        mx={{ md: 0, lg: 200 }}
+        mx={{ base: 5, sm: 5, md: 5, lg: 200 }}
         my={5}
         py={5}
         borderBottom="1px"
@@ -33,7 +33,7 @@ const LandingPage = () => {
       </Box>
       <CoinCarousel />
       <Box
-        mx={{ md: 0, lg: 200 }}
+        mx={{ base: 5, sm: 5, md: 5, lg: 200 }}
         my={5}
         py={5}
         borderBottom="1px"

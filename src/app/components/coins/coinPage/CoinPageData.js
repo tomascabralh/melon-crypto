@@ -36,7 +36,7 @@ const Pepu = ({ coin }) => {
   const color = useColorModeValue("gray.500", "gray.400");
   return (
     <Box>
-      <Box mx={{ md: 0, lg: 200 }} mt={5} pt={5}>
+      <Box mx={{ base: 5, sm: 5, md: 5, lg: 200 }} mt={5} pt={5}>
         <Breadcrumb separator=">">
           <BreadcrumbItem>
             <BreadcrumbLink href="/" textColor={color}>
@@ -70,7 +70,7 @@ const Pepu = ({ coin }) => {
         <CoinChart />
       </Box>
       <About coin={coin} />
-      <Articles q={coin.name} searchT={"qInTitle"} />
+      <Articles q={coin.name} />
     </Box>
   );
 };

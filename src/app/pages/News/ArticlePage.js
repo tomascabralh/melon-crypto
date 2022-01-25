@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Box, Heading, Text, Divider } from "@chakra-ui/layout";
+import { Box, Heading, Text, Divider, Image } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
-import { Image } from "@chakra-ui/image";
 import Author from "../../components/news/Author";
-import FormatDay from "../../components/news/DayFormater";
 import SpinnerUI from "../../components/UI/Spinner";
 import CreateComment from "../../components/news/comments/CreateComment";
 import Comments from "../../components/news/comments/Comments";
 import { useAuth } from "../../components/contexts/AuthContext";
+import { getDatabase, ref, onValue } from "firebase/database";
+import { deformatHrefTitle, FormatDay } from "../../components/Functions";
 
 const ArticlePage = () => {
   const { news } = useParams();
@@ -16,12 +15,10 @@ const ArticlePage = () => {
   const { users } = useAuth();
 
   useEffect(() => {
-    const GETrequest = (Title) => {
-      const title = Title.replaceAll("-", " ");
-      return `https://newsapi.org/v2/everything?qInTitle="${title}"&apiKey=${process.env.REACT_APP_articles_APIkey}`;
-    };
-    axios.get(GETrequest(news)).then((res) => {
-      setArticleData(res.data.articles[0]);
+    const Articles = ref(getDatabase(), `news/${news}`);
+    onValue(Articles, (snapshot) => {
+      const data = snapshot.val();
+      setArticleData(data);
     });
   }, [news]);
 
@@ -30,7 +27,7 @@ const ArticlePage = () => {
       {articleData.title !== undefined ? (
         <Box my={20} mx={{ base: 5, sm: 5, md: 5, lg: 100, xl: 300 }}>
           <Heading justifyContent="left" my={5} mb={5}>
-            {articleData?.title}
+            {deformatHrefTitle(articleData?.title)}
           </Heading>
           <Author article={articleData} />
           <Text
@@ -41,7 +38,7 @@ const ArticlePage = () => {
             borderBottom="1px"
             borderColor="gray.200"
           >
-            Date: <FormatDay date={articleData?.publishedAt} />
+            Date: {FormatDay(articleData?.publishedAt)}
           </Text>
           <Image
             borderRadius="lg"

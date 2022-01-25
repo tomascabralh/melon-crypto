@@ -12,11 +12,12 @@ const SocialMedia = (props) => {
     <ButtonGroup variant="ghost" color="gray.600" {...props}>
       <Grid
         templateColumns={{
-          base: "repeat(1, 1fr)",
-          sm: "repeat(1, 1fr)",
+          base: "repeat(2, 1fr)",
+          sm: "repeat(2, 1fr)",
           md: "repeat(4, 1fr)",
           lg: "repeat(4, 1fr)",
         }}
+        gap={{ base: 7, sm: 7, md: 4, lg: 4 }}
       >
         <IconButton
           as="a"

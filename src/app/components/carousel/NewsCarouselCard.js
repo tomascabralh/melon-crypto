@@ -10,13 +10,9 @@ import {
 } from "@chakra-ui/react";
 import Author from "../news/Author";
 import ImageNotFound from "../../../images/image-not-found.png";
+import { deformatHrefTitle, formatHrefTitle, removeTags } from "../Functions";
 
 const NewsCarouselCard = ({ article }, { key }) => {
-  const formatHrefTitle = (Title) => {
-    var title = Title.replaceAll(" ", "-");
-    return title;
-  };
-
   return (
     <Center py={6} pb={20} key={key}>
       <Box
@@ -55,7 +51,7 @@ const NewsCarouselCard = ({ article }, { key }) => {
           </Box>
           <Stack>
             <Heading fontSize={"2xl"} fontFamily={"body"}>
-              {article.title}
+              {deformatHrefTitle(article.title)}
             </Heading>
             <Box h={100} overflow={"hidden"}>
               <Text
@@ -63,7 +59,7 @@ const NewsCarouselCard = ({ article }, { key }) => {
                 whiteSpace="pre-wrap"
                 overflow={"hidden"}
               >
-                {article.description}
+                {removeTags(article.description)}
               </Text>
             </Box>
           </Stack>

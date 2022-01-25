@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Routes, Route, Navigate, Outlet } from "react-router-dom";
+import React from "react";
+import { Routes, Route } from "react-router-dom";
 import LandingPage from "./app/pages/LandingPage";
 import NewsPage from "./app/pages/News/NewsPage";
 import NotFoundPage from "./app/pages/NotFoundPage";

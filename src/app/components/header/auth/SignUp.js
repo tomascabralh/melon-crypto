@@ -25,6 +25,7 @@ import { auth } from "../../../../firebase";
 import { getDatabase, ref, set } from "firebase/database";
 import Login from "./Login";
 import { AiOutlineEye } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [signUpEmail, setSignUpEmail] = useState(null);
@@ -36,6 +37,8 @@ const SignUp = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const passwordConfirmRef = useRef(null);
+
+  const navigate = useNavigate();
 
   const toast = useToast();
 
@@ -76,13 +79,13 @@ const SignUp = () => {
             watchlistObject()
           );
         });
-        onClose();
         toast({
           title: "User created successfuly!",
           status: "success",
           duration: 2000,
           isClosable: true,
         });
+        navigate("/profile");
       } catch (error) {
         toast({
           title: "Email is invalid or already in use",

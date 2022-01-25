@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Box, Flex, HStack, GridItem, Spacer } from "@chakra-ui/react";
+import { Grid, Box, Flex, GridItem } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import { Line } from "react-chartjs-2";
 import axios from "axios";

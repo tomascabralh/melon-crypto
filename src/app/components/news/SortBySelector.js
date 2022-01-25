@@ -3,8 +3,7 @@ import { Box, Select } from "@chakra-ui/react";
 
 const SortBySelector = ({ fetchDataFromSortBySelector }) => {
   const sortOptions = [
-    { label: "Relevancy", value: "relevancy" },
-    { label: "Popularity", value: "popularity" },
+    { label: "Relevancy", value: "Crypto" },
     { label: "Date", value: "publishedAt" },
   ];
 

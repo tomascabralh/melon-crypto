@@ -44,11 +44,7 @@ const Suscription = () => {
   }
 
   return (
-    <Box
-      pb="10px"
-      minW="100px"
-      display={{ base: "none", md: "block", lg: "block" }}
-    >
+    <Box pb="10px" minW="100px">
       <Text mb={2} fontWeight="semibold">
         SUSCRIBE TO OUR NEWSLETTER
       </Text>

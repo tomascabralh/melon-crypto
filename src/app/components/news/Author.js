@@ -6,17 +6,19 @@ const Author = ({ article }) => {
     <>
       <Box mt={6} direction={"row"} spacing={4} align={"center"}>
         <Stack direction={"column"} spacing={0} fontSize={"sm"}>
-          <Text fontWeight={600} textAlign="left">
-            By: {article.source.name}
-            <Link href={article.url} isExternal>
-              '(read original)'
-            </Link>
-          </Text>
-          {article.author !== null ? (
+          {article.source !== undefined ? (
+            <Text fontWeight={600} textAlign="left">
+              By: {article.source.name}
+            </Text>
+          ) : null}
+          {article.author !== null && article.author !== undefined ? (
             <Text color={"gray.500"} textAlign="left">
               Author: {article.author}
             </Text>
           ) : null}
+          <Link href={article.url} isExternal textAlign="left">
+            '(read original)'
+          </Link>
         </Stack>
       </Box>
     </>

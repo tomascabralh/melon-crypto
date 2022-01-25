@@ -10,12 +10,10 @@ import {
   Center,
   InputRightElement,
   InputGroup,
-  IconButton,
   Button,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { ImCancelCircle } from "react-icons/im";
 
 const SearchBar = () => {
   const bg = useColorModeValue("white", "gray.900");

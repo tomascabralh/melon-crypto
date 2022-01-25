@@ -6,7 +6,7 @@ const Copyright = () => {
   const bgCopyright = useColorModeValue("green.400", "green.900");
 
   return (
-    <Box bgColor={bgCopyright} w="100%" h="7vh">
+    <Box bgColor={bgCopyright} w="100%" h="63px">
       <Center fontSize="lg">
         <Box mt="15px" fontWeight="semibold">
           © 2022 Melon Crypto.

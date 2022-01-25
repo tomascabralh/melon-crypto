@@ -10,7 +10,7 @@ const NewsPage = () => {
         <Heading
           borderBottom="1px"
           borderColor="gray.200"
-          mx={{ md: 0, lg: 200 }}
+          mx={{ base: 5, sm: 5, md: 5, lg: 200 }}
           my={5}
           py={5}
         >
