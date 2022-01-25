@@ -17,20 +17,25 @@ const NewsCarousel = () => {
   };
 
   const filterArray = (Articles) => {
-    console.log(Articles);
-    var results = Articles.filter(
-      (article) => article.title.includes("crypto") === true
-    );
-    return results;
+    const result = Articles.reduce((temp, value) => {
+      if (temp.title.includes("crypto") === true && temp.length < 10)
+        temp.push(value);
+      return temp;
+    }, []);
+    return result;
   };
 
   useEffect(() => {
     const Articles = ref(getDatabase(), `news/`);
     onValue(Articles, (snapshot) => {
       const data = snapshot.val();
-
-      console.log(filterArray(_.toArray(data)));
-      setArticles(data);
+      const filter = filterArray(
+        _.toArray(data),
+        (i) => i.titles.includes("crypto"),
+        10
+      );
+      console.log(filter);
+      setArticles(filter);
     });
   }, []);
 
