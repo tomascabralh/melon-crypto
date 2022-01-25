@@ -1,5 +1,7 @@
 export const filterArray = (Articles, filter1) => {
+  console.log(Articles);
   const result = Articles.filter((article) => {
+    console.log(article.title);
     return article.title.includes(filter1) === true;
   });
   return result;

@@ -7,6 +7,8 @@ import {
   Image,
   Textarea,
   Text,
+  HStack,
+  Spacer,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
@@ -29,11 +31,11 @@ const CreateComment = ({ commentID }) => {
     } else {
       if (commentID === undefined) {
         if (counter === 0) {
-          set(ref(getDatabase(), `news/${news}`), {
+          set(ref(getDatabase(), `news/${news}/com`), {
             idCounter: counter,
           });
 
-          set(ref(getDatabase(), `news/${news}/comments/` + counter), {
+          set(ref(getDatabase(), `news/${news}/com/comments/` + counter), {
             userID: currentUser?.uid,
             photoURL: users?.photoURL,
             user: users?.username,
@@ -43,11 +45,11 @@ const CreateComment = ({ commentID }) => {
           });
           setMsg("");
         } else {
-          update(ref(getDatabase(), `news/${news}`), {
+          update(ref(getDatabase(), `news/${news}/com`), {
             idCounter: counter,
           });
 
-          set(ref(getDatabase(), `news/${news}/comments/` + counter), {
+          set(ref(getDatabase(), `news/${news}/com/comments/` + counter), {
             userID: currentUser?.uid,
             photoURL: users?.photoURL,
             user: users?.username,
@@ -60,7 +62,10 @@ const CreateComment = ({ commentID }) => {
       } else {
         if (counter === 0) {
           set(
-            ref(getDatabase(), `news/${news}/comments/${commentID}/zreplies/`),
+            ref(
+              getDatabase(),
+              `news/${news}/com/comments/${commentID}/zreplies/`
+            ),
             {
               idCounter: counter,
             }
@@ -69,7 +74,7 @@ const CreateComment = ({ commentID }) => {
           set(
             ref(
               getDatabase(),
-              `news/${news}/comments/${commentID}/zreplies/comments/` +
+              `news/${news}/com/comments/${commentID}/zreplies/comments/` +
                 `${commentID}-${counter}`
             ),
             {
@@ -84,7 +89,10 @@ const CreateComment = ({ commentID }) => {
           setMsg("");
         } else {
           update(
-            ref(getDatabase(), `news/${news}/comments/${commentID}/zreplies/`),
+            ref(
+              getDatabase(),
+              `news/${news}/com/comments/${commentID}/zreplies/`
+            ),
             {
               idCounter: counter,
             }
@@ -93,7 +101,7 @@ const CreateComment = ({ commentID }) => {
           set(
             ref(
               getDatabase(),
-              `news/${news}/comments/${commentID}/zreplies/comments/` +
+              `news/${news}/com/comments/${commentID}/zreplies/comments/` +
                 `${commentID}-${counter}`
             ),
             {
@@ -113,13 +121,13 @@ const CreateComment = ({ commentID }) => {
 
   useEffect(() => {
     if (commentID === undefined) {
-      const starCountRef = ref(getDatabase(), `news/${news}/comments`);
+      const starCountRef = ref(getDatabase(), `news/${news}/com/comments`);
       onValue(starCountRef, (snapshot) => {
         const data = snapshot.val();
         if (data === null) {
           setCounter(0);
         } else {
-          const dbref = ref(getDatabase(), `news/${news}`);
+          const dbref = ref(getDatabase(), `news/${news}/com`);
           onValue(dbref, (snapshot) => {
             const idData = snapshot.val();
             setCounter(idData.idCounter + 1);
@@ -129,7 +137,7 @@ const CreateComment = ({ commentID }) => {
     } else {
       const starCountRef = ref(
         getDatabase(),
-        `news/${news}/comments/${commentID}/zreplies/comments/`
+        `news/${news}/com/comments/${commentID}/zreplies/comments/`
       );
       onValue(starCountRef, (snapshot) => {
         const data = snapshot.val();
@@ -138,7 +146,7 @@ const CreateComment = ({ commentID }) => {
         } else {
           const dbref = ref(
             getDatabase(),
-            `news/${news}/comments/${commentID}/zreplies/`
+            `news/${news}/com/comments/${commentID}/zreplies/`
           );
           onValue(dbref, (snapshot) => {
             const idData = snapshot.val();
@@ -151,45 +159,41 @@ const CreateComment = ({ commentID }) => {
 
   return (
     <>
-      <Grid templateColumns="repeat(10 ,1fr)">
-        <GridItem colSpan={2} mx={30}>
-          <Image
-            src={users?.photoURL}
-            alt={users?.uid}
-            fallbackSrc={Avatar}
-            borderRadius="full"
-            boxSize={150}
-          />
-        </GridItem>
-        <GridItem colSpan={7}>
-          <FormControl>
-            <FormLabel htmlFor="Comment"></FormLabel>
+      <HStack>
+        <Image
+          src={users?.photoURL}
+          alt={users?.uid}
+          fallbackSrc={Avatar}
+          borderRadius="full"
+          boxSize={{ base: "100px", sm: "120px", md: "150px" }}
+        />
+
+        <FormControl>
+          <FormLabel htmlFor="Comment"></FormLabel>
+          <HStack>
             <Text mb={5}>{users?.username} comments: </Text>
-            <Textarea
-              id="comment"
-              placeholder="Comment here"
-              value={msg}
-              size={"lg"}
-              onChange={(e) => {
-                setMsg(e.target.value);
-              }}
-            />
-          </FormControl>
-        </GridItem>
-        <GridItem colSpan={1}>
-          <Button
-            colorScheme="teal"
-            w="100%"
-            h="100%"
-            mx={30}
-            ml={50}
-            type="submit"
-            onClick={submitComment}
-          >
-            Submit
-          </Button>
-        </GridItem>
-      </Grid>
+            <Spacer />
+            <Button
+              colorScheme="teal"
+              w="70px"
+              h="30px"
+              type="submit"
+              onClick={submitComment}
+            >
+              Submit
+            </Button>
+          </HStack>
+          <Textarea
+            id="comment"
+            placeholder="Comment here"
+            value={msg}
+            size={"lg"}
+            onChange={(e) => {
+              setMsg(e.target.value);
+            }}
+          />
+        </FormControl>
+      </HStack>
     </>
   );
 };

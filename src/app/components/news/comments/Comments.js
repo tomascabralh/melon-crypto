@@ -20,7 +20,7 @@ const Comments = () => {
   const color = useColorModeValue("black", "gray.200");
 
   useEffect(() => {
-    const starCountRef = ref(getDatabase(), `news/${news}/comments`);
+    const starCountRef = ref(getDatabase(), `news/${news}/com/comments`);
     onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
       setBackendComments(data);
@@ -32,94 +32,96 @@ const Comments = () => {
       {backendComments?.map((comment, index) => {
         return (
           <>
-            <Flex my={10} key={comment.commentID}>
-              <Box>
+            <Box my={10} key={comment.commentID}>
+              <HStack>
                 <Image
                   src={comment?.photoURL}
                   alt={comment?.userID}
                   fallbackSrc={Avatar}
                   borderRadius="full"
-                  boxSize="100px"
+                  boxSize={{ base: "50px", sm: "70px", md: "100px" }}
                 />
-              </Box>
-              <Box w="100%" pl={10}>
-                <HStack>
-                  <Text fontSize="sm">{comment?.date} </Text>
-                  <Spacer />
-                  {comment?.userID === currentUser?.uid ? (
-                    <>
-                      <DeleteComment commentID={comment} />
-                    </>
-                  ) : null}
-                </HStack>
-                <Box
-                  boxShadow={"lg"}
-                  rounded={"md"}
-                  bg={bg}
-                  color={color}
-                  px={4}
-                >
-                  <Text mt={2} fontSize={"lg"} py={2}>
-                    {comment?.message}
-                  </Text>
+
+                <Box w="100%">
+                  <HStack>
+                    <Text fontSize="sm">{comment?.date} </Text>
+                    <Spacer />
+                    {comment?.userID === currentUser?.uid ? (
+                      <>
+                        <DeleteComment commentID={comment} />
+                      </>
+                    ) : null}
+                  </HStack>
+                  <Box
+                    boxShadow={"lg"}
+                    rounded={"md"}
+                    bg={bg}
+                    color={color}
+                    px={10}
+                  >
+                    <Text mt={2} fontSize={"lg"} py={2}>
+                      {comment?.message}
+                    </Text>
+                  </Box>
+                  <Link
+                    fontSize={"xs"}
+                    px={2}
+                    onClick={() => {
+                      setEditIndex((editIndex) =>
+                        editIndex === index ? null : index
+                      );
+                    }}
+                  >
+                    Reply
+                  </Link>
                 </Box>
-                <Link
-                  fontSize={"xs"}
-                  px={2}
-                  onClick={() => {
-                    setEditIndex((editIndex) =>
-                      editIndex === index ? null : index
-                    );
-                  }}
-                >
-                  Reply
-                </Link>
+              </HStack>
+            </Box>
 
-                {editIndex === index ? (
-                  <CreateComment commentID={comment.commentID} />
-                ) : null}
+            {editIndex === index ? (
+              <CreateComment commentID={comment.commentID} />
+            ) : null}
 
-                {_.toArray(comment.zreplies?.comments).map((reply) => {
-                  return (
-                    <>
-                      <Flex my={10} key={reply.commentID}>
-                        <Box>
-                          <Image
-                            src={reply?.photoURL}
-                            alt={reply?.userID}
-                            fallbackSrc={Avatar}
-                            borderRadius="full"
-                            boxSize="100px"
-                          />
+            {_.toArray(comment.zreplies?.comments).map((reply) => {
+              return (
+                <>
+                  <Box my={10} ml={50} key={reply.commentID}>
+                    <HStack>
+                      <Image
+                        src={reply?.photoURL}
+                        alt={reply?.userID}
+                        fallbackSrc={Avatar}
+                        borderRadius="full"
+                        boxSize={{ base: "50px", sm: "70px", md: "100px" }}
+                      />
+
+                      <Box w="100%">
+                        <HStack>
+                          <Text fontSize="sm">{reply?.date} </Text>
+                          <Spacer />
+                          {reply?.userID === currentUser?.uid ? (
+                            <>
+                              <DeleteComment commentID={reply} />
+                            </>
+                          ) : null}
+                        </HStack>
+                        <Box
+                          boxShadow={"lg"}
+                          rounded={"md"}
+                          bg={bg}
+                          color={color}
+                          px={10}
+                        >
+                          <Text mt={2} fontSize={"lg"} py={2}>
+                            {reply?.message}
+                          </Text>
                         </Box>
-                        <Box w="100%" pl={10}>
-                          <HStack>
-                            <Text fontSize="sm">{reply?.date} </Text>
-                            <Spacer />
-                            {reply?.userID === currentUser?.uid ? (
-                              <>
-                                <DeleteComment commentID={reply} />
-                              </>
-                            ) : null}
-                          </HStack>
-                          <Box
-                            boxShadow={"lg"}
-                            rounded={"md"}
-                            bg={bg}
-                            color={color}
-                            px={4}
-                          >
-                            <Text mt={2} fontSize={"lg"} py={2}>
-                              {reply?.message}
-                            </Text>
-                          </Box>
-                        </Box>
-                      </Flex>
-                    </>
-                  );
-                })}
-              </Box>
-            </Flex>
+                      </Box>
+                    </HStack>
+                  </Box>
+                </>
+              );
+            })}
           </>
         );
       })}
