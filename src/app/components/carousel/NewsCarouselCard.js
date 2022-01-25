@@ -12,45 +12,41 @@ import Author from "../news/Author";
 import ImageNotFound from "../../../images/image-not-found.png";
 import { deformatHrefTitle, formatHrefTitle, removeTags } from "../Functions";
 
-const NewsCarouselCard = ({ article }, { key }) => {
+const NewsCarouselCard = ({ article }) => {
   return (
-    <Center py={6} pb={20} key={key}>
+    <Center py={4} pb={20} px={8}>
       <Box
         maxW={{ base: "330px", sm: "445px" }}
         w="100%"
         boxShadow={"lg"}
         rounded={"lg"}
-        p={6}
+        p={4}
         overflow={"hidden"}
-        maxHeight="500px"
-        minHeight="500px"
+        height="500px"
         _hover={{
-          background: "gray.200",
-          color: "teal.800",
+          background: "gray.700",
+          color: "teal.400",
+          opacity: "0.6",
         }}
+        transition={"all 0.5s ease-out 100ms"}
       >
         <Link
           href={`/news/${formatHrefTitle(article.title)}`}
           style={{ textDecoration: "none" }}
         >
-          <Box
-            h={"210px"}
-            bg={"gray.100"}
-            mt={-6}
-            mx={-6}
-            mb={6}
-            pos={"relative"}
-          >
+          <Box mt={-6} mx={-6} mb={6} pos={"relative"}>
             <Image
               src={article.urlToImage}
-              layout={"fill"}
-              maxHeight="210px"
+              borderRadius="16px"
+              objectFit="cover"
+              height="150px"
+              w="full"
               alt={article.title}
               fallbackSrc={ImageNotFound}
             />
           </Box>
           <Stack>
-            <Heading fontSize={"2xl"} fontFamily={"body"}>
+            <Heading fontSize={"lg"} fontFamily={"body"}>
               {deformatHrefTitle(article.title)}
             </Heading>
             <Box h={100} overflow={"hidden"}>
@@ -58,6 +54,7 @@ const NewsCarouselCard = ({ article }, { key }) => {
                 color={"gray.500"}
                 whiteSpace="pre-wrap"
                 overflow={"hidden"}
+                fontSize={"sm"}
               >
                 {removeTags(article.description)}
               </Text>

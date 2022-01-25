@@ -1,9 +1,10 @@
-import { Center, Box } from "@chakra-ui/layout";
+import { Box } from "@chakra-ui/layout";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
 import CarouselCard from "./CoinsCarouselCard";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import { responsive } from "../../../utils/responsive";
 
 const CoinCarousel = () => {
   const GETrequest =
@@ -22,25 +23,27 @@ const CoinCarousel = () => {
   });
 
   return (
-    <Box w="100%" overflow="hidden">
-      <Center>
-        <Carousel
-          autoPlay={true}
-          infiniteLoop={true}
-          swipeable={true}
-          emulateTouch={true}
-          stopOnHover={true}
-          showThumbs={false}
-          showArrows={true}
-          showIndicators={false}
-          showStatus={false}
-          centerMode={true}
-          centerSlidePercentage={40}
-          transitionTime={1000}
-        >
-          {CarouselEntries}
-        </Carousel>
-      </Center>
+    <Box w={{ base: "100% ", lg: "75%" }} m="auto">
+      <Carousel
+        arrows={false}
+        swipeable={true}
+        draggable={true}
+        showDots={true}
+        responsive={responsive}
+        ssr={true}
+        infinite={true}
+        autoPlay={true}
+        autoPlaySpeed={5000}
+        keyBoardControl={true}
+        customTransition="all .5"
+        transitionDuration={500}
+        containerClass="carousel-container"
+        removeArrowOnDeviceType={["tablet", "mobile"]}
+        dotListClass="custom-dot-list-style"
+        itemClass="carousel-item-padding-40-px"
+      >
+        {CarouselEntries}
+      </Carousel>
     </Box>
   );
 };

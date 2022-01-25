@@ -16,53 +16,41 @@ const CarouselCard = ({ coin }) => {
   const bg = useColorModeValue("white", "gray.700");
 
   return (
-    <Center py={12} key={coin.id}>
+    <Center py={12}>
       <Box
         role={"group"}
         p={6}
-        maxW={"330px"}
-        w={"full"}
+        maxW={"260px"}
+        w={"100%"}
         bg={bg}
         boxShadow={"xl"}
         rounded={"lg"}
-        pos={"relative"}
         zIndex={1}
         _hover={{
           background: "gray.200",
           color: "teal.800",
         }}
+        transition={"all 0.5s ease-out 100ms"}
       >
         <Link href={`/coins/${coin.id}`} style={{ textDecoration: "none" }}>
-          <Box
-            rounded={"lg"}
-            mt={-12}
-            pos={"relative"}
-            height={"230px"}
-            _after={{
-              transition: "all .3s ease",
-              content: '""',
-              w: "full",
-              h: "full",
-              pos: "absolute",
-              top: 5,
-              left: 0,
-              zIndex: -1,
-            }}
-          >
-            <AspectRatio maxW="120" ratio={1}>
-              <Image rounded={"lg"} src={coin.image} ml={85} mt={100} />
-            </AspectRatio>
-          </Box>
+          <AspectRatio ratio={1} m="auto" boxSize="100px">
+            <Image
+              rounded={"lg"}
+              src={coin.image}
+              objectFit={"fill"}
+              boxSize="100px"
+            />
+          </AspectRatio>
           <Stack pt={10} align={"center"}>
-            <Heading fontSize={"4xl"} fontFamily={"body"} fontWeight={500}>
+            <Heading fontSize={"2xl"} fontFamily={"body"} fontWeight={500}>
               {coin.name}
             </Heading>
-            <Text fontWeight={800} fontSize={"xl"}>
+            <Text fontWeight={800} fontSize={"lg"}>
               $ {coin.current_price}
             </Text>
             <Text
               color={"gray.500"}
-              fontSize={"sm"}
+              fontSize={"xs"}
               textTransform={"uppercase"}
             >
               24 Hour Variation
