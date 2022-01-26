@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Box, Heading, Text, Divider, Image } from "@chakra-ui/react";
+import {
+  Box,
+  Heading,
+  Text,
+  Divider,
+  Image,
+  HStack,
+  Spacer,
+  AspectRatio,
+} from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import Author from "../../components/news/Author";
 import SpinnerUI from "../../components/UI/Spinner";
@@ -29,24 +38,22 @@ const ArticlePage = () => {
           <Heading justifyContent="left" my={5} mb={5}>
             {deformatHrefTitle(articleData?.title)}
           </Heading>
-          <Author article={articleData} />
-          <Text
-            color={"gray.500"}
-            textAlign="left"
-            pt={5}
-            my={5}
-            borderBottom="1px"
-            borderColor="gray.200"
-          >
-            Date: {FormatDay(articleData?.publishedAt)}
-          </Text>
-          <Image
-            borderRadius="lg"
-            src={articleData?.urlToImage}
-            alt={articleData?.title}
-            objectFit="contain"
-          />
-          <Text as="p" marginTop="2" fontSize="lg" justifyContent="center">
+          <HStack borderBottom="1px" borderColor="gray.200" pt={5} mb={5}>
+            <Text color={"gray.500"} textAlign="left">
+              Date: {FormatDay(articleData?.publishedAt)}
+            </Text>
+            <Spacer />
+            <Author article={articleData} />
+          </HStack>
+          <AspectRatio ratio={{ base: 4 / 5, sm: 2 / 1, md: 2 / 1 }}>
+            <Image
+              borderRadius="lg"
+              src={articleData?.urlToImage}
+              alt={articleData?.title}
+              objectFit="contain"
+            />
+          </AspectRatio>
+          <Text as="p" mt={10} fontSize="lg" justifyContent="center">
             {articleData.content}
           </Text>
         </Box>

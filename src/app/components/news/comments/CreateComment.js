@@ -2,8 +2,6 @@ import {
   FormControl,
   FormLabel,
   Button,
-  Grid,
-  GridItem,
   Image,
   Textarea,
   Text,

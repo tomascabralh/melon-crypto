@@ -1,25 +1,21 @@
 import React from "react";
-import { Box, Stack, Text, Link } from "@chakra-ui/layout";
+import { Box, VStack, Text, Link } from "@chakra-ui/layout";
 
 const Author = ({ article }) => {
   return (
     <>
-      <Box mt={6} direction={"row"} spacing={4} align={"center"}>
-        <Stack direction={"column"} spacing={0} fontSize={"sm"}>
+      <Box mt={6}>
+        <VStack spacing={0} fontSize={"sm"} align={"left"}>
           {article.source !== undefined ? (
-            <Text fontWeight={600} textAlign="left">
-              By: {article.source.name}
-            </Text>
+            <Text fontWeight={600}>By: {article.source.name}</Text>
           ) : null}
           {article.author !== null && article.author !== undefined ? (
-            <Text color={"gray.500"} textAlign="left">
-              Author: {article.author}
-            </Text>
+            <Text color={"gray.500"}>Author: {article.author}</Text>
           ) : null}
-          <Link href={article.url} isExternal textAlign="left">
+          <Link href={article.url} isExternal>
             '(read original)'
           </Link>
-        </Stack>
+        </VStack>
       </Box>
     </>
   );

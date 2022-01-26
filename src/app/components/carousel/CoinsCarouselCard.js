@@ -28,7 +28,7 @@ const CarouselCard = ({ coin }) => {
         zIndex={1}
         _hover={{
           background: "gray.200",
-          color: "teal.800",
+          color: "teal.700",
         }}
         transition={"all 0.5s ease-out 100ms"}
       >

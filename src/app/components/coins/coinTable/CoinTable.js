@@ -61,7 +61,7 @@ const CoinTable = ({ watchlist }) => {
       }}
     >
       <Table size="lg">
-        <Thead>
+        <Thead position={"sticky"} top={1}>
           <Tr>
             {titles.map((head) => {
               return <Th key={head}>{head}</Th>;

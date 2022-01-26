@@ -7,6 +7,7 @@ import {
   Stack,
   Image,
   Link,
+  Spacer,
 } from "@chakra-ui/react";
 import Author from "../news/Author";
 import ImageNotFound from "../../../images/image-not-found.png";
@@ -24,9 +25,8 @@ const NewsCarouselCard = ({ article }) => {
         overflow={"hidden"}
         height="500px"
         _hover={{
-          background: "gray.700",
-          color: "teal.400",
-          opacity: "0.6",
+          background: "gray.200",
+          color: "teal.700",
         }}
         transition={"all 0.5s ease-out 100ms"}
       >
@@ -39,7 +39,7 @@ const NewsCarouselCard = ({ article }) => {
               src={article.urlToImage}
               borderRadius="16px"
               objectFit="cover"
-              height="150px"
+              height="200px"
               w="full"
               alt={article.title}
               fallbackSrc={ImageNotFound}
@@ -61,6 +61,7 @@ const NewsCarouselCard = ({ article }) => {
             </Box>
           </Stack>
         </Link>
+        <Spacer />
         <Author article={article} />
       </Box>
     </Center>

@@ -10,6 +10,7 @@ import {
   Image,
   Spacer,
   VStack,
+  Stack,
 } from "@chakra-ui/react";
 import Author from "./Author";
 import FormatDay from "./DayFormater";
@@ -40,72 +41,44 @@ const Articles = (params) => {
         my={10}
         borderBottom="1px"
         borderColor="gray.200"
-        alignContent="right"
         key={index.toString()}
         _hover={{
           background: "gray.200",
           color: "teal.800",
         }}
-        borderRadius="lg"
       >
         <Link
           href={`/news/${formatHrefTitle(article.title)}`}
           style={{ textDecoration: "none" }}
         >
-          <Box
-            display="flex"
-            flexDirection={{ base: "column", sm: "row" }}
-            justifyContent="space-between"
-          >
-            <Box
-              display="flex"
-              flex="1"
-              marginRight={{ sm: 0, md: 3 }}
-              position="relative"
+          <Stack direction={{ base: "column", sm: "column", md: "row" }} mx={5}>
+            <AspectRatio
+              w={{ sm: "100%", md: 300 }}
+              ratio={{ base: 2 / 1, sm: 2 / 1, md: 1 }}
+              ml={{ sm: 0, md: "5%" }}
+              mr={{ sm: 0, md: 10 }}
             >
-              <Box
-                width={{ base: "0", sm: "30%" }}
-                zIndex="2"
-                marginLeft={{ sm: "0", md: "5%" }}
-                mx={10}
-              >
-                <AspectRatio w="400" h="300" ratio={1}>
-                  <Image
-                    borderRadius="lg"
-                    src={article.urlToImage}
-                    alt={article.title}
-                    objectFit="contain"
-                    maxW={"100%"}
-                    h="auto"
-                    display={{ base: "none", sm: "block" }}
-                  />
-                </AspectRatio>
-              </Box>
-              <Box
-                display="flex"
-                flex="1"
-                flexDirection="column"
-                justifyContent="center"
-                marginTop={{ base: "3", sm: "0" }}
-              >
-                <Heading marginTop="1">
-                  {deformatHrefTitle(article.title)}
-                </Heading>
-                <Text
-                  as="p"
-                  marginTop="2"
-                  fontSize="lg"
-                  display={{ base: "none", sm: "none", md: "flex" }}
-                >
-                  {removeTags(article.description)}
-                </Text>
+              <Image
+                borderRadius="lg"
+                src={article.urlToImage}
+                alt={article.title}
+                objectFit={"scale-down"}
+              />
+            </AspectRatio>
+            <VStack align={"left"}>
+              <Heading mt={1}>{deformatHrefTitle(article.title)}</Heading>
+              <Text as="p" mt={2} fontSize="lg">
+                {removeTags(article.description)}
+              </Text>
+              <Spacer />
+              <Box alignContent={"left"} w={"100%"}>
                 <Author article={article} />
                 <Text color={"gray.500"} textAlign="left">
                   Date: <FormatDay date={article.publishedAt} />
                 </Text>
               </Box>
-            </Box>
-          </Box>
+            </VStack>
+          </Stack>
         </Link>
       </Center>
     );

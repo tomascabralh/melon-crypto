@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Flex, Image, Text, HStack, Spacer, Link } from "@chakra-ui/react";
+import { Box, Image, Text, HStack, Spacer, Link } from "@chakra-ui/react";
 import Avatar from "../../../../images/user/DefaultAvatar.png";
 import { useAuth } from "../../contexts/AuthContext";
 import { getDatabase, ref, onValue } from "firebase/database";
