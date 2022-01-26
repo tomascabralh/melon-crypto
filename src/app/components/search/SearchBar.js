@@ -15,7 +15,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const SearchBar = () => {
+const SearchBar = (props) => {
   const bg = useColorModeValue("white", "gray.900");
   const color = useColorModeValue("black", "gray.50");
   const resultsBg = useColorModeValue("gray.50", "gray.700");
@@ -41,6 +41,7 @@ const SearchBar = () => {
     if (event.key === "Enter" && input !== "") {
       navigate(`/news/search/search_query=${input}`);
       setInput("");
+      props.onClose();
     }
   };
 
@@ -66,7 +67,7 @@ const SearchBar = () => {
           value={input}
           color={color}
           variant="flushed"
-          placeholder="Search . . ."
+          placeholder={props.placeholder ? props.placeholder : "Search . . ."}
           onChange={onSearch}
           onKeyPress={handleKeyPress}
         />
@@ -94,7 +95,7 @@ const SearchBar = () => {
             borderRadius="3px"
             overflow="auto"
             overflowY="auto"
-            maxH="162px"
+            maxH={props.h ? props.h : "162px"}
             bg={resultsBg}
             sx={{
               "&::-webkit-scrollbar": {

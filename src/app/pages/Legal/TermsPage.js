@@ -8,7 +8,7 @@ const TermsPage = () => {
       <Heading m={10} textAlign="center">
         MelonCrypto.com Terms of Use
       </Heading>
-      <Box px={500}>
+      <Box mx={{ base: 5, sm: 5, md: 100, lg: 250, xl: 400 }}>
         <Box align="center" textAlign="justify">
           <Text my={5}>
             These Terms of Use (the “Terms”) govern your access to and use of

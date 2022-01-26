@@ -2,18 +2,17 @@ import React from "react";
 import SearchBar from "../search/SearchBar";
 import { names } from "../../../data/NombresTest";
 import { Box, Flex, Text, Link, Spacer } from "@chakra-ui/layout";
-import { IconButton } from "@chakra-ui/react";
-import { FaMoon, FaSun } from "react-icons/fa";
 import HeaderMenu from "./HeaderMenu";
-import { useColorMode, useColorModeValue } from "@chakra-ui/color-mode";
+import { useColorModeValue } from "@chakra-ui/color-mode";
 import SignUp from "./auth/SignUp";
 import Login from "./auth/Login";
 import UserMenu from "./user/UserMenu";
 import { useAuth } from "../contexts/AuthContext";
+import SearchMobile from "../search/SearchMobile";
+import UserMenuMobile from "./user/UserMenuMobile";
+import Darkmode from "./Darkmode";
 
 function Header() {
-  const { colorMode, toggleColorMode } = useColorMode();
-
   const bg = useColorModeValue("#9AE6B4", "green.700");
   const color = useColorModeValue("black", "gray.50");
 
@@ -51,27 +50,31 @@ function Header() {
           />
           <Spacer />
           <Box
-            right
             mx={{ sm: 5, md: 5, lg: 10 }}
             w="500px"
             display={{ base: "none", sm: "block", md: "block" }}
           >
             <SearchBar data={names} />
           </Box>
-          <IconButton
-            icon={
-              colorMode === "light" ? (
-                <FaMoon fontSize="20px" />
-              ) : (
-                <FaSun fontSize="20px" />
-              )
-            }
-            size="sm"
-            mr={{ base: 2, sm: 2, md: 2, lg: 5 }}
-            onClick={toggleColorMode}
-          />
-          {!currentUser ? <Login /> : null}
-          {!currentUser ? <SignUp /> : <UserMenu />}
+          <Box
+            mx={{ sm: 5, md: 5, lg: 10 }}
+            display={{ base: "block", sm: "none", md: "none" }}
+          >
+            <SearchMobile />
+          </Box>
+          <Box mt={1} display={{ base: "none", sm: "block", md: "block" }}>
+            <Darkmode />
+            {!currentUser ? (
+              <>
+                <Login /> <SignUp />
+              </>
+            ) : (
+              <UserMenu />
+            )}
+          </Box>
+          <Box mt={1} display={{ base: "block", sm: "none", md: "none" }}>
+            <UserMenuMobile />
+          </Box>
         </Flex>
       </Box>
     </Box>

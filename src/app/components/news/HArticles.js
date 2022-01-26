@@ -67,12 +67,19 @@ const Articles = (params) => {
             </AspectRatio>
             <VStack align={"left"}>
               <Heading mt={1}>{deformatHrefTitle(article.title)}</Heading>
-              <Text as="p" mt={2} fontSize="lg">
+              <Text
+                as="p"
+                mt={2}
+                fontSize="lg"
+                display={{ base: "none", sm: "none", md: "block" }}
+              >
                 {removeTags(article.description)}
               </Text>
               <Spacer />
               <Box alignContent={"left"} w={"100%"}>
-                <Author article={article} />
+                <Box display={{ base: "none", sm: "none", md: "block" }}>
+                  <Author article={article} display={{}} />
+                </Box>
                 <Text color={"gray.500"} textAlign="left">
                   Date: <FormatDay date={article.publishedAt} />
                 </Text>

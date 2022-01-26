@@ -1,4 +1,4 @@
-import { Box, Text, Stack, Link } from "@chakra-ui/layout";
+import { Box, Text, Stack, Link, Flex } from "@chakra-ui/layout";
 import React from "react";
 
 const Legal = () => {
@@ -8,12 +8,16 @@ const Legal = () => {
         LEGAL
       </Text>
       <Stack>
-        <Link href="/privacy" style={{ textDecoration: "none" }}>
-          Privacy
-        </Link>
-        <Link href="/terms" style={{ textDecoration: "none" }}>
-          Terms
-        </Link>
+        <Flex>
+          <Link href="/privacy" style={{ textDecoration: "none" }}>
+            Privacy
+          </Link>
+        </Flex>
+        <Flex>
+          <Link href="/terms" style={{ textDecoration: "none" }}>
+            Terms
+          </Link>
+        </Flex>
       </Stack>
     </Box>
   );

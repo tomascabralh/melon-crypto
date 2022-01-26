@@ -8,7 +8,7 @@ const PrivacyPage = () => {
       <Heading m={10} textAlign="center">
         Privacy Policy
       </Heading>
-      <Box px={500}>
+      <Box mx={{ base: 5, sm: 5, md: 100, lg: 250, xl: 400 }}>
         <Box align="center" textAlign="justify">
           <Text my={5}>
             At MelonCrypto, we’re committed to protecting and respecting your

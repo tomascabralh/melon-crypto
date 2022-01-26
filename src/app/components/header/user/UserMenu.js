@@ -19,8 +19,9 @@ const UserMenu = () => {
         <MenuButton
           as={IconButton}
           aria-label="Options"
-          icon={<GiHamburgerMenu />}
+          icon={<GiHamburgerMenu fontSize="22px" />}
           size="sm"
+          variant="link"
         />
         <MenuList>
           <MenuItem

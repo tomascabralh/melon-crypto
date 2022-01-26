@@ -23,6 +23,7 @@ const CoinTableRow = ({ coins }) => {
   const toast = useToast();
 
   const bg = useColorModeValue("green.100", "green.400");
+  const bgColumn = useColorModeValue("#9AE6B4", "#22543D");
 
   const ShowToast = (id) => {
     if (users?.watchlist[`n${id}`] === true) {
@@ -55,12 +56,7 @@ const CoinTableRow = ({ coins }) => {
     <>
       {cryptos[0]?.map((coin) => {
         return (
-          <Tr
-            key={coin.market_cap_rank}
-            _hover={{
-              background: bg,
-            }}
-          >
+          <Tr key={coin.market_cap_rank}>
             <Td>
               <Checkbox
                 icon={<RiStarLine />}
@@ -87,7 +83,14 @@ const CoinTableRow = ({ coins }) => {
               />
             </Td>
             <Td>{coin.market_cap_rank}</Td>
-            <Td>
+            <Td
+              css={{
+                position: "sticky",
+                left: 0,
+                zindex: 2,
+                background: bgColumn,
+              }}
+            >
               <Link
                 href={`/coins/${coin.id}`}
                 style={{ textDecoration: "none" }}
@@ -107,13 +110,18 @@ const CoinTableRow = ({ coins }) => {
                 </Flex>
               </Link>
             </Td>
-            <Td>{`$ ${coin.current_price}`}</Td>
-            <Td>
+            <Td
+              css={{
+                left: 0,
+                zindex: 0,
+              }}
+            >{`$ ${coin.current_price}`}</Td>
+            <Td css={{ zindex: 0 }}>
               <CoinDayVariation
                 porcentageVar={coin.price_change_percentage_24h}
               />
             </Td>
-            <Td>{coin.market_cap}</Td>
+            <Td css={{ zindex: 0 }}>{coin.market_cap}</Td>
           </Tr>
         );
       })}

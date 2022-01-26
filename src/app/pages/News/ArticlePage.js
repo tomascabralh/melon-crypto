@@ -63,8 +63,8 @@ const ArticlePage = () => {
       <Box mx={{ base: 5, sm: 5, md: 5, lg: 100, xl: 200 }} my={20} py={5}>
         <Heading>Comment Section</Heading>
         <Divider my={10} />
-        {users ? <CreateComment title={news} /> : null}
         <Comments title={news} />
+        <Box mt={100}>{users ? <CreateComment title={news} /> : null}</Box>
       </Box>
     </>
   );
