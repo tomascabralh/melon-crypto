@@ -26,7 +26,7 @@ import { useNavigate } from "react-router-dom";
 import ForgotPassword from "./ForgotPassword";
 import { AiOutlineEye } from "react-icons/ai";
 
-const Login = () => {
+const Login = (props) => {
   const [logInEmail, setLogInEmail] = useState(null);
   const [logInPassword, setLogInPassword] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -56,6 +56,7 @@ const Login = () => {
           duration: 2000,
           isClosable: true,
         });
+        props?.click();
         navigate("/profile");
       } catch (error) {
         toast({

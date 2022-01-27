@@ -19,7 +19,7 @@ const Watchlist = () => {
         <Heading>Watchlist</Heading>
       </Box>
       <Box mx={{ base: 5, sm: 5, md: 5, lg: 0 }} mr={{ md: 5, lg: 20 }}>
-        {users ? <CoinTable watchlist={users} /> : null}
+        {users ? <CoinTable watchlist={users} h={"70vh"} /> : null}
       </Box>
     </>
   );

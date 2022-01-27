@@ -11,8 +11,9 @@ import {
 import axios from "axios";
 import CoinTableRow from "./CoinTableRow";
 
-const CoinTable = ({ watchlist }) => {
+const CoinTable = (props) => {
   const bg = useColorModeValue("#9AE6B4", "green.800");
+  const bgColumn = useColorModeValue("#9AE6B4", "#22543D");
   const titles = ["", "Top", "Coin", "Price (USD)", "24h %", "Market Cap"];
 
   const GETrequest =
@@ -47,6 +48,7 @@ const CoinTable = ({ watchlist }) => {
       bgColor={bg}
       borderRadius="5px"
       overflow="auto"
+      maxH={props.h ? props.h : null}
       sx={{
         "&::-webkit-scrollbar": {
           width: "8px",
@@ -62,14 +64,23 @@ const CoinTable = ({ watchlist }) => {
     >
       <Table size="lg">
         <Thead>
-          <Tr>
+          <Tr
+            css={{
+              position: "sticky",
+              top: 0,
+              zindex: 0,
+              background: bgColumn,
+            }}
+          >
             {titles.map((head) => {
               return <Th key={head}>{head}</Th>;
             })}
           </Tr>
         </Thead>
         <Tbody>
-          <CoinTableRow coins={watchlist ? watchlistCoins(watchlist) : coins} />
+          <CoinTableRow
+            coins={props.watchlist ? watchlistCoins(props.watchlist) : coins}
+          />
         </Tbody>
       </Table>
     </Box>

@@ -1,9 +1,15 @@
 import React from "react";
 import SearchBar from "../search/SearchBar";
-import { names } from "../../../data/NombresTest";
-import { Box, Flex, Text, Link, Spacer } from "@chakra-ui/layout";
+import {
+  Box,
+  Flex,
+  Text,
+  Link,
+  Spacer,
+  useColorModeValue,
+  HStack,
+} from "@chakra-ui/react";
 import HeaderMenu from "./HeaderMenu";
-import { useColorModeValue } from "@chakra-ui/color-mode";
 import SignUp from "./auth/SignUp";
 import Login from "./auth/Login";
 import UserMenu from "./user/UserMenu";
@@ -29,12 +35,8 @@ function Header() {
         whiteSpace="nowrap"
         color={color}
       >
-        <Flex marginRight={{ sm: 0, md: 2, lg: 4 }} marginY={2}>
-          <Box
-            width="200px"
-            marginRight={8}
-            display={{ base: "none", md: "block" }}
-          >
+        <Flex mr={{ sm: 0, md: 2, lg: 4 }} my={2}>
+          <Box width="200px" marginRight={8}>
             <Link href="/" style={{ textDecoration: "none" }}>
               <Text fontWeight="500">🍈 Melon Crypto</Text>
             </Link>
@@ -47,6 +49,7 @@ function Header() {
               },
               { name: "News", link: "/news" },
             ]}
+            base={"none"}
           />
           <Spacer />
           <Box
@@ -54,7 +57,7 @@ function Header() {
             w="500px"
             display={{ base: "none", sm: "block", md: "block" }}
           >
-            <SearchBar data={names} />
+            <SearchBar />
           </Box>
           <Box
             mx={{ sm: 5, md: 5, lg: 10 }}
@@ -62,17 +65,19 @@ function Header() {
           >
             <SearchMobile />
           </Box>
-          <Box mt={1} display={{ base: "none", sm: "block", md: "block" }}>
-            <Darkmode />
-            {!currentUser ? (
-              <>
-                <Login /> <SignUp />
-              </>
-            ) : (
-              <UserMenu />
-            )}
+          <Box display={{ base: "none", sm: "none", md: "block" }}>
+            <HStack mt={1}>
+              <Darkmode />
+              {!currentUser ? (
+                <>
+                  <Login /> <SignUp />
+                </>
+              ) : (
+                <UserMenu />
+              )}
+            </HStack>
           </Box>
-          <Box mt={1} display={{ base: "block", sm: "none", md: "none" }}>
+          <Box display={{ base: "block", sm: "block", md: "none" }}>
             <UserMenuMobile />
           </Box>
         </Flex>

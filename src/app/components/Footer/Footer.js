@@ -49,7 +49,7 @@ const Footer = () => {
               />
             </Box>
             <Center mr={{ base: 10, sm: 10, md: 0 }}>
-              <SocialMedia />
+              <SocialMedia base={"repeat(2, 1fr)"} />
             </Center>
           </VStack>
         </GridItem>

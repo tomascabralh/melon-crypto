@@ -8,10 +8,12 @@ import {
   Image,
   Link,
   Spacer,
+  HStack,
 } from "@chakra-ui/react";
 import Author from "../news/Author";
 import ImageNotFound from "../../../images/image-not-found.png";
 import { deformatHrefTitle, formatHrefTitle, removeTags } from "../Functions";
+import CommentsIcon from "../news/comments/CommentsIcon";
 
 const NewsCarouselCard = ({ article }) => {
   return (
@@ -62,7 +64,13 @@ const NewsCarouselCard = ({ article }) => {
           </Stack>
         </Link>
         <Spacer />
-        <Author article={article} />
+        <HStack mt={5}>
+          <Author article={article} />
+          <Spacer />
+          <Box mt={4}>
+            <CommentsIcon article={article} />
+          </Box>
+        </HStack>
       </Box>
     </Center>
   );

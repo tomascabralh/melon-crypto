@@ -22,7 +22,6 @@ const CoinTableRow = ({ coins }) => {
 
   const toast = useToast();
 
-  const bg = useColorModeValue("green.100", "green.400");
   const bgColumn = useColorModeValue("#9AE6B4", "#22543D");
 
   const ShowToast = (id) => {

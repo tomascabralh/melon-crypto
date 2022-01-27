@@ -12,8 +12,8 @@ const SocialMedia = (props) => {
     <ButtonGroup variant="ghost" color="gray.600" {...props}>
       <Grid
         templateColumns={{
-          base: "repeat(2, 1fr)",
-          sm: "repeat(2, 1fr)",
+          base: props.base,
+          sm: props.base,
           md: "repeat(4, 1fr)",
           lg: "repeat(4, 1fr)",
         }}

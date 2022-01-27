@@ -23,6 +23,7 @@ import {
   filterArray,
   removeTags,
 } from "../Functions";
+import CommentsIcon from "./comments/CommentsIcon";
 
 const Articles = (params) => {
   const [articles, setArticles] = useState([]);
@@ -76,14 +77,20 @@ const Articles = (params) => {
                 {removeTags(article.description)}
               </Text>
               <Spacer />
-              <Box alignContent={"left"} w={"100%"}>
-                <Box display={{ base: "none", sm: "none", md: "block" }}>
-                  <Author article={article} display={{}} />
+              <HStack alignContent={"left"} w={"100%"}>
+                <Box>
+                  <Box display={{ base: "none", sm: "none", md: "block" }}>
+                    <Author article={article} display={{}} />
+                  </Box>
+                  <Text color={"gray.500"} textAlign="left">
+                    Date: <FormatDay date={article.publishedAt} />
+                  </Text>
                 </Box>
-                <Text color={"gray.500"} textAlign="left">
-                  Date: <FormatDay date={article.publishedAt} />
-                </Text>
-              </Box>
+                <Spacer />
+                <Box mt={4}>
+                  <CommentsIcon article={article} />
+                </Box>
+              </HStack>
             </VStack>
           </Stack>
         </Link>

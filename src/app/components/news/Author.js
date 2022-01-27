@@ -4,7 +4,7 @@ import { Box, VStack, Text, Link } from "@chakra-ui/layout";
 const Author = ({ article }) => {
   return (
     <>
-      <Box mt={6}>
+      <Box>
         <VStack spacing={0} fontSize={"sm"} align={"left"}>
           {article.source !== undefined ? (
             <Text fontWeight={600}>By: {article.source.name}</Text>

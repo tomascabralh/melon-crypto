@@ -7,6 +7,8 @@ import {
   Button,
   useDisclosure,
   IconButton,
+  Box,
+  DrawerCloseButton,
 } from "@chakra-ui/react";
 import { ImSearch } from "react-icons/im";
 import SearchBar from "./SearchBar";
@@ -35,14 +37,21 @@ const SearchMobile = () => {
       >
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerBody mt={8}>
+          <Box mr={3}>
+            <DrawerCloseButton />
+          </Box>
+          <DrawerBody mt={12} mx={8}>
             <SearchBar
               placeholder="What are you looking for ?"
-              h={"70vh"}
+              h={"60vh"}
               onClose={onClose}
             />
+            <Box mt={30}>
+              <Button onClick={onClose} w={"100%"}>
+                Cancel
+              </Button>
+            </Box>
           </DrawerBody>
-          <Button onClick={onClose}>Cancel</Button>
         </DrawerContent>
       </Drawer>
     </>

@@ -27,7 +27,7 @@ import Login from "./Login";
 import { AiOutlineEye } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 
-const SignUp = () => {
+const SignUp = (props) => {
   const [signUpEmail, setSignUpEmail] = useState(null);
   const [signUpPassword, setSignUpPassword] = useState(null);
   const [signUpPasswordConfirm, setSignUpPasswordConfirm] = useState(null);
@@ -85,6 +85,7 @@ const SignUp = () => {
           duration: 2000,
           isClosable: true,
         });
+        props?.click();
         navigate("/profile");
       } catch (error) {
         toast({
