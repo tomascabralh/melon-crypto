@@ -4,25 +4,20 @@ import {
   useColorModeValue,
   Input,
   Box,
-  Link,
-  Kbd,
   Text,
   Center,
   InputRightElement,
   InputGroup,
   Button,
+  Image,
 } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const SearchBar = (props) => {
+const SearchCoin = (props) => {
   const bg = useColorModeValue("white", "gray.900");
   const color = useColorModeValue("black", "gray.50");
   const resultsBg = useColorModeValue("gray.50", "gray.700");
-  const resultsKBD = useColorModeValue("gray.100", "gray.700");
   const hover = useColorModeValue("green.100", "green.700");
-
-  const navigate = useNavigate();
 
   const [filteredData, setFilteredData] = useState([]);
   const [input, setInput] = useState("");
@@ -37,12 +32,9 @@ const SearchBar = (props) => {
     setFilteredData(newfilter);
   };
 
-  const handleKeyPress = (event) => {
-    if (event.key === "Enter" && input !== "") {
-      navigate(`/news/search/search_query=${input}`);
-      setInput("");
-      props.onClose();
-    }
+  const selectCoin = (coin) => {
+    setInput(coin.name);
+    setFilteredData([]);
   };
 
   const GETrequest =
@@ -67,11 +59,11 @@ const SearchBar = (props) => {
           value={input}
           color={color}
           variant="flushed"
-          placeholder={props.placeholder ? props.placeholder : "Search . . ."}
+          placeholder={"Select a Coin"}
           onChange={onSearch}
-          onKeyPress={handleKeyPress}
+          onFocus={() => setFilteredData(coins)}
         />
-        {input !== "" ? (
+        {input?.length > 0 ? (
           <InputRightElement>
             <Button
               size="sm"
@@ -79,23 +71,21 @@ const SearchBar = (props) => {
               mb={2}
               fontWeight={1000}
               variant="ghost"
-              onClick={() => {
-                setInput("");
-              }}
+              onClick={() => setInput("")}
             >
               X
             </Button>
           </InputRightElement>
         ) : null}
       </InputGroup>
-      {input.length > props.lenght && (
+      {input?.length >= 0 && (
         <>
           <Box
             mt={3}
             borderRadius="3px"
             overflow="auto"
             overflowY="auto"
-            maxH={props.h ? props.h : "162px"}
+            maxH={"162px"}
             bg={resultsBg}
             sx={{
               "&::-webkit-scrollbar": {
@@ -109,58 +99,44 @@ const SearchBar = (props) => {
               },
             }}
           >
-            <Center
-              borderRadius="5px"
-              maxH={6}
-              bg={resultsBg}
-              borderBottom={1}
-              borderBottomColor="black"
-            >
-              <Box p={2} textAlign={"center"} fontSize="sm">
-                <Text as="samp">Cryptocurrencies</Text>
-              </Box>
-            </Center>
             {filteredData.map((coin, index) => {
               return (
                 <Box key={index}>
-                  <Link
-                    href={`/coins/${coin.id}`}
-                    style={{ textDecoration: "none" }}
+                  <Button
+                    p={2}
+                    px={3}
+                    _hover={{
+                      background: hover,
+                    }}
+                    w="100%"
+                    variant={"link"}
+                    alignContent={"left"}
+                    onClick={() => {
+                      selectCoin(coin);
+                      props.getCoin(coin);
+                    }}
                   >
-                    <Box
-                      p={2}
-                      px={3}
-                      _hover={{
-                        background: hover,
+                    <Image
+                      src={coin.image}
+                      boxSize={{
+                        base: "20px",
+                        sm: "20px",
+                        md: "20px",
+                        lg: "20px",
                       }}
-                    >
-                      {coin.name}
-                    </Box>
-                  </Link>
+                      alt={coin.name}
+                      mr={5}
+                    />
+                    {coin.name}
+                  </Button>
                 </Box>
               );
             })}
           </Box>
-          {props?.addMovement ? null : (
-            <>
-              <Center
-                borderRadius="5px"
-                maxH={7}
-                bg={resultsKBD}
-                position="relative"
-              >
-                <Box p={2} textAlign={"center"} fontSize="sm">
-                  <Text as="samp">
-                    <Kbd>enter</Kbd> to search for "{input}" news
-                  </Text>
-                </Box>
-              </Center>
-            </>
-          )}
         </>
       )}
     </Box>
   );
 };
 
-export default SearchBar;
+export default SearchCoin;

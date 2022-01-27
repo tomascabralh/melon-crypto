@@ -57,7 +57,7 @@ function Header() {
             w="500px"
             display={{ base: "none", sm: "block", md: "block" }}
           >
-            <SearchBar />
+            <SearchBar lenght={1} />
           </Box>
           <Box
             mx={{ sm: 5, md: 5, lg: 10 }}

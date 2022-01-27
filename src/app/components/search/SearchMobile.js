@@ -45,6 +45,7 @@ const SearchMobile = () => {
               placeholder="What are you looking for ?"
               h={"60vh"}
               onClose={onClose}
+              lenght={1}
             />
             <Box mt={30}>
               <Button onClick={onClose} w={"100%"}>
