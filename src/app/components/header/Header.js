@@ -36,7 +36,7 @@ function Header() {
         color={color}
       >
         <Flex mr={{ sm: 0, md: 2, lg: 4 }} my={2}>
-          <Box width="200px" marginRight={8}>
+          <Box width="200px" mr={8}>
             <Link href="/" style={{ textDecoration: "none" }}>
               <Text fontWeight="500">🍈 Melon Crypto</Text>
             </Link>
@@ -66,7 +66,7 @@ function Header() {
             <SearchMobile />
           </Box>
           <Box display={{ base: "none", sm: "none", md: "block" }}>
-            <HStack mt={1}>
+            <HStack mb={2}>
               <Darkmode />
               {!currentUser ? (
                 <>

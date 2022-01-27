@@ -48,7 +48,7 @@ const Login = (props) => {
       });
     } else {
       try {
-        await signInWithEmailAndPassword(auth, logInEmail, logInPassword);
+        signInWithEmailAndPassword(auth, logInEmail, logInPassword);
         onClose();
         toast({
           title: "Logged in successfully!",
@@ -56,9 +56,9 @@ const Login = (props) => {
           duration: 2000,
           isClosable: true,
         });
-        props?.click();
         navigate("/profile");
       } catch (error) {
+        console.log(error);
         toast({
           title: "Username or password incorrect",
           status: "error",

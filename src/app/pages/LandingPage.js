@@ -1,15 +1,16 @@
 import React from "react";
-import { Center, VStack, Box, Heading } from "@chakra-ui/react";
+import { Center, VStack, Box, Heading, Image } from "@chakra-ui/react";
 import CoinTable from "../components/coins/coinTable/CoinTable";
 import CoinCarousel from "../components/carousel/CoinsCarousel";
 import NewsCarousel from "../components/carousel/NewsCarousel";
+import Melon from "../../images/melon-crypto-01.png";
 
 const LandingPage = () => {
   return (
     <Box pt={6}>
       <Center padding={4}>
         <VStack>
-          <Heading my={10}>🍈 Melon Crypto 🍈</Heading>
+          <Image src={Melon} alt="melon-crypto" htmlWidth={900} />
         </VStack>
       </Center>
       <Box
