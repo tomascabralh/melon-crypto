@@ -1,34 +1,45 @@
 import {
   HStack,
-  Spacer,
-  Stat,
-  StatLabel,
-  StatNumber,
-  StatHelpText,
-  StatArrow,
-  VStack,
+  Text,
   Box,
+  Heading,
+  Flex,
+  Grid,
+  Spacer,
 } from "@chakra-ui/react";
 import React from "react";
+import CurrencySelector from "../coins/coinPage/CurrencySelector";
 import AddCoin from "./portfolio/AddCoin";
+import PortfolioTable from "./portfolio/PortfolioTable";
 
 const Portfolio = () => {
   return (
     <Box>
-      <HStack mx={50}>
-        <AddCoin />
-        <Spacer />
-        <Box>
-          <Stat>
-            <StatLabel>Balance</StatLabel>
-            <StatNumber> $ 345,67</StatNumber>
-            <StatHelpText>
-              <StatArrow type="increase" />
+      <Grid templateColumns="repeat(4, 1fr)" ml={100}>
+        <Box mx={25}>
+          <Heading size={"lg"}>Balance</Heading>
+          <HStack mt={5}>
+            <Heading mr={5} size={"xl"}>
+              $345,67
+            </Heading>
+            <Text fontSize={"md"} fontWeight={300}>
               23.36%
-            </StatHelpText>
-          </Stat>
+            </Text>
+          </HStack>
+          <Box mt={5}>
+            <AddCoin />
+          </Box>
+          <Box mt={5} w={110}>
+            <CurrencySelector />
+          </Box>
         </Box>
-      </HStack>
+        <Spacer />
+        <Box colSpan={3}>
+          <PortfolioTable />
+        </Box>
+
+        <Spacer />
+      </Grid>
     </Box>
   );
 };

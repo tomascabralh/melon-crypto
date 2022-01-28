@@ -22,9 +22,20 @@ const CreateComment = ({ commentID }) => {
   const [msg, setMsg] = useState();
   const [counter, setCounter] = useState();
 
-  const submitComment = () => {
-    var d = new Date();
+  const d = new Date();
 
+  const setComment = () => {
+    set(ref(getDatabase(), `news/${news}/com/comments/` + counter), {
+      userID: currentUser?.uid,
+      photoURL: users?.photoURL,
+      user: users?.username,
+      message: msg,
+      date: d.toLocaleString(),
+      commentID: counter,
+    });
+  };
+
+  const submitComment = () => {
     if (msg === undefined || msg === "") {
     } else {
       if (commentID === undefined) {
@@ -32,29 +43,13 @@ const CreateComment = ({ commentID }) => {
           set(ref(getDatabase(), `news/${news}/com`), {
             idCounter: counter,
           });
-
-          set(ref(getDatabase(), `news/${news}/com/comments/` + counter), {
-            userID: currentUser?.uid,
-            photoURL: users?.photoURL,
-            user: users?.username,
-            message: msg,
-            date: d.toLocaleString(),
-            commentID: counter,
-          });
+          setComment();
           setMsg("");
         } else {
           update(ref(getDatabase(), `news/${news}/com`), {
             idCounter: counter,
           });
-
-          set(ref(getDatabase(), `news/${news}/com/comments/` + counter), {
-            userID: currentUser?.uid,
-            photoURL: users?.photoURL,
-            user: users?.username,
-            message: msg,
-            date: d.toLocaleString(),
-            commentID: counter,
-          });
+          setComment();
           setMsg("");
         }
       } else {

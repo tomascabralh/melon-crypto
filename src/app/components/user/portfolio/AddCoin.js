@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -25,22 +25,81 @@ import {
   StatLabel,
   StatNumber,
 } from "@chakra-ui/react";
+import { getDatabase, ref, set, onValue, update } from "firebase/database";
+import { useAuth } from "../../contexts/AuthContext";
 import SearchCoin from "../../search/SearchCoin";
 
 const AddCoin = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const format = (val) => `$` + val;
-  const parse = (val) => val.replace(/^\$/, "");
-
   const [price, setPrice] = useState("0");
   const [quantity, setQuantity] = useState("0");
   const [pxq, setPxq] = useState(0);
   const [coin, setCoin] = useState(0);
+  const [action, setAction] = useState("buy");
+  const [counter, setCounter] = useState();
+
+  const { currentUser } = useAuth();
+
+  const format = (val) => `$` + val;
+  const parse = (val) => val.replace(/^\$/, "");
 
   const getCoin = (coin) => {
     setCoin(coin);
     setPrice(coin.current_price);
   };
+
+  const setMovement = () => {
+    set(ref(getDatabase(), `users/${currentUser?.uid}/portfolio/` + counter), {
+      coin: coin.id,
+      action: action,
+      price: price,
+      quantity: quantity,
+      pxq: pxq,
+    });
+  };
+
+  const addTransaction = () => {
+    if (pxq !== 0) {
+      if (counter === 0) {
+        set(ref(getDatabase(), `users/${currentUser?.uid}/portfolio`), {
+          idCounter: counter,
+        });
+        setMovement();
+        onClose();
+        setPrice("0");
+        setQuantity("0");
+        setPxq(0);
+      } else {
+        update(ref(getDatabase(), `users/${currentUser?.uid}/portfolio`), {
+          idCounter: counter,
+        });
+        setMovement();
+        onClose();
+        setPrice("0");
+        setQuantity("0");
+        setPxq(0);
+      }
+    }
+  };
+
+  useEffect(() => {
+    const starCountRef = ref(
+      getDatabase(),
+      `users/${currentUser?.uid}/portfolio`
+    );
+    onValue(starCountRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data === null) {
+        setCounter(0);
+      } else {
+        const dbref = ref(getDatabase(), `users/${currentUser?.uid}/portfolio`);
+        onValue(dbref, (snapshot) => {
+          const idData = snapshot.val();
+          setCounter(idData.idCounter + 1);
+        });
+      }
+    });
+  }, [currentUser]);
 
   const Tabpanel = () => {
     return (
@@ -98,15 +157,27 @@ const AddCoin = () => {
 
   return (
     <>
-      <Button onClick={onOpen}>Add Transaction</Button>
-
+      <Button onClick={onOpen} size="sm">
+        + Transaction
+      </Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Add Movement</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Tabs isFitted variant="enclosed" colorScheme="black">
+            <Tabs
+              isFitted
+              variant="enclosed"
+              colorScheme="black"
+              onChange={(index) => {
+                if (index === 0) {
+                  setAction("buy");
+                } else {
+                  setAction("sell");
+                }
+              }}
+            >
               <TabList mb="1em">
                 <Tab>Buy</Tab>
                 <Tab>Sell</Tab>
@@ -119,7 +190,7 @@ const AddCoin = () => {
           </ModalBody>
 
           <ModalFooter>
-            <Button mx={3} w="100%" onClick={onClose}>
+            <Button mx={3} w="100%" onClick={addTransaction}>
               Add Movement
             </Button>
           </ModalFooter>
