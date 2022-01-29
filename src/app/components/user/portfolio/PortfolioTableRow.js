@@ -1,10 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { Tr, Td, useColorModeValue, Box, Flex, Image } from "@chakra-ui/react";
+import React from "react";
+import {
+  Tr,
+  Td,
+  useColorModeValue,
+  Box,
+  Flex,
+  Image,
+  Link,
+} from "@chakra-ui/react";
 import CoinDayVariation from "../../coins/coinPage/CoinDayVariation";
 
 const PortfolioTableRow = (props) => {
-  const [coins, setCoins] = useState([]);
-
   const bgColumn = useColorModeValue("#9AE6B4", "#22543D");
 
   const profitLoss = (coin) => {
@@ -12,14 +18,10 @@ const PortfolioTableRow = (props) => {
     return ((current - coin.spent) / coin.spent) * 100;
   };
 
-  useEffect(() => {
-    setCoins(props.coinObject);
-  }, [props.coinObject]);
   return (
     <>
       {props.coinObject[0] !== undefined &&
         props?.coinObject.map((coin) => {
-          console.log(coin);
           return (
             <Tr key={coin.coin}>
               <Td
@@ -30,19 +32,24 @@ const PortfolioTableRow = (props) => {
                   background: bgColumn,
                 }}
               >
-                <Flex>
-                  <Image
-                    src={coin.image}
-                    boxSize={{
-                      base: "30px",
-                      sm: "30px",
-                      md: "30px",
-                      lg: "30px",
-                    }}
-                    alt={coin.name}
-                  />
-                  <Box ml={5}>{coin.coin}</Box>
-                </Flex>
+                <Link
+                  href={`/coins/${coin.coin}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  <Flex>
+                    <Image
+                      src={coin.image}
+                      boxSize={{
+                        base: "30px",
+                        sm: "30px",
+                        md: "30px",
+                        lg: "30px",
+                      }}
+                      alt={coin.name}
+                    />
+                    <Box ml={5}>{coin.name}</Box>
+                  </Flex>
+                </Link>
               </Td>
               <Td
                 css={{
@@ -55,10 +62,10 @@ const PortfolioTableRow = (props) => {
               </Td>
               <Td css={{ zindex: 0 }}>
                 {coin.holdings} {coin.symbol}{" "}
-                {`($${coin.holdings * coin.price})`}
+                {`($${(coin.holdings * coin.price).toFixed(2)})`}
               </Td>
               <Td css={{ zindex: 0 }}>
-                <CoinDayVariation porcentageVar={profitLoss(coin)} />
+                <CoinDayVariation porcentageVar={profitLoss(coin).toFixed(2)} />
               </Td>
             </Tr>
           );

@@ -1,45 +1,62 @@
+import React, { useState } from "react";
 import {
   HStack,
   Text,
   Box,
   Heading,
   Flex,
-  Grid,
   Spacer,
+  VStack,
 } from "@chakra-ui/react";
-import React from "react";
-import CurrencySelector from "../coins/coinPage/CurrencySelector";
 import AddCoin from "./portfolio/AddCoin";
 import PortfolioTable from "./portfolio/PortfolioTable";
+import CoinDayVariation from "../coins/coinPage/CoinDayVariation";
+import SpinnerUI from "../UI/Spinner";
+import PortfolioPieChart from "./portfolio/PortfolioPieChart";
 
 const Portfolio = () => {
+  const [stats, setStats] = useState();
+  const fetchStats = (stat) => {
+    setStats(stat);
+  };
+
+  const balance = (stat) => {
+    var tot = stat.reduce((sum, a) => sum + a.hold_price, 0);
+    return tot;
+  };
+
+  const profitLoss = (coin) => {
+    var current = balance(coin);
+    var spent = coin.reduce((sum, a) => sum + a.spent, 0);
+    return ((current - spent) / spent) * 100;
+  };
+
   return (
     <Box>
-      <Grid templateColumns="repeat(4, 1fr)" ml={100}>
-        <Box mx={25}>
-          <Heading size={"lg"}>Balance</Heading>
-          <HStack mt={5}>
-            <Heading mr={5} size={"xl"}>
-              $345,67
-            </Heading>
-            <Text fontSize={"md"} fontWeight={300}>
-              23.36%
-            </Text>
-          </HStack>
-          <Box mt={5}>
-            <AddCoin />
-          </Box>
-          <Box mt={5} w={110}>
-            <CurrencySelector />
-          </Box>
+      <Flex>
+        <VStack mx="auto" my={"auto"}>
+          <Heading size={"xl"}>Balance</Heading>
+          <Text mx="auto" fontSize={50}>
+            ${stats ? balance(stats).toFixed(2) : <SpinnerUI />}
+          </Text>
+          <Text>
+            <CoinDayVariation
+              porcentageVar={
+                stats ? profitLoss(stats).toFixed(2) : <SpinnerUI />
+              }
+            />
+          </Text>
+          <AddCoin />
+          <Spacer />
+          <Spacer />
+          <PortfolioPieChart stats={stats} />
+          <Spacer />
+        </VStack>
+        <Box mx="auto">
+          <PortfolioTable fetchStats={fetchStats} />
         </Box>
-        <Spacer />
-        <Box colSpan={3}>
-          <PortfolioTable />
-        </Box>
-
-        <Spacer />
-      </Grid>
+      </Flex>
+      <Spacer />
     </Box>
   );
 };

@@ -14,7 +14,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import PortfolioTableRow from "./PortfolioTableRow";
 import _ from "lodash";
 
-const PortfolioTable = () => {
+const PortfolioTable = (props) => {
   const bg = useColorModeValue("#9AE6B4", "green.800");
   const bgColumn = useColorModeValue("#9AE6B4", "#22543D");
   const titles = ["Coin", "Price (USD)", "24h %", "Holdings", "Profit/Loss"];
@@ -40,6 +40,8 @@ const PortfolioTable = () => {
       object.price_change = filteredCoins[0].price_change_percentage_24h;
       object.image = filteredCoins[0].image;
       object.price = filteredCoins[0].current_price;
+      object.name = filteredCoins[0].name;
+      object.hold_price = sum1(filteredArray) * filteredCoins[0].current_price;
 
       function sum1(args) {
         var tot = 0;
@@ -66,6 +68,7 @@ const PortfolioTable = () => {
       objectArray.push(object);
     });
     setCoinObj(objectArray);
+    props.fetchStats(objectArray);
   }
 
   function filterCoinNames(moves) {
@@ -100,7 +103,7 @@ const PortfolioTable = () => {
       bgColor={bg}
       borderRadius="5px"
       overflow="auto"
-      maxH={300}
+      maxH={600}
       w={1000}
       sx={{
         "&::-webkit-scrollbar": {

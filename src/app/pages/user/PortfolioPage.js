@@ -12,9 +12,9 @@ const PortfolioPage = () => {
         borderBottom="1px"
         borderColor="gray.200"
       >
-        <Heading>Portfolio (Work in progress)</Heading>
+        <Heading>Portfolio</Heading>
       </Box>
-      <Box h={550} mx={{ md: 0, lg: 20 }}>
+      <Box mx={{ md: 0, lg: 20 }}>
         <Portfolio />
       </Box>
     </>
