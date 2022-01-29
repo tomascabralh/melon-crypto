@@ -4,8 +4,6 @@ import {
   useColorModeValue,
   Input,
   Box,
-  Text,
-  Center,
   InputRightElement,
   InputGroup,
   Button,

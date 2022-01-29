@@ -6,7 +6,7 @@ const PortfolioPage = () => {
   return (
     <>
       <Box
-        mx={{ md: 0, lg: 20 }}
+        mx={{ base: 5, sm: 5, md: 5, lg: 20 }}
         my={5}
         py={5}
         borderBottom="1px"
@@ -14,7 +14,7 @@ const PortfolioPage = () => {
       >
         <Heading>Portfolio</Heading>
       </Box>
-      <Box mx={{ md: 0, lg: 20 }}>
+      <Box>
         <Portfolio />
       </Box>
     </>

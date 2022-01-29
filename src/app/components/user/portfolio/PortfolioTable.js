@@ -104,7 +104,6 @@ const PortfolioTable = (props) => {
       borderRadius="5px"
       overflow="auto"
       maxH={600}
-      w={1000}
       sx={{
         "&::-webkit-scrollbar": {
           width: "8px",

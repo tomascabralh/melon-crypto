@@ -56,7 +56,7 @@ const PortfolioTableRow = (props) => {
                   left: 0,
                   zindex: 0,
                 }}
-              >{`$ ${coin.price}`}</Td>
+              >{`$${coin.price}`}</Td>
               <Td css={{ zindex: 0 }}>
                 <CoinDayVariation porcentageVar={coin.price_change} />
               </Td>

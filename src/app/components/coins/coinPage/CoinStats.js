@@ -1,9 +1,8 @@
-import { Box, Grid, Heading, Text } from "@chakra-ui/layout";
 import React, { useState } from "react";
 import LowHighBar from "./LowHighBar";
 import CoinDayVariation from "./CoinDayVariation";
 import CurrencySelector from "./CurrencySelector";
-import { HStack, Spacer } from "@chakra-ui/react";
+import { HStack, Spacer, Box, Grid, Heading, Text } from "@chakra-ui/react";
 
 const CoinStats = ({ coin }) => {
   const [currency, setCurrency] = useState("usd");
@@ -16,7 +15,7 @@ const CoinStats = ({ coin }) => {
     <>
       <Box w="1450px" h="250px">
         <Grid
-          templateColumns={{ md: "repeat(1, 1fr)", lg: "repeat(2, 1fr)" }}
+          templateColumns={{ md: "repeat(1, 2fr)", lg: "repeat(2, 1fr)" }}
           gap={6}
           boxShadow="base"
           rounded="md"
@@ -24,10 +23,10 @@ const CoinStats = ({ coin }) => {
           <Box
             w="100%"
             h="250"
-            borderRight="2px"
-            borderColor="gray.100"
             px={10}
             py={2}
+            borderRight={{ md: "0px", lg: "1px" }}
+            borderRightColor="gray.100"
           >
             <HStack>
               <Box mb="5">
@@ -53,21 +52,32 @@ const CoinStats = ({ coin }) => {
                 </Box>
               </Box>
             </HStack>
-            <Grid templateColumns="repeat(2, 1fr)" mt={5}>
-              <Box fontSize="lg" textAlign="left">
-                Lowest 24h
-                <Text fontSize="sm">{coin.market_data.low_24h[currency]}</Text>
+            <Box
+              borderBottom={{ base: "1px", sm: "1px", md: "1px", lg: "0px" }}
+              borderBottomColor="gray.100"
+            >
+              <Grid templateColumns="repeat(2, 1fr)" mt={5}>
+                <Box fontSize="lg" textAlign="left">
+                  Lowest 24h
+                  <Text fontSize="sm">
+                    {coin.market_data.low_24h[currency]}
+                  </Text>
+                </Box>
+                <Box fontSize="lg" textAlign="right">
+                  Highest 24h
+                  <Text fontSize="sm">
+                    {coin.market_data.high_24h[currency]}
+                  </Text>
+                </Box>
+              </Grid>
+              <Box mb={8}>
+                <LowHighBar coin={coin} />
               </Box>
-              <Box fontSize="lg" textAlign="right">
-                Highest 24h
-                <Text fontSize="sm">{coin.market_data.high_24h[currency]}</Text>
-              </Box>
-            </Grid>
-            <LowHighBar coin={coin} />
+            </Box>
           </Box>
           <Box w="100%" h="250" px={10} py={2}>
             <Grid templateColumns="repeat(2, 1fr)">
-              <Box h="100" my={3} borderBottom="2px" borderColor="gray.100">
+              <Box h="100" my={3} borderBottom="1px" borderColor="gray.100">
                 <Heading size="md">Market Cap</Heading>
                 <Text>${coin.market_data.market_cap[currency]}</Text>
                 <CoinDayVariation
@@ -77,18 +87,17 @@ const CoinStats = ({ coin }) => {
                 />
               </Box>
               <Box
-                h="100"
                 my={3}
                 textAlign="right"
-                borderBottom="2px"
+                borderBottom="1px"
                 borderColor="gray.100"
               >
                 <Heading size="md">Volume 24h</Heading>
                 <Text>${coin.market_data.total_volume[currency]}</Text>
               </Box>
-              <Box h="100" my={3}>
+              <Box my={3}>
                 <Heading size="md">Fully Diluted Market Cap</Heading>
-                <Text>
+                <Text whiteSpace="nowrap">
                   ${coin.market_data.fully_diluted_valuation[currency]}
                 </Text>
                 <CoinDayVariation
@@ -97,13 +106,21 @@ const CoinStats = ({ coin }) => {
                   }
                 />
               </Box>
-              <Box h="100" my={3} textAlign="right">
-                <Heading size="md">Circulating Supply</Heading>
+              <Box my={3} textAlign="right">
+                <Heading
+                  size="md"
+                  textOverflow="ellipsis"
+                  whiteSpace="nowrap"
+                  overflow="hidden"
+                >
+                  Circulating Supply
+                </Heading>
                 <Text>
                   {coin.market_data.circulating_supply} {coin.symbol}
                 </Text>
+                <Text>Max Supply: </Text>
                 <Text>
-                  Max Supply: {coin.market_data.max_supply} {coin.symbol}
+                  {coin.market_data.max_supply} {coin.symbol}
                 </Text>
               </Box>
             </Grid>

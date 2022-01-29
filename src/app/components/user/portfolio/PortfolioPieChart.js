@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Box } from "@chakra-ui/react";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import SpinnerUI from "../../UI/Spinner";
 
@@ -30,6 +29,7 @@ const PortfolioPieChart = (props) => {
       props.stats.map((coin) => {
         labelArray.push(coin.name);
         dataArray.push(coin.hold_price);
+        return;
       });
       setLabels(labelArray);
       setData(dataArray);

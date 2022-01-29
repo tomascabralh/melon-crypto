@@ -43,7 +43,11 @@ const CoinChart = () => {
         py={5}
       >
         <Grid>
-          <GridItem w={"87vw"} mt={{ base: 250, sm: 250, md: 250, lg: 0 }}>
+          <GridItem
+            w={"87vw"}
+            mt={{ base: 250, sm: 250, md: 250, lg: 0 }}
+            overflow={"auto"}
+          >
             {!chartdata ? (
               <SpinnerUI />
             ) : (
