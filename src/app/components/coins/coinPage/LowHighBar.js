@@ -12,7 +12,14 @@ const LowHighBar = ({ coin }) => {
   return (
     <Box>
       {progress !== undefined ? (
-        <Progress mt={3} size="sm" value={progress} isAnimated />
+        <Progress
+          mt={3}
+          size="sm"
+          value={progress}
+          isAnimated={true}
+          colorScheme="whatsapp"
+          hasStripe
+        />
       ) : (
         <Progress mt={3} size="sm" isIndeterminate />
       )}
