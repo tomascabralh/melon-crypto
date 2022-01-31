@@ -33,40 +33,43 @@ const PortfolioTable = (props) => {
       var filteredCoins = coins.filter((obj) => {
         return obj.id === coinName;
       });
-      var object = {};
-      object.coin = coinName;
-      object.holdings = sum1(filteredArray);
-      object.spent = sum2(filteredArray);
-      object.symbol = filteredCoins[0].symbol;
-      object.price_change = filteredCoins[0].price_change_percentage_24h;
-      object.image = filteredCoins[0].image;
-      object.price = filteredCoins[0].current_price;
-      object.name = filteredCoins[0].name;
-      object.hold_price = sum1(filteredArray) * filteredCoins[0].current_price;
+      if (filteredCoins[0] !== undefined) {
+        var object = {};
+        object.coin = coinName;
+        object.holdings = sum1(filteredArray);
+        object.spent = sum2(filteredArray);
+        object.symbol = filteredCoins[0].symbol;
+        object.price_change = filteredCoins[0].price_change_percentage_24h;
+        object.image = filteredCoins[0].image;
+        object.price = filteredCoins[0].current_price;
+        object.name = filteredCoins[0].name;
+        object.hold_price =
+          sum1(filteredArray) * filteredCoins[0].current_price;
 
-      function sum1(args) {
-        var tot = 0;
-        args.forEach((obj) => {
-          if (obj?.action === "buy") {
-            tot += parseFloat(obj?.quantity);
-          } else {
-            tot -= parseFloat(obj?.quantity);
-          }
-        });
-        return tot;
+        function sum1(args) {
+          var tot = 0;
+          args.forEach((obj) => {
+            if (obj?.action === "buy") {
+              tot += parseFloat(obj?.quantity);
+            } else {
+              tot -= parseFloat(obj?.quantity);
+            }
+          });
+          return tot;
+        }
+        function sum2(args) {
+          var tot = 0;
+          args.forEach((obj) => {
+            if (obj?.action === "buy") {
+              tot += parseFloat(obj?.pxq);
+            } else {
+              tot -= parseFloat(obj?.pxq);
+            }
+          });
+          return tot;
+        }
+        objectArray.push(object);
       }
-      function sum2(args) {
-        var tot = 0;
-        args.forEach((obj) => {
-          if (obj?.action === "buy") {
-            tot += parseFloat(obj?.pxq);
-          } else {
-            tot -= parseFloat(obj?.pxq);
-          }
-        });
-        return tot;
-      }
-      objectArray.push(object);
     });
     setCoinObj(objectArray);
     props.fetchStats(objectArray);
@@ -92,13 +95,16 @@ const PortfolioTable = (props) => {
     axios.get(GETrequest).then((res) => {
       setCoins(res.data);
     });
+  }, []);
+
+  useEffect(() => {
     const db = ref(getDatabase(), `users/${currentUser?.uid}/portfolio`);
     onValue(db, (snapshot) => {
       const data = snapshot.val();
       setCoinObject(_.toArray(data), filterCoinNames(_.toArray(data)));
     });
     // eslint-disable-next-line
-  }, [currentUser]);
+  }, [currentUser, coins]);
 
   return (
     <Box

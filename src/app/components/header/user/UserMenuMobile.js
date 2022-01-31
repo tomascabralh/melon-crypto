@@ -42,7 +42,7 @@ const UserMenuMobile = () => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerHeader borderBottom={"2px"} borderBottomColor={"gray.200"}>
-            <Link href="/" style={{ textDecoration: "none" }}>
+            <Link href="/" style={{ textDecoration: "none" }} onClick={onClose}>
               🍈 Melon Crypto 🍈
             </Link>
             <DrawerCloseButton mt={2} />
@@ -67,6 +67,7 @@ const UserMenuMobile = () => {
                   fontS={"xl"}
                   mt={5}
                   base={"block"}
+                  click={onClose}
                 />
               </Box>
             </VStack>
@@ -93,6 +94,7 @@ const UserMenuMobile = () => {
                           update: true,
                         },
                       ]}
+                      click={onClose}
                       fontS={"xl"}
                       mt={5}
                     />

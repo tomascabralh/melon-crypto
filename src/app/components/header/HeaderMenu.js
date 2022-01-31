@@ -15,6 +15,9 @@ const HeaderMenu = (props) => {
         to={item.link}
         state={{ update: item.update }}
         style={{ textDecoration: "none" }}
+        onClick={() => {
+          props?.click();
+        }}
       >
         <Text
           textAlign="center"
