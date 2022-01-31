@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Text, Link } from "@chakra-ui/layout";
+import { Link as ReachLink } from "react-router-dom";
 
 const HeaderMenu = (props) => {
   const headerMenuItems = props.menuItems.map((item) => (
@@ -9,7 +10,12 @@ const HeaderMenu = (props) => {
       mt={props.mt ? props.mt : 0}
       display={{ base: props.base, md: "block" }}
     >
-      <Link href={item.link} style={{ textDecoration: "none" }}>
+      <Link
+        as={ReachLink}
+        to={item.link}
+        state={{ update: item.update }}
+        style={{ textDecoration: "none" }}
+      >
         <Text
           textAlign="center"
           fontWeight="500"

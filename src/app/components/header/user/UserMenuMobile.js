@@ -84,9 +84,14 @@ const UserMenuMobile = () => {
                         {
                           name: "Profile",
                           link: "/profile",
+                          update: false,
                         },
                         { name: "Portfolio", link: "/user/portfolio" },
-                        { name: "Account Settings", link: "/profile" },
+                        {
+                          name: "Account Settings",
+                          link: "/profile",
+                          update: true,
+                        },
                       ]}
                       fontS={"xl"}
                       mt={5}

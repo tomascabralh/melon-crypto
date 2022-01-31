@@ -63,6 +63,7 @@ const SignUp = (props) => {
       });
     } else if (signUpPassword === signUpPasswordConfirm) {
       try {
+        navigate("/news");
         await createUserWithEmailAndPassword(
           auth,
           signUpEmail,
@@ -86,7 +87,6 @@ const SignUp = (props) => {
           isClosable: true,
         });
         props?.click();
-        navigate("/profile");
       } catch (error) {
         toast({
           title: "Email is invalid or already in use",

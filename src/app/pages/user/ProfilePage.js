@@ -1,19 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Divider, Grid, GridItem, Text } from "@chakra-ui/react";
 import UserData from "../../components/user/UserData";
 import UserDataUpdate from "../../components/user/UserDataUpdate";
 import Watchlist from "../../components/user/Watchlist";
 import { useAuth } from "../../components/contexts/AuthContext";
 import SpinnerUI from "../../components/UI/Spinner";
+import { useLocation } from "react-router-dom";
 
-const ProfilePage = () => {
+const ProfilePage = (props) => {
   const { users } = useAuth();
   const [updateForm, setUpdateForm] = useState(false);
+
+  const { state } = useLocation();
 
   const changeToUpdate = (change) => {
     setUpdateForm(change);
   };
 
+  useEffect(() => {
+    if (state !== null) {
+      setUpdateForm(state?.update);
+    }
+  }, [state]);
   return (
     <Box>
       <Box mt={5}>

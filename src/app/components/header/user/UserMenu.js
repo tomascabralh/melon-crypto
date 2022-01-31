@@ -7,6 +7,7 @@ import {
   MenuItem,
   Link,
 } from "@chakra-ui/react";
+import { Link as ReachLink } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useAuth } from "../../contexts/AuthContext";
 
@@ -38,13 +39,14 @@ const UserMenu = () => {
           >
             Portfolio
           </MenuItem>
-          <MenuItem
-            as={Link}
-            href={`/profile`}
+          <Link
+            as={ReachLink}
+            to={`/profile`}
+            state={{ update: true }}
             style={{ textDecoration: "none" }}
           >
-            Account Settings
-          </MenuItem>
+            <MenuItem>Account Settings</MenuItem>
+          </Link>
           <MenuItem onClick={logout}>Logout</MenuItem>
         </MenuList>
       </Menu>

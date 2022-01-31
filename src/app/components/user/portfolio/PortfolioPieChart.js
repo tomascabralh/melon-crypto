@@ -26,10 +26,9 @@ const PortfolioPieChart = (props) => {
     var labelArray = [];
     var dataArray = [];
     if (props.stats !== undefined) {
-      props.stats.map((coin) => {
+      props.stats.forEach((coin) => {
         labelArray.push(coin.name);
         dataArray.push(coin.hold_price);
-        return;
       });
       setLabels(labelArray);
       setData(dataArray);

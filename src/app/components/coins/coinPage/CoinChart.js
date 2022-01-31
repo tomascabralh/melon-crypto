@@ -3,7 +3,9 @@ import { Grid, Box, Flex, GridItem } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import { Line } from "react-chartjs-2";
 import axios from "axios";
+// eslint-disable-next-line
 import { Chart as ChartJS } from "chart.js/auto";
+// eslint-disable-next-line
 import { Chart } from "react-chartjs-2";
 import TimeSelector from "./TimeSelector";
 import CurrencySelector from "./CurrencySelector";

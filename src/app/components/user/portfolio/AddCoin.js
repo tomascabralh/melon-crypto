@@ -29,7 +29,7 @@ import { getDatabase, ref, set, onValue, update } from "firebase/database";
 import { useAuth } from "../../contexts/AuthContext";
 import SearchCoin from "../../search/SearchCoin";
 
-const AddCoin = () => {
+const AddCoin = ({ stats }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [price, setPrice] = useState("0");
   const [quantity, setQuantity] = useState("0");
@@ -37,15 +37,30 @@ const AddCoin = () => {
   const [coin, setCoin] = useState(0);
   const [action, setAction] = useState("buy");
   const [counter, setCounter] = useState();
+  const [max, setMax] = useState(Infinity);
 
   const { currentUser } = useAuth();
 
   const format = (val) => `$` + val;
   const parse = (val) => val.replace(/^\$/, "");
 
+  const openModal = () => {
+    onOpen();
+    setAction("buy");
+  };
+
   const getCoin = (coin) => {
     setCoin(coin);
     setPrice(coin.current_price);
+    if (action === "sell") {
+      var filter = stats.filter(function (Coin) {
+        return coin.id.includes(Coin.coin);
+      });
+      console.log(filter);
+      setMax(filter[0].holdings);
+    } else {
+      setMax(Infinity);
+    }
   };
 
   const setMovement = () => {
@@ -111,6 +126,7 @@ const AddCoin = () => {
             <NumberInput
               defaultValue={0}
               min={0}
+              max={max}
               step={0.001}
               onChange={(q) => {
                 setQuantity(q);
@@ -157,7 +173,7 @@ const AddCoin = () => {
 
   return (
     <>
-      <Button onClick={onOpen} size="sm">
+      <Button onClick={openModal} size="sm">
         + Transaction
       </Button>
       <Modal isOpen={isOpen} onClose={onClose}>

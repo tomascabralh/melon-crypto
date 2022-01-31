@@ -7,6 +7,9 @@ import {
   VStack,
   Grid,
   GridItem,
+  HStack,
+  Tag,
+  Tooltip,
 } from "@chakra-ui/react";
 import AddCoin from "./portfolio/AddCoin";
 import PortfolioTable from "./portfolio/PortfolioTable";
@@ -28,7 +31,20 @@ const Portfolio = () => {
   const profitLoss = (coin) => {
     var current = balance(coin);
     var spent = coin.reduce((sum, a) => sum + a.spent, 0);
+
     return ((current - spent) / spent) * 100;
+  };
+
+  const variation = (coin) => {
+    var current = balance(coin);
+    var spent = coin.reduce((sum, a) => sum + a.spent, 0);
+    if (current - spent > 0) {
+      return `+ $${current - spent}`;
+    } else if (current - spent < 0) {
+      return `- $${current - spent}`;
+    } else {
+      return `$${current - spent}`;
+    }
   };
 
   return (
@@ -41,6 +57,7 @@ const Portfolio = () => {
           lg: "repeat(3, 1fr)",
         }}
         mx={{ base: 5, sm: 5, md: 5, lg: 20 }}
+        minH={"60vh"}
       >
         <GridItem>
           <VStack mx="auto" my={10}>
@@ -48,14 +65,17 @@ const Portfolio = () => {
             <Text fontSize={{ base: 25, sm: 40, md: 50, lg: 50 }}>
               ${stats ? balance(stats).toFixed(2) : <SpinnerUI />}
             </Text>
-            <Text>
-              <CoinDayVariation
-                porcentageVar={
-                  stats ? profitLoss(stats).toFixed(2) : <SpinnerUI />
-                }
-              />
-            </Text>
-            <AddCoin />
+            <Tooltip label={stats ? variation(stats) : null} placement="left">
+              <HStack>
+                <Text>
+                  <CoinDayVariation
+                    porcentageVar={stats ? profitLoss(stats).toFixed(2) : 0}
+                  />
+                </Text>
+                <Tag size="sm">24 hs</Tag>
+              </HStack>
+            </Tooltip>
+            <AddCoin stats={stats} />
             <Box w={{ base: 260, sm: 350, md: 450, lg: 320 }}>
               <PortfolioPieChart stats={stats} />
             </Box>

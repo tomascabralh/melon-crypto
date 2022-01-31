@@ -21,7 +21,7 @@ const SocialMedia = (props) => {
       >
         <IconButton
           as="a"
-          href="https://www.instagram.com/tch._.tch/?hl=es"
+          href="https://www.instagram.com"
           aria-label="Instagram"
           isRound="true"
           target="_blank"
@@ -29,7 +29,7 @@ const SocialMedia = (props) => {
         />
         <IconButton
           as="a"
-          href="https://www.facebook.com/tomicabral"
+          href="https://www.facebook.com"
           aria-label="Facebook"
           isRound="true"
           target="_blank"
@@ -37,7 +37,7 @@ const SocialMedia = (props) => {
         />
         <IconButton
           as="a"
-          href="https://twitter.com/zurba96"
+          href="https://twitter.com"
           aria-label="Twitter"
           isRound="true"
           target="_blank"
@@ -45,7 +45,7 @@ const SocialMedia = (props) => {
         />
         <IconButton
           as="a"
-          href="https://www.linkedin.com/in/facudom/"
+          href="https://www.linkedin.com"
           aria-label="Linkedin"
           isRound="true"
           target="_blank"

@@ -7,6 +7,7 @@ import {
   Th,
   useColorModeValue,
   Box,
+  Skeleton,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { getDatabase, ref, onValue } from "firebase/database";
@@ -25,7 +26,7 @@ const PortfolioTable = (props) => {
 
   function setCoinObject(data, filter) {
     var objectArray = [];
-    filter.map((coinName) => {
+    filter.forEach((coinName) => {
       var filteredArray = data.filter((obj) => {
         return obj.coin === coinName;
       });
@@ -73,7 +74,7 @@ const PortfolioTable = (props) => {
 
   function filterCoinNames(moves) {
     var array = [];
-    moves.map((transaction) => {
+    moves.forEach((transaction) => {
       if (
         array.includes(transaction.coin) === false &&
         transaction.coin !== undefined
@@ -96,6 +97,7 @@ const PortfolioTable = (props) => {
       const data = snapshot.val();
       setCoinObject(_.toArray(data), filterCoinNames(_.toArray(data)));
     });
+    // eslint-disable-next-line
   }, [currentUser]);
 
   return (
@@ -133,7 +135,11 @@ const PortfolioTable = (props) => {
           </Tr>
         </Thead>
         <Tbody>
-          <PortfolioTableRow coinObject={coinObj} />
+          {coinObj ? (
+            <PortfolioTableRow coinObject={coinObj} />
+          ) : (
+            <Skeleton height="50px" w="100%" />
+          )}
         </Tbody>
       </Table>
     </Box>
